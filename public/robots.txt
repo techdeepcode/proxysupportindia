@@ -181,4 +181,5 @@ User-agent: redditbot
 Allow: /
 
 # Sitemaps
+Sitemap: https://proxysupportindia.com/sitemap.xml
 Sitemap: https://proxysupportindia.com/sitemap-index.xml
