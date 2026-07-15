@@ -1,0 +1,37 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import TrustBoundary from '@components/TrustBoundary.astro';
+import CTASection from '@components/CTASection.astro';
+import Schema from '@components/Schema.astro';
+
+const title = 'About Proxy Support India — End-to-End IT Career Proxy Support';
+const description = 'Proxy Support India helps IT professionals get more recruiter calls, clear technical interviews and deliver real project work — USA-first, global, India-to-global.';
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'About', href: '/about' }];
+---
+<BaseLayout title={title} description={description} path="/about">
+  <Schema pageType="AboutPage" name="About Proxy Support India" description={description} includeOrg={true} breadcrumb={crumbs} />
+  <PageHero
+    eyebrow="About us"
+    h1="End-to-End IT Career Proxy Support"
+    intro="Proxy Support India exists for one reason: talented IT professionals lose opportunities to fixable gaps — a profile no one sees, an interview they were not ready for, or a new job they could not yet deliver. We close those gaps with real, stack-matched, real-time support."
+    breadcrumb={crumbs}
+  />
+  <section class="wrap section">
+    <div class="page-body">
+      <h2>USA-first, global, India-to-global</h2>
+      <p>Our center market is the USA, where IT hiring volume and structured interview loops are highest. From there we cover Canada, UK, Europe, Australia, Singapore, Japan, New Zealand, the Gulf and India. The brand carries India in its name because we specialise in helping India-based engineers win and hold roles abroad — but the site, and the support, are built for candidates everywhere.</p>
+      <h2>What we cover</h2>
+      <ul class="bullets">
+        <li>Proxy interview support — JD-based, round-wise help to clear technical interviews</li>
+        <li>Proxy job support — real-time help to deliver day-to-day project work</li>
+        <li>Profile engineering, marketing and managing — get found and get calls</li>
+        <li>Recruiter-call generation and end-to-end career execution</li>
+      </ul>
+      <h2>Current on the technologies that hire</h2>
+      <p>Our experts work in the stacks that are actually hiring in 2026 — AI/ML, GenAI, MLOps, DevOps, cloud, Java, .NET, React, Workday, UiPath and more — and we keep technology references current (for example Astro 7, Java 25 LTS, .NET 10, React 19.2 and Kubernetes 1.36 as of July 2026).</p>
+    </div>
+  </section>
+  <TrustBoundary />
+  <CTASection />
+</BaseLayout>

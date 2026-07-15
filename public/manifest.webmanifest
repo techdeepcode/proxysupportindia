@@ -1,0 +1,16 @@
+{
+  "name": "Proxy Support India",
+  "short_name": "Proxy Support",
+  "description": "End-to-end IT career proxy support — proxy interview support, proxy job support, profile engineering, marketing, managing and recruiter calls across USA and global markets.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#2E2159",
+  "background_color": "#FAF9FC",
+  "lang": "en",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/og/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/og/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

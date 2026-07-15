@@ -1,0 +1,112 @@
+---
+import { site, waTalk, telLink, trustLine } from '@data/site';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import PhoneIcon from './PhoneIcon.astro';
+import SocialLinks from './SocialLinks.astro';
+import { tier1Techs } from '@data/technologies';
+import { countries as allCountries } from '@data/countries';
+import { cities } from '@data/cities';
+const year = 2026;
+
+// ---- Curated top columns (no duplication) ----
+const columns = [
+  { h: 'Proxy Interview', links: [
+    { label: 'Proxy Interview Support', href: '/proxy-interview-support' },
+    { label: 'Get Interview Scheduled', href: '/get-interview-scheduled' },
+    { label: 'Urgent Interview Help', href: '/urgent-proxy-interview-support' },
+    { label: 'Same-Day Interview', href: '/same-day-proxy-interview-support' },
+    { label: 'Failed Interview Help', href: '/failed-interview-help' },
+  ] },
+  { h: 'Proxy Job', links: [
+    { label: 'Proxy Job Support', href: '/proxy-job-support' },
+    { label: 'Real-Time Job Support', href: '/real-time-it-job-support' },
+    { label: 'Production Issue Support', href: '/production-issue-support' },
+    { label: 'Project Onboarding', href: '/project-onboarding-support' },
+    { label: 'Client Call & Standup', href: '/client-call-standup-support' },
+  ] },
+  { h: 'Profile & Recruiter', links: [
+    { label: 'Profile Engineering', href: '/profile-engineering' },
+    { label: 'Profile Marketing', href: '/profile-marketing' },
+    { label: 'Profile Managing', href: '/profile-managing' },
+    { label: 'Get More Recruiter Calls', href: '/get-more-recruiter-calls' },
+    { label: 'End-to-End Support', href: '/end-to-end-it-career-proxy-support' },
+  ] },
+  { h: 'Popular', links: [
+    { label: 'How to Get IT Jobs (2026)', href: '/how-to-get-it-jobs' },
+    { label: 'Forward Deployed Engineer', href: '/forward-deployed-engineer' },
+    { label: 'High-Paying IT Roles', href: '/high-paying-it-roles' },
+    { label: 'Direct Support — No Middlemen', href: '/direct-it-support-no-middlemen' },
+    { label: 'Real Interview Questions', href: '/real-interview-questions' },
+    { label: 'Knowledge Base', href: '/knowledge-base' },
+    { label: 'Blog', href: '/blog' },
+  ] },
+  { h: 'Company', links: [
+    { label: 'All Services', href: '/services' },
+    { label: 'All Technologies', href: '/technologies' },
+    { label: 'All Locations', href: '/countries' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' },
+  ] },
+];
+
+// ---- Browse-everything link farms (SEO) with fully-qualified names. ----
+const i2g = ['usa', 'canada', 'uk', 'europe', 'australia', 'singapore', 'japan', 'new-zealand'];
+const explore = [
+  { h: 'Proxy Interview Support by country', href: '/countries',
+    links: allCountries.map((c) => ({ label: `Proxy Interview Support ${c.name}`, href: `/proxy-interview-support-${c.slug}` })) },
+  { h: 'Proxy Job Support by country', href: '/countries',
+    links: allCountries.map((c) => ({ label: `Proxy Job Support ${c.name}`, href: `/proxy-job-support-${c.slug}` })) },
+  { h: 'Proxy Support by technology', href: '/technologies',
+    links: tier1Techs.map((t: any) => ({ label: `${t.name} Proxy Interview Support`, href: `/${t.slug}-proxy-interview-support` })) },
+  { h: 'Proxy Support by city', href: '/locations',
+    links: cities.map((c) => ({ label: `${c.name} Proxy Support`, href: `/${c.slug}-proxy-interview-support` })) },
+  { h: 'India-to-Global Support', href: '/india-to-global-proxy-support',
+    links: [
+      ...i2g.map((s) => ({ label: `India to ${allCountries.find((c) => c.slug === s)?.name ?? s} Proxy Interview Support`, href: `/india-to-${s}-proxy-interview-support` })),
+      { label: 'Remote Job Support from India', href: '/remote-job-support-from-india' },
+      { label: 'USA Time-Zone Job Support from India', href: '/usa-time-zone-proxy-job-support-from-india' },
+      { label: 'Night-Shift Job Support from India', href: '/night-shift-proxy-job-support-from-india' },
+    ] },
+];
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-brand">
+      <p class="fb">Proxy Support India</p>
+      <p style="margin-top:.6rem; font-size:.86rem; max-width:24em; color:rgb(255 255 255/.7);">
+        End-to-end IT career proxy support — interviews, job support, profile services and recruiter
+        calls across USA, Canada, UK, Europe, Australia, Singapore, Japan, New Zealand, Gulf & India.
+      </p>
+      <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-top:1rem;">
+        <a class="btn btn-wa btn-sm" href={waTalk} target="_blank" rel="noopener" data-cta="whatsapp-click"><WhatsAppIcon /> Talk on WhatsApp</a>
+        <a class="btn btn-line btn-sm" href={telLink} data-cta="phone-click" style="color:#fff; box-shadow:inset 0 0 0 1.5px rgb(255 255 255/.4);"><PhoneIcon /> Call</a>
+      </div>
+      <p style="margin-top:.8rem; font-size:.82rem;"><a href={`mailto:${site.email}`}>{site.email}</a></p>
+      <SocialLinks variant="footer" class="foot-social" />
+    </div>
+    {columns.map((c) => (
+      <div class="foot-col">
+        <h5>{c.h}</h5>
+        <ul>{c.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+      </div>
+    ))}
+  </div>
+
+  <div class="foot-explore">
+    <div class="wrap">
+      {explore.map((g) => (
+        <div class="fe-group">
+          <h5><a href={g.href}>{g.h} →</a></h5>
+          <div class="fe-links">{g.links.map((l) => <a href={l.href}>{l.label}</a>)}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="foot-legal">
+    <div class="wrap">
+      <p class="legal">© {year} ProxySupportIndia.com. {trustLine}</p>
+    </div>
+  </div>
+</footer>

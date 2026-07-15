@@ -1,0 +1,15 @@
+---
+// Always-visible conversion CTA.
+// Desktop: floating pills bottom-right. Mobile: fixed bottom bar.
+import { waTalk, telLink } from '@data/site';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import PhoneIcon from './PhoneIcon.astro';
+---
+<div class="floating-cta" role="region" aria-label="Contact Proxy Support India">
+  <a class="fcta fcta-wa" href={waTalk} target="_blank" rel="noopener" data-cta="whatsapp-click" aria-label="Talk to us on WhatsApp">
+    <WhatsAppIcon /> <span class="fcta-label">Talk on WhatsApp</span>
+  </a>
+  <a class="fcta fcta-call mobile-only" href={telLink} data-cta="phone-click" aria-label="Call Proxy Support India">
+    <PhoneIcon /> <span class="fcta-label">Call</span>
+  </a>
+</div>

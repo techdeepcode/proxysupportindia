@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import CTASection from '@components/CTASection.astro';
+import Schema from '@components/Schema.astro';
+import { cities } from '@data/cities';
+import { countries } from '@data/countries';
+
+const title = 'Proxy Support by City — USA, Canada, UK, Australia, APAC & India | Proxy Support India';
+const description = 'City-level proxy interview support and proxy job support across New York, Dallas, Toronto, London, Sydney, Singapore, Bangalore, Hyderabad and more.';
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Locations', href: '/locations' }];
+const byCountry = countries.map((c) => ({ country: c, list: cities.filter((ct) => ct.countrySlug === c.slug) })).filter((g) => g.list.length);
+---
+<BaseLayout title={title} description={description} path="/locations">
+  <Schema pageType="CollectionPage" name="Proxy Support by City" description={description} breadcrumb={crumbs}
+    itemList={{ name: 'Cities', items: cities.map((ct) => ({ name: `${ct.name} Proxy Support`, url: `/${ct.slug}-proxy-interview-support` })) }} />
+  <PageHero eyebrow="City-level coverage" h1="Proxy Interview & Job Support by City" intro="Onsite, hybrid or remote — get proxy support tuned to your city and its wider market." breadcrumb={crumbs} />
+  <section class="wrap section">
+    {byCountry.map((g) => (
+      <div style="margin-top:1.8rem;">
+        <h2 style="color:rgb(var(--primary)); font-size:1.25rem;">{g.country.flag} {g.country.name}</h2>
+        <div class="related" style="margin-top:.7rem;">
+          {g.list.map((ct) => <a href={`/${ct.slug}-proxy-interview-support`}>{ct.name}</a>)}
+        </div>
+      </div>
+    ))}
+  </section>
+  <CTASection />
+</BaseLayout>

@@ -1,0 +1,42 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import FAQ from '@components/FAQ.astro';
+import CTASection from '@components/CTASection.astro';
+import Schema from '@components/Schema.astro';
+
+const title = 'Pricing — Proxy Interview & Job Support Plans | Proxy Support India';
+const description = 'How Proxy Support India pricing works: per-interview, monthly job support, and end-to-end plans. Share your details on WhatsApp for an exact, transparent quote.';
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Pricing', href: '/pricing' }];
+const tiers = [
+  { name: 'Proxy Interview Support', model: 'Per interview / per round', for: 'A scheduled interview you need to clear.', points: ['JD-based interview mapping', 'Round-wise preparation + mocks', 'Real-time support through rounds', 'Urgent & same-day options'] },
+  { name: 'Proxy Job Support', model: 'Monthly or per-task', for: 'A role you’ve joined and need to deliver.', points: ['Daily ticket & debugging help', 'Production-issue support', 'Time-zone / night-shift coverage', 'Scale hours up or down'] },
+  { name: 'End-to-End Support', model: 'Custom plan', for: 'The whole journey, one team.', points: ['Profile → marketing → managing', 'Recruiter calls + interviews', 'Offer & joining support', 'Proxy job support after joining'] },
+];
+const faqs = [
+  { q: 'Why don’t you list fixed prices?', a: 'Because every case differs — technology, seniority, number of rounds or hours, and urgency all change the effort. We give an exact quote after a quick WhatsApp chat, with no hidden numbers.' },
+  { q: 'What drives interview support pricing?', a: 'Your stack, seniority, number of rounds, and how urgent it is (same-day costs more than planned).' },
+  { q: 'What drives job support pricing?', a: 'Your technology, project complexity, how many hours you need, and your time zone (night-shift US coverage costs more).' },
+  { q: 'How do I get a quote?', a: 'Tap any WhatsApp button and share your details. We reply fast with a clear, itemised quote.' },
+];
+---
+<BaseLayout title={title} description={description} path="/pricing">
+  <Schema name="Pricing — Proxy Support India" description={description} breadcrumb={crumbs} faqs={faqs}
+    service={{ name: 'IT Career Proxy Support', description }}
+    offerCatalog={{ name: 'Proxy Support plans', offers: tiers.map((t) => ({ name: t.name, description: `${t.model}. ${t.for}` })) }} />
+  <PageHero eyebrow="Transparent, case-based pricing" h1="Pricing That Matches Your Situation" intro="No inflated package tiers. Pricing depends on your stack, level, rounds or hours, and urgency — so you only pay for what you actually need. Here’s how it’s structured." breadcrumb={crumbs} />
+  <section class="wrap section">
+    <div class="cards cols-3" style="margin-top:1.6rem;">
+      {tiers.map((t) => (
+        <div class="card">
+          <span class="kicker">{t.model}</span>
+          <h3>{t.name}</h3>
+          <p>{t.for}</p>
+          <ul class="bullets" style="margin-top:.4rem;">{t.points.map((p) => <li>{p}</li>)}</ul>
+        </div>
+      ))}
+    </div>
+  </section>
+  <div class="wrap"><FAQ faqs={faqs} /></div>
+  <CTASection heading="Get your exact quote on WhatsApp" text="Share your JD, stack or project details and we’ll reply with a clear, itemised price." />
+</BaseLayout>

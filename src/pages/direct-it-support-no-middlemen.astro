@@ -1,0 +1,79 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import FAQ from '@components/FAQ.astro';
+import RelatedLinks from '@components/RelatedLinks.astro';
+import CTASection from '@components/CTASection.astro';
+import Schema from '@components/Schema.astro';
+import { site } from '@data/site';
+
+const years = 2026 - site.since;
+const title = `Direct IT Interview & Job Support — No Middlemen | ${site.name}`;
+const description = `An in-house IT team operating in the proxy support world since ${site.since}. No middlemen, no outsourcing — expert developers take your interview or project directly and start immediately.`;
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Direct Support — No Middlemen', href: '/direct-it-support-no-middlemen' }];
+
+const features = [
+  { t: 'In-house expert team', d: 'Our engineers are our own senior team members — not a rotating marketplace of unknown freelancers. The person who prepares you or delivers your task is accountable to us and to you.' },
+  { t: 'No middlemen or outsourcing', d: 'Many “proxy” providers are brokers who resell your requirement to a third party and take a cut. We don’t. You deal with the company doing the actual work — start to finish.' },
+  { t: 'Quick project handover', d: 'Share your JD, interview date or project issue on WhatsApp and we take it on immediately. No drawn-out onboarding, no forms, no waiting for a match to be “sourced”.' },
+  { t: 'Faster delivery', d: 'Fewer hands means fewer delays and miscommunications. Direct ownership of your interview or task means quicker turnaround and cleaner, higher-quality results.' },
+  { t: 'Direct communication', d: 'One point of contact, on WhatsApp, in your time zone. No account managers or coordinators sitting between you and the engineer actually helping you.' },
+  { t: 'Immediate start available', d: 'Interview tomorrow? Production issue right now? Because the team is in-house, we can start within the hour instead of hunting for someone who’s free.' },
+];
+const faqs = [
+  { q: `How long have you been doing proxy support?`, a: `We have operated in the proxy IT support world since ${site.since} — over ${years} years. We are an established IT company, not a freelancer or a broker that appeared last month.` },
+  { q: 'Are you freelancers or a middleman platform?', a: 'Neither. We are a company with an in-house team of expert developers. Your interview support or job support is delivered directly by our own engineers — nothing is outsourced or resold.' },
+  { q: 'Why does “no middlemen” matter for me?', a: 'It means faster response, direct accountability, consistent quality, better confidentiality, and lower cost — because you are not paying a broker’s markup or waiting for a requirement to be passed down a chain.' },
+  { q: 'How fast can you start?', a: 'Often within the hour. Because the team is in-house and always available across time zones, we can begin urgent interview or job support immediately.' },
+  { q: 'Is my information kept confidential?', a: 'Yes — 100% confidential. Working directly with one accountable team, rather than through third parties, is exactly what keeps your details private.' },
+];
+const related = [
+  { label: 'Proxy Interview Support', href: '/proxy-interview-support' },
+  { label: 'Proxy Job Support', href: '/proxy-job-support' },
+  { label: 'End-to-End IT Career Proxy Support', href: '/end-to-end-it-career-proxy-support' },
+  { label: 'Real-Time IT Job Support', href: '/real-time-it-job-support' },
+  { label: 'About Proxy Support India', href: '/about' },
+  { label: 'Contact on WhatsApp', href: '/contact' },
+];
+---
+<BaseLayout title={title} description={description} path="/direct-it-support-no-middlemen">
+  <Schema name="Direct IT Interview & Job Support — No Middlemen" description={description} breadcrumb={crumbs} service={{ name: 'Direct IT Proxy Support (no middlemen)', description }} faqs={faqs} />
+  <PageHero
+    eyebrow="Featured · Why Proxy Support India"
+    h1="Direct IT Interview & Job Support — No Middlemen"
+    intro={`Proxy Support India is an IT company that has operated in the proxy support world since ${site.since} — over ${years} years. We are not freelancers and not a middleman platform. An in-house team of expert developers takes your interview or project directly and starts immediately: no outsourcing, no third parties, no delays.`}
+    breadcrumb={crumbs}
+  />
+  <article class="wrap section">
+    <div class="page-body">
+      <h2>What “direct, no middlemen” actually means</h2>
+      <p>A large part of the proxy market runs on brokers. A candidate contacts one “provider”, who quietly resells the requirement to another person, who may pass it on again. Every hop adds cost, slows the response, muddies communication, and weakens confidentiality — and you rarely know who is really on the other end.</p>
+      <p>We work the opposite way. The engineer who prepares you for your interview or helps you deliver your project is part of our own team. You talk to them directly. That single change is what makes the support faster, more consistent, more private and better value.</p>
+
+      <h2>Why it’s better for you</h2>
+      <ul class="bullets">
+        {features.map((f) => <li><b>{f.t}.</b> {f.d}</li>)}
+      </ul>
+
+      <h2>How it works</h2>
+      <ul class="bullets">
+        <li>Message us on WhatsApp with your JD, interview date or project issue.</li>
+        <li>We match you with an in-house expert in your exact stack — usually within the hour.</li>
+        <li>They work with you directly, in real time, in your time zone.</li>
+        <li>We stay with you through the outcome — offer, delivery or job stability.</li>
+      </ul>
+
+      <h2>Who this is for</h2>
+      <ul class="bullets">
+        <li>Candidates who want an accountable, established team — not an anonymous freelancer.</li>
+        <li>Professionals who need an immediate, confidential start.</li>
+        <li>Anyone who has been let down by brokers, delays or being passed around.</li>
+      </ul>
+    </div>
+  </article>
+  <CTASection heading="Work directly with our in-house team" text="No middlemen, no outsourcing — just expert developers who start immediately. Message us on WhatsApp." />
+  <div class="wrap">
+    <FAQ faqs={faqs} />
+    <RelatedLinks links={related} />
+  </div>
+</BaseLayout>

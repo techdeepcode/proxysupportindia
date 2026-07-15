@@ -1,0 +1,57 @@
+---
+import { waTalk, waLink, ctas } from '@data/site';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import Icon from './Icon.astro';
+import ReadinessConsole from './ReadinessConsole.astro';
+
+const shareJD = waLink(ctas.shareJD.message);
+
+// Scannable, highlighted service hooks — the "what we do" in one glance.
+// Primary services first: interview → job → recruiter calls.
+const hooks = [
+  { svc: 'Proxy Interview Support', out: 'Clear every interview — coding, system design & client rounds', href: '/proxy-interview-support' },
+  { svc: 'Proxy Job Support', out: 'Deliver the task — daily tickets, debugging & production', href: '/proxy-job-support' },
+  { svc: 'Get More Recruiter Calls', out: 'Fill your pipeline — turn a silent profile into interviews', href: '/get-more-recruiter-calls' },
+  { svc: 'End-to-End Career Support', out: 'From profile to interview to a stable job', href: '/end-to-end-it-career-proxy-support' },
+];
+---
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">Proxy Interview Support · Proxy Job Support · End-to-End Career Support</p>
+      <h1 class="hero-h1">Clear <mark>every interview</mark>, deliver <mark>the job</mark> &amp; get <mark>more recruiter calls</mark></h1>
+      <p class="hero-sub">Real-time, stack-matched proxy support across USA, Canada, UK, Europe, Australia, Singapore, Japan, New Zealand, Gulf &amp; India.</p>
+      <a class="hero-aim" href="/high-paying-it-roles">
+        <svg class="aim-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M16 7h5v5"/></svg>
+        Aim higher — land higher-paying roles in <b>AI/ML · GenAI · MLOps · DevOps · Cloud · SRE · Security · Data Engineering</b> →
+      </a>
+
+      <ul class="svc-hooks">
+        {hooks.map((h) => (
+          <li>
+            <a class="svc-hook" href={h.href}>
+              <span class="svc-ic" aria-hidden="true"><Icon name="check" /></span>
+              <span class="svc-txt"><b>{h.svc}</b><span>{h.out}</span></span>
+              <span class="svc-go" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="cta-row">
+        <a class="btn btn-wa" href={waTalk} target="_blank" rel="noopener" data-cta="whatsapp-click"><WhatsAppIcon /> Talk on WhatsApp</a>
+        <a class="btn btn-ghost" href={shareJD} target="_blank" rel="noopener" data-cta="share-interview-jd">Share Interview JD</a>
+      </div>
+
+      <ul class="assure">
+        <li>In-house team since 2011</li>
+        <li>No middlemen · direct support</li>
+        <li>Stack-matched expert engineers</li>
+        <li>24×7 · every time zone</li>
+        <li>100% confidential · never impersonate</li>
+      </ul>
+    </div>
+
+    <ReadinessConsole />
+  </div>
+</section>

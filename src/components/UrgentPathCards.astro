@@ -1,0 +1,80 @@
+---
+import { waLink, ctas } from '@data/site';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+
+const paths = [
+  {
+    code: 'High-stakes interview',
+    service: 'Proxy Interview Support',
+    prob: 'Final round approaching under pressure? Facing coding, system design, client-facing or HR rounds?',
+    helps: 'Expert-led prep, mock interviews and real-time, round-wise proxy support to clear every stage.',
+    tags: ['technical & coding', 'system design', 'HR rounds', 'client-facing', 'final round'],
+    href: '/proxy-interview-support',
+    waLabel: 'Share My Interview JD',
+    waHref: waLink(ctas.shareJD.message),
+    waCta: 'share-interview-jd',
+    sub: [
+      { label: 'Urgent / same-day', href: '/urgent-proxy-interview-support' },
+      { label: 'System design prep', href: '/knowledge-base/system-design-proxy-interview-support' },
+      { label: 'Interview questions', href: '/real-interview-questions' },
+    ],
+  },
+  {
+    code: 'On the job',
+    service: 'Proxy Job Support',
+    prob: 'Joined a new role and stuck? Unfamiliar codebase, tickets piling up, production pressure?',
+    helps: 'Real-time help to deliver daily tasks, debug and ship with confidence.',
+    tags: ['daily tickets', 'debugging', 'production issues'],
+    href: '/proxy-job-support',
+    waLabel: 'Send My Project Issue',
+    waHref: waLink(ctas.sendProjectIssue.message),
+    waCta: 'send-project-issue',
+    sub: [
+      { label: 'Production issue help', href: '/production-issue-support' },
+      { label: 'Real-time job support', href: '/real-time-it-job-support' },
+    ],
+  },
+  {
+    code: 'No recruiter calls',
+    service: 'Profile & Recruiter Calls',
+    prob: 'Applying daily but the phone is silent? Profile not reaching the right recruiters?',
+    helps: 'We engineer and market your profile until interview calls start coming.',
+    tags: ['profile engineering', 'profile marketing', 'more calls'],
+    href: '/get-more-recruiter-calls',
+    waLabel: 'Get Me More Calls',
+    waHref: waLink(ctas.moreCalls.message),
+    waCta: 'whatsapp-click',
+    sub: [
+      { label: 'Profile engineering', href: '/profile-engineering' },
+      { label: 'Profile marketing', href: '/profile-marketing' },
+    ],
+  },
+];
+---
+<section class="section" id="paths">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Choose your urgent need</p>
+      <h2>What do you need right now?</h2>
+      <p>Pick the one that matches your situation — each goes straight to the right service, or start a chat on WhatsApp.</p>
+    </div>
+    <div class="triage">
+      {paths.map((p) => (
+        <div class="path">
+          <span class="path-code">{p.code}</span>
+          <h3>{p.service}</h3>
+          <p class="prob">{p.prob}</p>
+          <p class="helps"><b>You get:</b> {p.helps}</p>
+          <div class="tagline">{p.tags.map((t) => <span class="tag">{t}</span>)}</div>
+          <div class="path-actions">
+            <a class="btn btn-violet btn-sm" href={p.href}>Explore {p.service} →</a>
+            <a class="btn btn-wa btn-sm" href={p.waHref} target="_blank" rel="noopener" data-cta={p.waCta}><WhatsAppIcon /> {p.waLabel}</a>
+          </div>
+          <div class="path-sub">
+            {p.sub.map((s) => <a href={s.href}>{s.label} →</a>)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

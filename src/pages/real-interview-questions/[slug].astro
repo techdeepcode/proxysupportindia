@@ -1,0 +1,88 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import FAQ from '@components/FAQ.astro';
+import RelatedLinks from '@components/RelatedLinks.astro';
+import CTASection from '@components/CTASection.astro';
+import Schema from '@components/Schema.astro';
+import WhatsAppIcon from '@components/WhatsAppIcon.astro';
+import { riqTopics, riqBySlug, questionSets } from '@data/realInterviewQuestions';
+import { techBySlug } from '@data/technologies';
+import { waLink, ctas } from '@data/site';
+
+export function getStaticPaths() {
+  return riqTopics.map((t) => ({ params: { slug: t.slug }, props: { slug: t.slug } }));
+}
+const { slug } = Astro.props as { slug: string };
+const t = riqBySlug(slug)!;
+const questions = questionSets[slug] ?? [];
+const tech = techBySlug(t.tech);
+const wa = waLink(`Hi Proxy Support India, I have a ${tech?.name ?? t.title} interview and want proxy interview support. My JD:`);
+
+const related = [
+  ...(tech ? [
+    { label: `${tech.name} Proxy Interview Support`, href: `/${tech.slug}-proxy-interview-support` },
+    { label: `${tech.name} Proxy Job Support`, href: `/${tech.slug}-proxy-job-support` },
+  ] : []),
+  { label: 'All Interview Questions', href: '/real-interview-questions' },
+  { label: 'Proxy Interview Support', href: '/proxy-interview-support' },
+  { label: 'Urgent Proxy Interview Support', href: '/urgent-proxy-interview-support' },
+];
+const faqs = [
+  { q: `How should I prepare for a ${tech?.name ?? t.title} interview?`, a: `Map your JD to the likely rounds, practise the questions on this page out loud, and get real-time proxy interview support for the areas you’re unsure about.` },
+  { q: `Can I get proxy interview support for ${tech?.name ?? 'this'}?`, a: 'Yes — share your JD on WhatsApp and we’ll match you with a stack expert for round-wise support.' },
+  { q: 'Are these real interview questions?', a: 'They are real-style questions modelled on what US and global panels ask in 2026 — written fresh, not copied from anywhere.' },
+];
+const title = `${t.title} | Proxy Support India`;
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Interview Questions', href: '/real-interview-questions' }, { label: t.h1, href: `/real-interview-questions/${t.slug}` }];
+
+const itemList = questions.length ? { name: t.title, items: questions.map((q) => ({ name: q.q })) } : undefined;
+---
+<BaseLayout title={title} description={t.description} path={`/real-interview-questions/${t.slug}`} keywords={[t.title.toLowerCase(), `${tech?.name ?? ''} interview questions`.trim(), 'proxy interview support', 'real interview questions', t.category.toLowerCase()]} ogType="article">
+  <Schema name={t.h1} description={t.description} breadcrumb={crumbs} article={{ headline: t.h1, description: t.description }} faqs={faqs} itemList={itemList} />
+  <PageHero eyebrow={`${t.category} · ${t.level} · Updated Jul 2026`} h1={t.h1} intro={t.intro} breadcrumb={crumbs} ctaLabel="Share JD on WhatsApp" />
+  <article class="wrap section">
+    <div class="cta-row" style="margin-top:0;">
+      <a class="btn btn-wa" href={wa} data-cta="share-interview-jd"><WhatsAppIcon /> Need Proxy Interview Support? Share JD</a>
+    </div>
+
+    {questions.length > 0 ? (
+      <div class="page-body">
+        {questions.map((q, i) => (
+          <>
+            <div style="margin-top:1.6rem; padding:1.1rem 1.2rem; border:1px solid rgb(var(--line)); border-radius:.9rem; background:rgb(var(--card));">
+              <h3 style="margin:0; font-size:1.05rem;">Q{i + 1}. {q.q}</h3>
+              <p style="margin-top:.6rem;"><b>Short answer:</b> {q.short}</p>
+              <p style="margin-top:.4rem;"><b>Strong answer:</b> {q.strong}</p>
+              <p style="margin-top:.4rem;"><b>Likely follow-up:</b> {q.followUp}</p>
+              <p style="margin-top:.4rem; color:rgb(var(--muted));"><b>What the interviewer is checking:</b> {q.checking}</p>
+              <p style="margin-top:.4rem; color:rgb(var(--muted));"><b>Common mistake:</b> {q.mistake}</p>
+            </div>
+            {(i + 1) % 8 === 0 && i + 1 < questions.length && (
+              <div class="final" style="margin:1.4rem 0;">
+                <h2 style="font-size:1.1rem;">Need Proxy Interview Support?</h2>
+                <p>Share your JD on WhatsApp and clear these rounds with a stack expert.</p>
+                <div class="cta-row"><a class="btn btn-wa" href={wa} data-cta="share-interview-jd"><WhatsAppIcon /> Share JD on WhatsApp</a></div>
+              </div>
+            )}
+          </>
+        ))}
+      </div>
+    ) : (
+      <div class="page-body">
+        <h2>Preparing this question set</h2>
+        <p>Our expert-written {t.title.replace(/\s*\(2026\)/, '')} set is being expanded with 25–40 questions. In the meantime, the fastest way to prepare is live: share your exact JD and we’ll map the likely questions and run round-wise proxy interview support tuned to your interview.</p>
+        <ul class="bullets">
+          <li>JD-based mapping of the questions you’ll actually face</li>
+          <li>Short + strong answers coached for your level</li>
+          <li>Follow-ups and the mistakes to avoid</li>
+        </ul>
+      </div>
+    )}
+  </article>
+  <CTASection primary="shareJD" heading="Clear your interview with proxy interview support" text="Share your JD on WhatsApp and we’ll match you with a stack expert for round-wise support." />
+  <div class="wrap">
+    <FAQ faqs={faqs} />
+    <RelatedLinks links={related} />
+  </div>
+</BaseLayout>

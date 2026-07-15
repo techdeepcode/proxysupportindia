@@ -1,0 +1,41 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageArticle from '@components/PageArticle.astro';
+import { getAllPages, type PageEntry } from '@data/pageRegistry';
+import { buildContent } from '../lib/content';
+import { serviceBySlug } from '@data/services';
+
+export function getStaticPaths() {
+  return getAllPages().map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props { entry: PageEntry; }
+const { entry } = Astro.props as Props;
+const content = buildContent(entry);
+
+// Pick an OG image key from the entry when we have a themed one.
+let ogImageKey = 'default';
+if (entry.service && serviceBySlug(entry.service)) ogImageKey = entry.service;
+if (entry.tech === 'ai-ml') ogImageKey = 'ai-ml';
+if (entry.tech === 'devops') ogImageKey = 'devops';
+if (entry.tech === 'workday') ogImageKey = 'workday';
+
+const keywords = content.title
+  .replace(/\|.*$/, '')
+  .split(/[,—-]/)
+  .map((s) => s.trim())
+  .filter(Boolean)
+  .slice(0, 6);
+---
+<BaseLayout
+  title={content.title}
+  description={content.description}
+  path={`/${entry.slug}`}
+  keywords={keywords}
+  ogImageKey={ogImageKey}
+>
+  <PageArticle content={content} />
+</BaseLayout>

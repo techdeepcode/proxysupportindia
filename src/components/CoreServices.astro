@@ -1,0 +1,26 @@
+---
+import { services } from '@data/services';
+---
+<section class="section tinted" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Core services · in priority order</p>
+      <h2>Everything you need, from first call to job stability</h2>
+      <p>Seven services that cover the whole IT career journey. Start with the one that matches your situation — or take the end-to-end plan.</p>
+    </div>
+    <div class="cards cols-3">
+      {services.map((s, i) => (
+        <a class="card" href={`/${s.slug}`}>
+          <span class="kicker">{i < 3 ? 'Primary service' : s.kicker}</span>
+          <h3>{s.name}</h3>
+          <p>{s.short}</p>
+          <span class="card-link">Explore {s.name}</span>
+        </a>
+      ))}
+    </div>
+    <div class="cta-row" style="margin-top:1.6rem">
+      <a class="btn btn-line" href="/services">See all services →</a>
+      <a class="btn btn-line" href="/end-to-end-it-career-proxy-support">End-to-end plan →</a>
+    </div>
+  </div>
+</section>

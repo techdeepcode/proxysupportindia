@@ -1,0 +1,31 @@
+---
+import { waLink, ctas } from '@data/site';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+const wa = waLink(ctas.endToEndPlan.message);
+const links = [
+  { label: 'India → USA', href: '/india-to-usa-proxy-interview-support' },
+  { label: 'India → Canada', href: '/india-to-canada-proxy-interview-support' },
+  { label: 'India → UK', href: '/india-to-uk-proxy-interview-support' },
+  { label: 'India → Australia', href: '/india-to-australia-proxy-interview-support' },
+  { label: 'India → Singapore', href: '/india-to-singapore-proxy-interview-support' },
+  { label: 'Remote job support from India', href: '/remote-job-support-from-india' },
+  { label: 'USA time-zone job support', href: '/usa-time-zone-proxy-job-support-from-india' },
+  { label: 'Night-shift job support', href: '/night-shift-proxy-job-support-from-india' },
+];
+---
+<section class="section" id="india-to-global">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">India-to-global career execution</p>
+      <h2>Based in India, targeting the world</h2>
+      <p>The brand has India in its name, but the mission is global. We help India-based engineers win and hold roles abroad — with time-zone-aligned interview and job support so distance never costs you the offer or the delivery.</p>
+    </div>
+    <div class="related" style="margin-top:1.6rem;">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </div>
+    <div class="cta-row" style="margin-top:1.6rem">
+      <a class="btn btn-wa" href={wa}><WhatsAppIcon /> Plan my India-to-global move</a>
+      <a class="btn btn-line" href="/india-to-global-proxy-support">India-to-Global overview →</a>
+    </div>
+  </div>
+</section>

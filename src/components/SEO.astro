@@ -1,0 +1,72 @@
+---
+import { site, ogImageFor } from '@data/site';
+export interface Props {
+  title: string;
+  description: string;
+  path?: string;               // e.g. "/proxy-interview-support"
+  keywords?: string[];
+  ogType?: string;             // website | article | profile
+  ogImageKey?: string;         // key into ogImages map
+  ogImage?: string;            // explicit override
+  ogImageAlt?: string;
+  publishedTime?: string;      // ISO date (articles)
+  modifiedTime?: string;       // ISO date
+  noindex?: boolean;
+}
+const {
+  title,
+  description,
+  path = Astro.url.pathname,
+  keywords = [],
+  ogType = 'website',
+  ogImageKey,
+  ogImage,
+  ogImageAlt,
+  publishedTime,
+  modifiedTime,
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(path === '/' ? '/' : path.replace(/\/$/, '') + '/', site.url).href;
+const img = new URL(ogImage || ogImageFor(ogImageKey), site.url).href;
+const imgAlt = ogImageAlt || title;
+const robots = noindex
+  ? 'noindex, nofollow'
+  : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+
+// Verification (env-driven; nothing rendered if unset — never hardcode fake IDs)
+const googleVerify = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const bingVerify = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+{keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+<meta name="author" content={site.author} />
+<meta name="publisher" content={site.publisher} />
+<meta name="robots" content={robots} />
+<meta name="language" content={site.lang} />
+<link rel="canonical" href={canonical} />
+
+{googleVerify && <meta name="google-site-verification" content={googleVerify} />}
+{bingVerify && <meta name="msvalidate.01" content={bingVerify} />}
+
+<!-- Open Graph (WhatsApp, Facebook, LinkedIn, Slack, Discord, Telegram) -->
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={img} />
+<meta property="og:image:alt" content={imgAlt} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content={site.locale} />
+{ogType === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+{ogType === 'article' && modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={img} />
+<meta name="twitter:image:alt" content={imgAlt} />

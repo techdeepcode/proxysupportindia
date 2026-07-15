@@ -1,0 +1,35 @@
+---
+import { highPayingRoles, salaryNote } from '@data/highPayingRoles';
+import { techBySlug } from '@data/technologies';
+---
+<section class="section" id="high-paying">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Aim higher · 2026’s highest-paying tech</p>
+      <h2>Land higher-paying IT roles in the hottest trending tech</h2>
+      <p>AI, GenAI, MLOps, DevOps, Cloud, SRE, Security, Data Engineering and QA Automation pay a premium — and hire hard. We help you clear their interviews and deliver on the job.</p>
+    </div>
+    <div class="cards cols-3">
+      {highPayingRoles.map((r) => {
+        const t = techBySlug(r.tech);
+        return (
+          <div class="card">
+            <span class="kicker">{t?.category ?? 'High-value'}</span>
+            <h3>{r.role}</h3>
+            <span class="salary-band" title="Typical USA base salary (USD)">{r.salaryUSA} <span>USA base</span></span>
+            <p>{r.blurb}</p>
+            <div class="cell-links" style="margin-top:auto;">
+              <a href={`/${r.tech}-proxy-interview-support`}>Interview support</a>
+              <a href={`/${r.tech}-proxy-job-support`}>Job support</a>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+    <p class="matrix-legend" style="margin-top:1rem;">{salaryNote}</p>
+    <div class="cta-row" style="margin-top:1rem">
+      <a class="btn btn-line" href="/high-paying-it-roles">All high-paying IT roles →</a>
+      <a class="btn btn-line" href="/technologies">Browse all technologies →</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,44 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Schema from '@components/Schema.astro';
+import WhatsAppIcon from '@components/WhatsAppIcon.astro';
+import { site, waLink, ctas } from '@data/site';
+
+const title = 'Contact Proxy Support India — Share Your JD on WhatsApp';
+const description = 'Contact Proxy Support India on WhatsApp. Share your interview JD, project issue or target market and get matched with a stack-matched expert fast.';
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Contact', href: '/contact' }];
+const options = [
+  { key: 'shareJD', ...ctas.shareJD, cta: 'share-interview-jd' },
+  { key: 'sendProjectIssue', ...ctas.sendProjectIssue, cta: 'send-project-issue' },
+  { key: 'endToEndPlan', ...ctas.endToEndPlan, cta: 'end-to-end-plan' },
+  { key: 'moreCalls', ...ctas.moreCalls, cta: 'whatsapp-click' },
+];
+---
+<BaseLayout title={title} description={description} path="/contact">
+  <Schema pageType="ContactPage" name="Contact Proxy Support India" description={description} includeOrg={true} breadcrumb={crumbs} />
+  <PageHero eyebrow="WhatsApp-first · fast response" h1="Talk to Proxy Support India" intro="The fastest way to start is WhatsApp. Pick the message that fits your situation — it opens a chat pre-filled so we can help right away." breadcrumb={crumbs} />
+  <section class="wrap section">
+    <div class="cards" style="margin-top:1.6rem;">
+      {options.map((o) => (
+        <a class="card" href={waLink(o.message)} data-cta={o.cta}>
+          <span class="kicker">WhatsApp</span>
+          <h3>{o.label}</h3>
+          <p>{o.message}</p>
+          <span class="card-link">Open WhatsApp</span>
+        </a>
+      ))}
+    </div>
+    <div class="final" style="margin-top:2rem;">
+      <h2>Prefer email?</h2>
+      <p>Write to us and we’ll reply with next steps.</p>
+      <div class="cta-row">
+        <a class="btn btn-wa" href={waLink(ctas.shareJD.message)} data-cta="whatsapp-click"><WhatsAppIcon /> Message on WhatsApp</a>
+        <a class="btn btn-ghost" href={`mailto:${site.email}`}>{site.email}</a>
+      </div>
+    </div>
+    <p style="margin-top:1.4rem; font-size:.85rem; color:rgb(var(--muted));">
+      Note: update the WhatsApp number and email in <code>src/data/site.ts</code> to go live.
+    </p>
+  </section>
+</BaseLayout>

@@ -1,0 +1,27 @@
+---
+const steps = [
+  { n: '01', h: 'Profile', p: 'Engineered, ATS-ready, JD-aligned.', href: '/profile-engineering' },
+  { n: '02', h: 'Reach', p: 'Marketed to the right recruiters, daily.', href: '/profile-marketing' },
+  { n: '03', h: 'Calls', p: 'A silent profile turned into recruiter calls.', href: '/get-more-recruiter-calls' },
+  { n: '04', h: 'Interview', p: 'Cleared, round by round.', href: '/proxy-interview-support' },
+  { n: '05', h: 'Job', p: 'Delivered, from day one and beyond.', href: '/proxy-job-support' },
+];
+---
+<section class="section tinted" id="funnel">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Profile-to-job funnel</p>
+      <h2>Where candidates stall — and how we keep you moving</h2>
+      <p>Most searches break at one weak link: a profile no one sees, calls that don’t convert, or a job you can’t yet deliver. We fix the whole funnel.</p>
+    </div>
+    <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));">
+      {steps.map((s) => (
+        <a class="card" href={s.href}>
+          <span class="kicker">Step {s.n}</span>
+          <h3>{s.h}</h3>
+          <p>{s.p}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

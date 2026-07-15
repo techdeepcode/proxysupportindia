@@ -1,0 +1,49 @@
+---
+import { site, waTalk, stats } from '@data/site';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import Icon from './Icon.astro';
+import { countries } from '@data/countries';
+const marketCount = countries.length;
+const years = 2026 - site.since;
+
+const outcomes = [
+  { t: 'Clear every interview', d: 'coding · system design · client · HR rounds' },
+  { t: 'Deliver the job', d: 'tickets · debugging · production · client calls' },
+  { t: 'Get more recruiter calls', d: 'engineered + marketed profile' },
+];
+const metrics = [
+  { v: stats.interviews, l: 'interviews supported' },
+  { v: stats.jobSupport, l: 'job-support projects' },
+  { v: stats.profiles, l: 'profiles marketed' },
+  { v: stats.higherRoles, l: 'landed higher-paying roles' },
+  { v: `${marketCount}`, l: 'global markets' },
+  { v: `${years}+ yrs`, l: 'proxy support since 2011' },
+];
+---
+<aside class="console" aria-label="What you get with Proxy Support India">
+  <div class="console-top">
+    <span>Support console</span>
+    <span class="status">Online · 24×7</span>
+  </div>
+
+  <div class="con-outcomes">
+    {outcomes.map((o) => (
+      <div class="con-out">
+        <span class="con-check" aria-hidden="true"><Icon name="check" /></span>
+        <div><b>{o.t}</b><span>{o.d}</span></div>
+      </div>
+    ))}
+  </div>
+
+  <div class="con-metrics">
+    {metrics.map((m) => (
+      <div><b>{m.v}</b><span>{m.l}</span></div>
+    ))}
+  </div>
+
+  <div class="console-foot">
+    <span class="next">{years}+ years · start today</span>
+    <a class="btn btn-wa btn-sm" href={waTalk} target="_blank" rel="noopener" data-cta="whatsapp-click"><WhatsAppIcon /> Get my plan</a>
+  </div>
+  <p class="console-note">Real-time, stack-matched support — from interview to offer to on-the-job delivery.</p>
+</aside>

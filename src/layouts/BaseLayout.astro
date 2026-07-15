@@ -1,0 +1,59 @@
+---
+import '../styles/global.css';
+import { site } from '@data/site';
+import SEO from '@components/SEO.astro';
+import Analytics from '@components/Analytics.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import FloatingCTA from '@components/FloatingCTA.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  keywords?: string[];
+  ogType?: string;
+  ogImageKey?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  noindex?: boolean;
+}
+const props = Astro.props;
+// GTM-container noscript iframe. Keep in sync with Analytics.astro default.
+const GTM_ID = import.meta.env.PUBLIC_GTM_ID || 'GTM-N57S3DVZ';
+---
+<!doctype html>
+<html lang={site.lang}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content={site.themeColor} />
+  <!-- Google Tag Manager — placed high in <head> per GTM best practice. -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <Analytics />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://flagcdn.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="alternate" type="application/rss+xml" title="Proxy Support India Blog" href="/rss.xml" />
+  <SEO {...props} />
+  <slot name="head" />
+</head>
+<body>
+  {GTM_ID && (
+    <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`} height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  )}
+  <Header />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+  <FloatingCTA />
+</body>
+</html>

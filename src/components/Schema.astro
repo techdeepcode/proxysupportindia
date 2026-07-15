@@ -1,0 +1,120 @@
+---
+// Reusable JSON-LD emitter. EVERY page renders a WebPage (or
+// CollectionPage/ContactPage/AboutPage) node + BreadcrumbList,
+// plus type-specific nodes (Service, Article, BlogPosting,
+// FAQPage, ItemList, OfferCatalog, Organization, WebSite).
+// No fake ratings/reviews/guarantees are ever emitted.
+import { site, trustLine, sameAs } from '@data/site';
+
+export interface Crumb { label: string; href: string; }
+export interface QA { q: string; a: string; }
+export interface ListEntry { name: string; url?: string; }
+export interface Offer { name: string; description: string; }
+
+export interface Props {
+  pageType?: 'WebPage' | 'CollectionPage' | 'ContactPage' | 'AboutPage';
+  name: string;
+  description: string;
+  breadcrumb?: Crumb[];
+  includeOrg?: boolean;                 // homepage/contact/about
+  service?: { name: string; description: string };
+  article?: { headline: string; description: string; blog?: boolean; datePublished?: string; dateModified?: string };
+  faqs?: QA[];
+  itemList?: { name: string; items: ListEntry[] };
+  offerCatalog?: { name: string; offers: Offer[] };
+}
+const {
+  pageType = 'WebPage', name, description, breadcrumb, includeOrg = false,
+  service, article, faqs, itemList, offerCatalog,
+} = Astro.props;
+
+const abs = (p: string) => new URL(p === '/' ? '/' : p.replace(/\/$/, '') + '/', site.url).href;
+const canonical = abs(Astro.url.pathname);
+const orgId = site.url + '/#organization';
+const siteId = site.url + '/#website';
+const pageId = canonical + '#webpage';
+const crumbId = canonical + '#breadcrumb';
+const DATE = '2026-07-14';
+
+const graph: any[] = [];
+
+// Organization + WebSite (site-wide identity; full node on homepage/contact/about)
+if (includeOrg) {
+  graph.push({
+    '@type': 'Organization', '@id': orgId, name: site.name, url: site.url + '/',
+    description: site.positioning, slogan: site.tagline, disambiguatingDescription: trustLine,
+    email: site.email, sameAs: sameAs(),
+    contactPoint: { '@type': 'ContactPoint', contactType: 'customer support', availableLanguage: ['English'], url: `https://wa.me/${site.whatsapp}` },
+    areaServed: ['US', 'CA', 'GB', 'EU', 'AU', 'SG', 'JP', 'NZ', 'AE', 'SA', 'IN'],
+  });
+}
+graph.push({ '@type': 'WebSite', '@id': siteId, url: site.url + '/', name: site.name, inLanguage: 'en', publisher: { '@id': orgId } });
+
+// WebPage / CollectionPage / ContactPage / AboutPage — on EVERY page
+const webPage: any = {
+  '@type': pageType, '@id': pageId, url: canonical, name, description,
+  inLanguage: 'en', isPartOf: { '@id': siteId },
+  datePublished: DATE, dateModified: DATE,
+  about: { '@id': orgId },
+};
+if (breadcrumb && breadcrumb.length) webPage.breadcrumb = { '@id': crumbId };
+graph.push(webPage);
+
+// BreadcrumbList
+if (breadcrumb && breadcrumb.length) {
+  graph.push({
+    '@type': 'BreadcrumbList', '@id': crumbId,
+    itemListElement: breadcrumb.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.label, item: abs(c.href) })),
+  });
+}
+
+// Service
+if (service) {
+  graph.push({
+    '@type': 'Service', name: service.name, description: service.description, serviceType: service.name,
+    provider: { '@id': orgId }, areaServed: ['US', 'CA', 'GB', 'AU', 'SG', 'JP', 'NZ', 'AE', 'IN'],
+    url: canonical, mainEntityOfPage: { '@id': pageId },
+  });
+}
+
+// Article (+ BlogPosting when blog)
+if (article) {
+  const a: any = {
+    '@type': article.blog ? ['Article', 'BlogPosting'] : 'Article',
+    headline: article.headline, description: article.description,
+    datePublished: article.datePublished ?? DATE, dateModified: article.dateModified ?? DATE,
+    author: { '@id': orgId }, publisher: { '@id': orgId }, mainEntityOfPage: { '@id': pageId }, inLanguage: 'en',
+  };
+  graph.push(a);
+}
+
+// ItemList
+if (itemList && itemList.items.length) {
+  graph.push({
+    '@type': 'ItemList', name: itemList.name, numberOfItems: itemList.items.length,
+    itemListElement: itemList.items.map((it, i) => ({
+      '@type': 'ListItem', position: i + 1, name: it.name, ...(it.url ? { url: abs(it.url) } : {}),
+    })),
+  });
+}
+
+// OfferCatalog (pricing — descriptive only, no fake prices)
+if (offerCatalog && offerCatalog.offers.length) {
+  graph.push({
+    '@type': 'OfferCatalog', name: offerCatalog.name,
+    itemListElement: offerCatalog.offers.map((o) => ({
+      '@type': 'Offer', itemOffered: { '@type': 'Service', name: o.name, description: o.description, provider: { '@id': orgId } },
+    })),
+  });
+}
+
+// FAQPage
+if (faqs && faqs.length) {
+  graph.push({
+    '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  });
+}
+
+const jsonld = { '@context': 'https://schema.org', '@graph': graph };
+---
+<script type="application/ld+json" set:html={JSON.stringify(jsonld)} is:inline />

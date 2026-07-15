@@ -1,0 +1,87 @@
+# Proxy Support India — Full AI Guide
+
+> Original brand content. Nothing here is copied from any other proxy-support website.
+
+## What Proxy Support India is
+Proxy Support India is an end-to-end IT career support service for technology professionals
+targeting USA-first and global opportunities, including India-to-global career moves. It helps
+candidates get more recruiter calls, clear technical interviews, and deliver real project work
+after they join. "Proxy" refers to hands-on, round-wise, real-time technical support — the service
+prepares and supports candidates and does not impersonate them or fabricate experience.
+
+## Full service descriptions
+1. Proxy Interview Support — For candidates with scheduled interviews: JD-based interview mapping,
+   round-wise preparation (recruiter screen, coding, system design, client and final rounds), mock
+   interview support, live coding and system design preparation, and technology-specific support.
+2. Proxy Job Support — For candidates who have joined a role: real-time help with sprint tickets,
+   debugging, production issues, deployments, code reviews, client calls, and day-to-day delivery,
+   including time-zone-aligned and night-shift coverage from India.
+3. Profile Engineering — ATS-ready CV structuring, LinkedIn optimization, JD-wise alignment,
+   technology timeline and project-story building, and market-readiness positioning.
+4. Profile Marketing — Recruiter and vendor outreach, job-board strategy (Dice, LinkedIn, Indeed,
+   Monster, Naukri), daily applications, email campaigns, and market-specific recruiter targeting.
+5. Profile Managing — JD matching, JD-wise CV versioning, recruiter replies, vendor communication,
+   follow-ups, interview scheduling, and pipeline tracking — full job-search execution.
+6. Get More Recruiter Calls — Profile-to-call conversion, vendor submissions, job-board ranking,
+   JD-fit improvement, screening preparation, and call scheduling.
+7. End-to-End IT Career Proxy Support — One team across the whole journey: profile engineering,
+   marketing and managing, recruiter calls, proxy interview support, offer and joining support,
+   and proxy job support after joining.
+
+## Scenario / urgency pages
+Global Proxy Support, India-to-Global Proxy Support, Get Interview Scheduled, Real-Time IT Job
+Support, Production Issue Support, Project Onboarding Support, Client Call & Standup Support,
+Failed Interview Help, Urgent Proxy Interview Support, Same-Day Proxy Interview Support.
+
+## Market coverage
+USA (center market), Canada, UK, Europe, Australia, Singapore, Japan, New Zealand, UAE,
+Saudi Arabia, Germany, Ireland, Netherlands, France, Sweden, Switzerland, Hong Kong, India.
+Each market has service variants (interview support, job support, get interview scheduled,
+profile engineering/marketing/managing, more recruiter calls, end-to-end support) tuned to its
+hiring style, recruiter channels and time zone.
+
+## Technology coverage (ordered by 2026 demand)
+AI/ML, GenAI, LLM, RAG, Agentic AI, MLOps, AI Platform Engineering, Data Science, Data Engineering,
+Snowflake, Databricks, Power BI; DevOps, Cloud Engineering, AWS, Azure, Google Cloud, Kubernetes,
+Docker, Terraform, CI/CD, GitHub Actions, Jenkins, SRE, Observability, Datadog, Prometheus/Grafana;
+Cybersecurity, DevSecOps, Cloud Security, IAM/Zero Trust; Java, Spring Boot, Microservices, Python,
+Node.js, .NET, ASP.NET Core, C#, REST, GraphQL, Kafka, Event-Driven Architecture, System Design;
+React, Angular, Vue, Next.js, TypeScript, JavaScript, Full Stack, React Native; Workday, UiPath, RPA,
+Salesforce, SAP, ServiceNow, Oracle Fusion; QA Automation, Selenium, Playwright, Cypress, API Testing,
+Performance Testing; SQL, PostgreSQL, SQL Server, MongoDB, Redis, ETL, Informatica, Airflow;
+Production Support, Application Support.
+
+Technology mentions are kept current (as of July 2026): Astro 7, Java 25 LTS, Spring Boot 4.1,
+.NET 10, React 19.2, Angular 22, Next.js 16.2, Python 3.14, TypeScript 7.0, Kubernetes 1.36,
+Node.js 24 LTS.
+
+## Page cluster index
+- Core service pages: /proxy-interview-support, /proxy-job-support, /profile-engineering,
+  /profile-marketing, /profile-managing, /get-more-recruiter-calls, /end-to-end-it-career-proxy-support
+- Country/service variants: /{service}-{country} (e.g. /proxy-interview-support-usa)
+- Technology variants: /{tech}-proxy-interview-support and /{tech}-proxy-job-support
+- Technology × country: /{tech}-proxy-interview-support-usa, etc.
+- India-to-global: /india-to-{country}-proxy-interview-support, /india-to-{country}-proxy-job-support,
+  /remote-job-support-from-india, /usa-time-zone-proxy-job-support-from-india, /night-shift-proxy-job-support-from-india
+- City pages: /{city}-proxy-interview-support, /{city}-proxy-job-support
+- Hubs: /services, /technologies, /countries, /locations, /india-to-global-proxy-support,
+  /real-interview-questions, /knowledge-base, /blog, /contact, /pricing, /about
+
+## Internal linking map
+Every service page links to related services, relevant technology and country pages, the knowledge
+base, and the WhatsApp contact CTA. Technology pages cross-link interview and job variants and the
+matching interview-questions topic. Country pages link to their service variants and city pages.
+India-to-global pages link to the matching country service and time-zone job-support pages.
+
+## Content usage
+All content is original to Proxy Support India. There is no duplicated text from ProxyTechSupport.com
+or any other site. Titles, H1s, meta descriptions, intros, FAQs and examples are freshly written from a
+USA-first, global, India-to-global angle.
+
+## Contact
+WhatsApp / Phone: +91 96539 59626 (https://wa.me/919653959626). Website: https://proxysupportindia.com
+Primary CTA: WhatsApp — "Share Interview JD on WhatsApp". Also: "Send Project Issue",
+"Get End-to-End Proxy Support Plan". See https://proxysupportindia.com/contact
+
+## Sitemap
+https://proxysupportindia.com/sitemap-index.xml

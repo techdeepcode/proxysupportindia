@@ -1,0 +1,64 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+import UrgentPathCards from '@components/UrgentPathCards.astro';
+import CoreServices from '@components/CoreServices.astro';
+import DirectSupport from '@components/DirectSupport.astro';
+import HighPayingRoles from '@components/HighPayingRoles.astro';
+import ServiceJourney from '@components/ServiceJourney.astro';
+import TechnologyMatrix from '@components/TechnologyMatrix.astro';
+import MarketSelector from '@components/MarketSelector.astro';
+import IndiaToGlobal from '@components/IndiaToGlobal.astro';
+import ProfileToJobFunnel from '@components/ProfileToJobFunnel.astro';
+import KnowledgeEngine from '@components/KnowledgeEngine.astro';
+import TrustBoundary from '@components/TrustBoundary.astro';
+import FAQ from '@components/FAQ.astro';
+import CTASection from '@components/CTASection.astro';
+import Schema from '@components/Schema.astro';
+import { services } from '@data/services';
+
+const title = 'Proxy Interview Support, Proxy Job Support & End-to-End IT Career Proxy Support | Proxy Support India';
+const description = 'Proxy Support India provides proxy interview support, proxy job support, profile engineering, marketing, managing and recruiter calls across USA, Canada, UK, Europe, Australia, Singapore, Japan, New Zealand, Gulf and India. Share your JD on WhatsApp.';
+
+const faqs = [
+  { q: 'Can you help me clear my technical interview?', a: 'Yes — that is exactly what proxy interview support does. We map your JD to the likely rounds, run expert-led mock interviews, and give you real-time, round-wise support through coding, system design, HR, client and final rounds so you walk in prepared and walk out with an offer.' },
+  { q: 'I just joined a job and I’m struggling to deliver — can you help?', a: 'Yes. Proxy job support gives you real-time help to deliver daily project work — understanding the codebase, sprint tickets, debugging, production issues, deployments and client calls — so you ramp fast and stay dependable from week one.' },
+  { q: 'My profile gets no recruiter calls. Can you fix that?', a: 'Yes. We engineer your profile (ATS + JD-aligned CV and LinkedIn) and market it to the right recruiters and vendors until interview calls start coming — then hand you into proxy interview support to convert them.' },
+  { q: 'Can you support me end-to-end, from profile to a stable job?', a: 'Yes. End-to-end IT career proxy support runs the whole journey with one team: profile engineering, marketing and managing → recruiter calls → proxy interview support → offer and joining → proxy job support after you start. Nothing stalls in the gaps.' },
+  { q: 'Do you support my technology and target market?', a: 'Very likely. We cover 70+ stacks — AI/ML, GenAI, DevOps, cloud, Java, .NET, React, Workday, UiPath and more — across USA (our center market), Canada, UK, Europe, Australia, Singapore, Japan, New Zealand, the Gulf and India, aligned to your time zone.' },
+  { q: 'How fast can you start — is same-day support possible?', a: 'Fast. For urgent interviews we offer same-day and next-day support, matching you with a stack expert within the hour. Share your JD or project issue on WhatsApp and we’ll respond right away.' },
+  { q: 'Is it confidential — and do you impersonate candidates?', a: 'It is 100% confidential. “Proxy” here means hands-on, real-time support: we prepare and support you round by round and during the job. We never impersonate you or fabricate experience.' },
+];
+---
+<BaseLayout title={title} description={description} path="/" ogImageKey="default">
+  <Schema
+    name="Proxy Support India — End-to-End IT Career Proxy Support"
+    description={description}
+    includeOrg={true}
+    breadcrumb={[{ label: 'Home', href: '/' }]}
+    faqs={faqs}
+    itemList={{ name: 'Core Services — Proxy Support India', items: services.map((s) => ({ name: s.name, url: `/${s.slug}` })) }}
+  />
+
+  <!-- Order: front-load "what we support" (services, tech, markets) so a
+       visitor grasps the offering within 2–3 seconds; process/trust/resources follow. -->
+  <Hero />
+  <UrgentPathCards />
+  <CoreServices />
+  <TechnologyMatrix />
+  <HighPayingRoles />
+  <MarketSelector />
+  <ServiceJourney />
+  <ProfileToJobFunnel />
+  <IndiaToGlobal />
+  <DirectSupport />
+  <TrustBoundary />
+  <KnowledgeEngine />
+  <div class="wrap">
+    <FAQ faqs={faqs} heading="Proxy support — frequently asked questions" />
+  </div>
+  <CTASection
+    heading="Send your JD, project issue or target market on WhatsApp"
+    text="We reply fast with a readiness plan and available expert slots — from proxy interview support to proxy job support and full end-to-end career support."
+  />
+</BaseLayout>

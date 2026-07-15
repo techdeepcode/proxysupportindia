@@ -1,0 +1,42 @@
+---
+import { blogIndex } from '@data/blogs';
+import { riqTopics } from '@data/realInterviewQuestions';
+import { knowledgeBase } from '@data/knowledgeBase';
+const featured = [
+  { id: 'IQ', cat: 'Interview questions', title: riqTopics[0].title, href: `/real-interview-questions/${riqTopics[0].slug}`, meta: `${riqTopics[0].level} · Updated Jul 2026` },
+  { id: 'KB', cat: 'Knowledge base', title: knowledgeBase[0].title, href: `/knowledge-base/${knowledgeBase[0].slug}`, meta: 'Updated Jul 2026' },
+  { id: 'BL', cat: 'Blog', title: blogIndex[0].title, href: `/blog/${blogIndex[0].slug}`, meta: `${blogIndex[0].readMins} min · Updated ${blogIndex[0].updated}` },
+  { id: 'IQ', cat: 'Interview questions', title: riqTopics[6].title, href: `/real-interview-questions/${riqTopics[6].slug}`, meta: `${riqTopics[6].level} · Updated Jul 2026` },
+  { id: 'BL', cat: 'Blog', title: blogIndex[3].title, href: `/blog/${blogIndex[3].slug}`, meta: `${blogIndex[3].readMins} min · Updated ${blogIndex[3].updated}` },
+];
+---
+<section class="section" id="knowledge">
+  <div class="wrap kb-split">
+    <div class="section-head">
+      <p class="eyebrow">Knowledge engine</p>
+      <h2>Knowledge Base, Blog &amp; Real Interview Questions</h2>
+      <p>Free, original guidance from the same experts who run your sessions. Start reading before you ever message us.</p>
+      <div class="cta-row" style="margin-top:1.2rem">
+        <a class="btn btn-violet btn-sm" href="/knowledge-base">Knowledge Base</a>
+        <a class="btn btn-line btn-sm" href="/real-interview-questions">Interview Questions</a>
+      </div>
+    </div>
+    <div class="kb-main">
+      <div class="hubs">
+        <a class="hub" href="/knowledge-base"><span class="hub-code">KB</span><span class="hub-body"><b>Knowledge Base</b><span>What proxy support is, how it works, costs</span></span></a>
+        <a class="hub" href="/blog"><span class="hub-code">BL</span><span class="hub-body"><b>Blog</b><span>Strategies for calls, interviews and jobs</span></span></a>
+        <a class="hub" href="/real-interview-questions"><span class="hub-code">IQ</span><span class="hub-body"><b>Interview Questions</b><span>Real questions by technology</span></span></a>
+      </div>
+      <div class="index">
+        {featured.map((f) => (
+          <div class="idx-row">
+            <span class="id">{f.id}</span>
+            <span class="cat">{f.cat}</span>
+            <span class="title"><a href={f.href}>{f.title}</a></span>
+            <span class="meta">{f.meta}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

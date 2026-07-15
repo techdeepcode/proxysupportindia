@@ -1,0 +1,90 @@
+============================================================
+ PROXY SUPPORT INDIA — BRAND COLOR THEME
+ proxysupportindia.com
+ Source of truth: src/styles/global.css (:root)
+ Use these exact codes across website, logo, social & print.
+============================================================
+
+------------------------------------------------------------
+ CORE BRAND COLORS
+------------------------------------------------------------
+PRIMARY    (Deep Jamun)     #2E2159   rgb(46, 33, 89)     --primary
+SECONDARY  (Action Violet)  #6D28D9   rgb(109, 40, 217)   --secondary
+ACCENT     (Brass / Gold)   #C9A227   rgb(201, 162, 39)   --accent
+ACCENT-2   (Light Brass)    #E8C860   rgb(232, 200, 96)   (highlights / gradients)
+
+Brass gradient  : #C9A227  ->  #E8C860   (left to right)
+Violet gradient : #2E2159  ->  #6D28D9   (logo mark, buttons)
+
+------------------------------------------------------------
+ CALL-TO-ACTION (BUTTONS / LINKS)
+------------------------------------------------------------
+CTA               #6D28D9   rgb(109, 40, 217)   --cta
+CTA HOVER         #5B21B6   rgb(91, 33, 182)    --cta-hover
+
+------------------------------------------------------------
+ WHATSAPP (CONVERSION)
+------------------------------------------------------------
+WHATSAPP GREEN    #25D366   rgb(37, 211, 102)   --wa
+WHATSAPP HOVER    #1EBE5A   rgb(30, 190, 90)    --wa-hover
+WHATSAPP INK      #06301A   rgb(6, 48, 26)      --wa-ink   (text on green)
+
+------------------------------------------------------------
+ SURFACE / TEXT (LIGHT MODE — default)
+------------------------------------------------------------
+SURFACE (page bg) #FAF9FC   rgb(250, 249, 252)  --surface
+CARD (panel bg)   #FFFFFF   rgb(255, 255, 255)  --card
+INK (body text)   #221A3E   rgb(34, 26, 62)     --ink
+MUTED (sub text)  #6B6584   rgb(107, 101, 132)  --muted
+LINE (hairlines)  #E6E2F0   rgb(230, 226, 240)  --line
+
+------------------------------------------------------------
+ CONSOLE / DARK PANELS (always dark — cockpit feel)
+ Also used as the background for OG / social / Instagram images
+------------------------------------------------------------
+CONSOLE BG        #191233   rgb(25, 18, 51)     --console-bg
+CONSOLE CARD      #241B46   rgb(36, 27, 70)     --console-card
+CONSOLE LINE      #423474   rgb(66, 52, 116)    --console-line
+DEEPEST BG        #0E0A1C   rgb(14, 10, 28)     (Instagram post background top)
+
+------------------------------------------------------------
+ STATUS COLORS
+------------------------------------------------------------
+SUCCESS           #16A34A   rgb(22, 163, 74)    --success
+WARNING           #F59E0B   rgb(245, 158, 11)   --warn
+
+------------------------------------------------------------
+ DARK MODE OVERRIDES (.dark)
+------------------------------------------------------------
+SURFACE           #130F26   rgb(19, 15, 38)     --surface
+CARD              #1D1836   rgb(29, 24, 54)     --card
+INK               #ECE9F6   rgb(236, 233, 246)  --ink
+MUTED             #A49DC0   rgb(164, 157, 192)  --muted
+LINE              #2E2750   rgb(46, 39, 80)     --line
+PRIMARY           #C4B5FD   rgb(196, 181, 253)  --primary
+SECONDARY         #A78BFA   rgb(167, 139, 250)  --secondary
+CTA               #8B5CF6   rgb(139, 92, 246)   --cta
+CTA HOVER         #A78BFA   rgb(167, 139, 250)  --cta-hover
+
+------------------------------------------------------------
+ META / PWA
+------------------------------------------------------------
+THEME COLOR (browser bar)   #2E2159   (manifest theme_color)
+APP BACKGROUND              #FAF9FC   (manifest background_color)
+
+------------------------------------------------------------
+ QUICK PALETTE (copy-paste for Canva / design tools)
+------------------------------------------------------------
+#2E2159  #6D28D9  #C9A227  #E8C860  #25D366
+#191233  #241B46  #0E0A1C  #FAF9FC  #221A3E
+
+------------------------------------------------------------
+ USAGE NOTES
+------------------------------------------------------------
+- Headings / brand:      Primary #2E2159 (light bg) or White (dark bg)
+- Accent / highlights:   Brass #C9A227 -> #E8C860
+- Buttons / links:       Violet #6D28D9 (hover #5B21B6)
+- WhatsApp CTA only:     Green #25D366 (never use green elsewhere)
+- Social/OG backgrounds: Console/dark gradient #191233 -> #2E2159 -> #6D28D9
+- Do NOT introduce new colors outside this list.
+============================================================

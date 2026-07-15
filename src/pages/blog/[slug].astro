@@ -1,0 +1,46 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import FAQ from '@components/FAQ.astro';
+import RelatedLinks from '@components/RelatedLinks.astro';
+import CTASection from '@components/CTASection.astro';
+import Schema from '@components/Schema.astro';
+import { blogIndex } from '@data/blogs';
+import { buildBlogArticle } from '../../lib/blogContent';
+
+export function getStaticPaths() {
+  return blogIndex.map((stub) => ({ params: { slug: stub.slug }, props: { stub } }));
+}
+const { stub } = Astro.props as { stub: typeof blogIndex[number] };
+const a = buildBlogArticle(stub);
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }, { label: a.h1, href: `/blog/${a.slug}` }];
+---
+<BaseLayout
+  title={a.title}
+  description={a.description}
+  path={`/blog/${a.slug}`}
+  keywords={a.keywords}
+  ogType="article"
+  ogImageKey="default"
+  modifiedTime="2026-07-14"
+  publishedTime="2026-07-14"
+>
+  <Schema name={a.h1} description={a.description} breadcrumb={crumbs} article={{ headline: a.h1, description: a.description, blog: true }} faqs={a.faqs} />
+  <PageHero eyebrow={`${a.category} · ${a.readMins} min · Updated ${a.updated}`} h1={a.h1} intro={a.pain} breadcrumb={crumbs} />
+  <article class="wrap section">
+    <div class="page-body">
+      {a.sections.map((s) => (
+        <>
+          <h2>{s.h2}</h2>
+          {s.paras.map((p) => <p>{p}</p>)}
+          {s.bullets && <ul class="bullets">{s.bullets.map((b) => <li>{b}</li>)}</ul>}
+        </>
+      ))}
+    </div>
+  </article>
+  <CTASection />
+  <div class="wrap">
+    <FAQ faqs={a.faqs} />
+    <RelatedLinks links={a.related} />
+  </div>
+</BaseLayout>

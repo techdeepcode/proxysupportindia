@@ -1,0 +1,236 @@
+---
+import { waTalk, telLink, urgencyBar } from '@data/site';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import PhoneIcon from './PhoneIcon.astro';
+import SocialLinks from './SocialLinks.astro';
+import { tier1Techs } from '@data/technologies';
+import { countryBySlug, flagUrl } from '@data/countries';
+
+const wa = waTalk;
+
+const techs = [
+  'ai-ml', 'genai', 'mlops', 'devops', 'cloud-engineering', 'aws', 'azure', 'kubernetes',
+  'java', 'dotnet', 'react', 'python', 'data-engineering', 'snowflake', 'cybersecurity',
+  'workday', 'uipath', 'salesforce',
+].map((s) => tier1Techs.find((t) => t.slug === s)!).filter(Boolean);
+const locs = ['usa', 'canada', 'uk', 'europe', 'australia', 'singapore', 'japan', 'india'].map((s) => countryBySlug(s)!);
+const riq = [
+  ['java-interview-questions', 'Java'], ['react-interview-questions', 'React'], ['ai-ml-interview-questions', 'AI/ML'],
+  ['genai-interview-questions', 'GenAI'], ['devops-interview-questions', 'DevOps'], ['aws-interview-questions', 'AWS'],
+];
+
+const megas = [
+  {
+    id: 'mega-interview', label: 'Proxy Interview', hub: '/proxy-interview-support',
+    columns: [
+      { title: 'Interview Services', links: [
+        { label: 'Proxy Interview Support', href: '/proxy-interview-support' },
+        { label: 'Get Interview Scheduled', href: '/get-interview-scheduled' },
+        { label: 'Urgent Interview Help', href: '/urgent-proxy-interview-support' },
+        { label: 'Same-Day Interview', href: '/same-day-proxy-interview-support' },
+        { label: 'Failed Interview Help', href: '/failed-interview-help' },
+      ] },
+      { title: 'By Technology', links: [
+        ...techs.slice(0, 12).map((t) => ({ label: t.name, href: `/${t.slug}-proxy-interview-support` })),
+        { label: 'All technologies →', href: '/technologies', all: true },
+      ] },
+      { title: 'By Location', links: [
+        ...locs.map((c) => ({ label: c.name, href: `/proxy-interview-support-${c.slug}`, flag: c.slug })),
+        { label: 'All locations →', href: '/countries', all: true },
+      ] },
+      { title: 'Real Interview Questions', links: [
+        ...riq.map(([slug, name]) => ({ label: name, href: `/real-interview-questions/${slug}` })),
+        { label: 'All questions →', href: '/real-interview-questions', all: true },
+      ] },
+    ],
+  },
+  {
+    id: 'mega-job', label: 'Proxy Job', hub: '/proxy-job-support',
+    columns: [
+      { title: 'Job Services', links: [
+        { label: 'Proxy Job Support', href: '/proxy-job-support' },
+        { label: 'Real-Time Job Support', href: '/real-time-it-job-support' },
+        { label: 'Production Issue Support', href: '/production-issue-support' },
+        { label: 'Project Onboarding', href: '/project-onboarding-support' },
+        { label: 'Client Call & Standup', href: '/client-call-standup-support' },
+      ] },
+      { title: 'By Technology', links: [
+        ...techs.slice(0, 12).map((t) => ({ label: t.name, href: `/${t.slug}-proxy-job-support` })),
+        { label: 'All technologies →', href: '/technologies', all: true },
+      ] },
+      { title: 'By Location', links: [
+        ...locs.map((c) => ({ label: c.name, href: `/proxy-job-support-${c.slug}`, flag: c.slug })),
+        { label: 'All locations →', href: '/countries', all: true },
+      ] },
+      { title: 'India-to-Global', links: [
+        { label: 'Remote from India', href: '/remote-job-support-from-india' },
+        { label: 'USA time-zone', href: '/usa-time-zone-proxy-job-support-from-india' },
+        { label: 'Night-shift support', href: '/night-shift-proxy-job-support-from-india' },
+        { label: 'India → USA', href: '/india-to-usa-proxy-job-support' },
+        { label: 'All India-to-global →', href: '/india-to-global-proxy-support', all: true },
+      ] },
+    ],
+  },
+];
+
+const profile = [
+  { label: 'Profile Engineering', href: '/profile-engineering' },
+  { label: 'Profile Marketing', href: '/profile-marketing' },
+  { label: 'Profile Managing', href: '/profile-managing' },
+  { label: 'Get More Recruiter Calls', href: '/get-more-recruiter-calls' },
+  { label: 'End-to-End IT Career Proxy Support', href: '/end-to-end-it-career-proxy-support' },
+];
+---
+<div class="urgency-bar">
+  <div class="wrap urgency-wrap">
+    <span class="urgency-msg">{urgencyBar}</span>
+    <SocialLinks variant="strip" />
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Proxy Support India — Home">
+      <img class="brand-mark" src="/brand/logo-mark.svg" width="36" height="36" alt="" />
+      <span class="brand-text">
+        <span class="brand-name">Proxy Support India</span>
+        <span class="brand-sub">END-TO-END PROXY SUPPORT</span>
+      </span>
+    </a>
+
+    <nav class="main-nav" aria-label="Primary">
+      {megas.map((m) => (
+        <div class="nav-mega" data-flyout>
+          <a class="nav-trigger" href={m.hub} data-flyout-trigger aria-expanded="false" aria-controls={m.id} aria-haspopup="true">
+            {m.label} <span class="caret" aria-hidden="true">▾</span>
+          </a>
+          <div class="mega" id={m.id} data-flyout-panel>
+            <div class="wrap">
+              <div class="mega-grid">
+                {m.columns.map((col) => (
+                  <div class="mega-col">
+                    <h4>{col.title}</h4>
+                    {col.links.map((l) => <a href={l.href} class={l.all ? 'all' : (l.flag ? 'has-flag' : '')}>{l.flag && <img class="nav-flag" src={flagUrl(l.flag, 20)} width="20" height="15" alt="" loading="lazy" />}{l.label}</a>)}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+      <div class="nav-item" data-flyout>
+        <a class="nav-trigger" href="/services" data-flyout-trigger aria-expanded="false" aria-controls="fly-profile" aria-haspopup="true">
+          Profile Services <span class="caret" aria-hidden="true">▾</span>
+        </a>
+        <div class="dropdown" id="fly-profile" data-flyout-panel>{profile.map((c) => <a href={c.href}>{c.label}</a>)}</div>
+      </div>
+      <a href="/technologies">Technologies</a>
+      <a href="/countries">Locations</a>
+      <a href="/blog">Blog</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-wa btn-sm" href={wa} target="_blank" rel="noopener" data-cta="whatsapp-click" aria-label="Talk on WhatsApp"><WhatsAppIcon /> <span class="hide-xs">WhatsApp</span></a>
+      <a class="btn btn-line btn-sm header-call" href={telLink} data-cta="phone-click" aria-label="Call us"><PhoneIcon /> <span class="hide-xs">Call</span></a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" data-nav-toggle>☰</button>
+    </div>
+  </div>
+
+  <!-- Mobile accordion menu (native <details> — no hover needed) -->
+  <div class="mobile-nav" data-mobile-nav>
+    <div class="wrap">
+      {megas.map((m) => (
+        <details class="m-group" name="mnav">
+          <summary>{m.label}</summary>
+          <div class="m-panel">
+            {m.columns.map((col) => (
+              <div class="m-col">
+                <h5>{col.title}</h5>
+                {col.links.map((l) => <a href={l.href} class={l.flag ? 'has-flag' : ''}>{l.flag && <img class="nav-flag" src={flagUrl(l.flag, 20)} width="20" height="15" alt="" loading="lazy" />}{l.label}</a>)}
+              </div>
+            ))}
+          </div>
+        </details>
+      ))}
+      <details class="m-group" name="mnav">
+        <summary>Profile Services</summary>
+        <div class="m-panel"><div class="m-col">{profile.map((c) => <a href={c.href}>{c.label}</a>)}</div></div>
+      </details>
+      <a class="m-flat" href="/technologies">Technologies</a>
+      <a class="m-flat" href="/countries">Locations</a>
+      <a class="m-flat" href="/real-interview-questions">Real Interview Questions</a>
+      <a class="m-flat" href="/knowledge-base">Knowledge Base</a>
+      <a class="m-flat" href="/blog">Blog</a>
+      <a class="m-flat" href="/contact">Contact</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // ---- Mobile hamburger ----
+  const toggle = document.querySelector('[data-nav-toggle]');
+  const mobileMenu = document.querySelector('[data-mobile-nav]');
+  toggle?.addEventListener('click', () => {
+    const open = mobileMenu?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(!!open));
+  });
+
+  // ---- Desktop flyout / mega menus ----
+  // Rules that avoid the "click closes it" struggle:
+  //  • Mouse hover opens; leaving closes after a short delay (hover-intent).
+  //  • Clicking the trigger NEVER closes it — on a mouse it navigates to the
+  //    hub page; on touch the FIRST tap opens the panel (no navigation),
+  //    a SECOND tap navigates.
+  //  • Keyboard: focus opens; Escape closes and restores focus.
+  const flyouts = Array.from(document.querySelectorAll('[data-flyout]'));
+  const CLOSE_DELAY = 200;
+  const timers = new WeakMap<Element, number>();
+
+  function closeFly(fly: Element) {
+    fly.classList.remove('open');
+    fly.querySelector('[data-flyout-trigger]')?.setAttribute('aria-expanded', 'false');
+  }
+  function openFly(fly: Element) {
+    flyouts.forEach((f) => { if (f !== fly) closeFly(f); });
+    window.clearTimeout(timers.get(fly));
+    fly.classList.add('open');
+    fly.querySelector('[data-flyout-trigger]')?.setAttribute('aria-expanded', 'true');
+  }
+  function scheduleClose(fly: Element) {
+    window.clearTimeout(timers.get(fly));
+    timers.set(fly, window.setTimeout(() => closeFly(fly), CLOSE_DELAY));
+  }
+  function closeAll() { flyouts.forEach(closeFly); }
+
+  flyouts.forEach((fly) => {
+    const trigger = fly.querySelector('[data-flyout-trigger]') as HTMLElement;
+
+    // Mouse hover-intent (ignore touch pointers here)
+    fly.addEventListener('pointerenter', (e) => { if ((e as PointerEvent).pointerType === 'mouse') openFly(fly); });
+    fly.addEventListener('pointerleave', (e) => { if ((e as PointerEvent).pointerType === 'mouse') scheduleClose(fly); });
+
+    // Clicking the trigger NEVER closes and NEVER navigates — it only keeps
+    // the panel open (openFly is idempotent). Users reach the hub page via
+    // the first link inside the panel (e.g. "Proxy Interview Support").
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      openFly(fly);
+    });
+
+    // Keyboard access: opening on focus is safe now (click never toggles).
+    fly.addEventListener('focusin', () => openFly(fly));
+    fly.addEventListener('focusout', (e) => {
+      const next = (e as FocusEvent).relatedTarget as Node | null;
+      if (!next || !fly.contains(next)) scheduleClose(fly);
+    });
+    fly.addEventListener('keydown', (e) => {
+      if ((e as KeyboardEvent).key === 'Escape') { closeFly(fly); trigger.focus(); }
+    });
+  });
+
+  // Close when tapping/clicking outside, or pressing Escape.
+  document.addEventListener('click', (e) => {
+    if (!(e.target as Element)?.closest('[data-flyout]')) closeAll();
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
+</script>

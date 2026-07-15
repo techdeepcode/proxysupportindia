@@ -1,0 +1,58 @@
+---
+import type { PageContent } from '../lib/content';
+import PageHero from './PageHero.astro';
+import FAQ from './FAQ.astro';
+import RelatedLinks from './RelatedLinks.astro';
+import CTASection from './CTASection.astro';
+import Schema from './Schema.astro';
+
+export interface Props { content: PageContent; }
+const { content } = Astro.props;
+// Split sections so we can drop an inline CTA mid-article.
+const mid = Math.min(2, content.sections.length);
+const first = content.sections.slice(0, mid);
+const rest = content.sections.slice(mid);
+---
+<Schema
+  name={content.h1}
+  description={content.description}
+  breadcrumb={content.breadcrumb}
+  service={content.schemaType === 'Service' ? { name: content.h1, description: content.description } : undefined}
+  article={content.schemaType === 'Article' ? { headline: content.h1, description: content.description } : undefined}
+  faqs={content.faqs}
+/>
+
+<PageHero eyebrow={content.kicker} h1={content.h1} intro={content.intro} breadcrumb={content.breadcrumb} />
+
+<article class="wrap section">
+  <div class="page-body">
+    {first.map((s) => (
+      <>
+        <h2>{s.h2}</h2>
+        {s.paras?.map((p) => <p>{p}</p>)}
+        {s.bullets && <ul class="bullets">{s.bullets.map((b) => <li>{b}</li>)}</ul>}
+      </>
+    ))}
+  </div>
+</article>
+
+<CTASection primary={content.primaryCta} />
+
+{rest.length > 0 && (
+  <article class="wrap section" style="padding-top:0;">
+    <div class="page-body">
+      {rest.map((s) => (
+        <>
+          <h2>{s.h2}</h2>
+          {s.paras?.map((p) => <p>{p}</p>)}
+          {s.bullets && <ul class="bullets">{s.bullets.map((b) => <li>{b}</li>)}</ul>}
+        </>
+      ))}
+    </div>
+  </article>
+)}
+
+<div class="wrap">
+  <FAQ faqs={content.faqs} />
+  <RelatedLinks links={content.related} />
+</div>

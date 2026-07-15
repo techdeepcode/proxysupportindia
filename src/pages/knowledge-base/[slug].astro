@@ -1,0 +1,58 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import FAQ from '@components/FAQ.astro';
+import RelatedLinks from '@components/RelatedLinks.astro';
+import CTASection from '@components/CTASection.astro';
+import Schema from '@components/Schema.astro';
+import { knowledgeBase, kbBySlug } from '@data/knowledgeBase';
+import { serviceBySlug } from '@data/services';
+import { scenarioBySlug } from '@data/scenarios';
+import { buildKbExtras } from '../../lib/kbContent';
+
+export function getStaticPaths() {
+  return knowledgeBase.map((k) => ({ params: { slug: k.slug }, props: { slug: k.slug } }));
+}
+const { slug } = Astro.props as { slug: string };
+const k = kbBySlug(slug)!;
+const svc = k.relatedService ? (serviceBySlug(k.relatedService) || scenarioBySlug(k.relatedService)) : undefined;
+const extras = buildKbExtras(k);
+const faqs = extras.faqs;
+const related = [
+  ...(k.relatedSlugs ?? []).map((s) => ({ label: knowledgeBase.find((x) => x.slug === s)?.title ?? s, href: `/knowledge-base/${s}` })),
+  ...(svc ? [{ label: svc.name, href: `/${svc.slug}` }] : []),
+  { label: 'Proxy Interview Support', href: '/proxy-interview-support' },
+  { label: 'Proxy Job Support', href: '/proxy-job-support' },
+  { label: 'Contact on WhatsApp', href: '/contact' },
+].filter((v, i, arr) => arr.findIndex((x) => x.href === v.href) === i);
+
+const title = `${k.title} | Proxy Support India`;
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Knowledge Base', href: '/knowledge-base' }, { label: k.h1, href: `/knowledge-base/${k.slug}` }];
+---
+<BaseLayout title={title} description={k.description} path={`/knowledge-base/${k.slug}`} keywords={extras.keywords} ogType="article">
+  <Schema name={k.h1} description={k.description} breadcrumb={crumbs} article={{ headline: k.h1, description: k.description }} faqs={faqs} />
+  <PageHero eyebrow={`${k.category} · Updated Jul 2026`} h1={k.h1} intro={k.quickAnswer} breadcrumb={crumbs} />
+  <article class="wrap section">
+    <div class="page-body">
+      <h2>What it includes</h2>
+      <ul class="bullets">{k.points.map((p) => <li>{p}</li>)}</ul>
+      {svc && (
+        <>
+          <h2>Who needs it</h2>
+          <ul class="bullets">{svc.forWho.map((f) => <li>{f}</li>)}</ul>
+        </>
+      )}
+      {extras.depth.map((s) => (
+        <>
+          <h2>{s.h2}</h2>
+          {s.paras.map((p) => <p>{p}</p>)}
+        </>
+      ))}
+    </div>
+  </article>
+  <CTASection />
+  <div class="wrap">
+    <FAQ faqs={faqs} />
+    <RelatedLinks links={related} />
+  </div>
+</BaseLayout>

@@ -1,0 +1,86 @@
+# ============================================================
+#  ProxySupportIndia.com — .gitignore
+#  Astro + Node + Cloudflare Pages (Windows dev)
+# ============================================================
+
+# ---- Build output (Cloudflare Pages rebuilds this; never commit) ----
+dist/
+.output/
+.vercel/
+.netlify/
+
+# ---- Astro generated types / cache ----
+.astro/
+
+# ---- Dependencies ----
+node_modules/
+.pnp
+.pnp.js
+jspm_packages/
+
+# ---- Environment / secrets (PUBLIC_* are client-exposed by design,
+#      but keep the real .env out of git; commit .env.example instead) ----
+.env
+.env.*
+!.env.example
+
+# ---- Logs & debug ----
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ---- Package-manager housekeeping ----
+.npm
+.yarn/
+.pnpm-store/
+.eslintcache
+.cache/
+*.tsbuildinfo
+
+# ---- Test / coverage ----
+coverage/
+.nyc_output/
+
+# ---- OS junk ----
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# ---- Editors / IDEs ----
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# ---- Wrangler / Cloudflare local ----
+.wrangler/
+wrangler.toml.bak
+
+# ---- Misc temp ----
+tmp/
+temp/
+*.tmp
+*.bak
+
+# ============================================================
+#  DO NOT ignore these (needed for build/deploy):
+#   - public/            (favicon, robots.txt, manifest, og/, brand/)
+#   - public/brand/**    (logo, social & Instagram images — referenced by pages)
+#   - src/, scripts/, *.config.mjs, package.json, package-lock.json
+# ============================================================

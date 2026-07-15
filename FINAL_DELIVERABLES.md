@@ -1,0 +1,28 @@
+FINAL DELIVERABLES MUST INCLUDE:
+
+- Complete Astro website
+- SEO component
+- Schema component
+- GA4 / GTM / verification support through env variables
+- Open Graph metadata
+- Twitter/X metadata
+- WhatsApp/social preview metadata
+- robots.txt
+- llms.txt
+- llms-full.txt
+- humans.txt
+- security.txt
+- manifest.webmanifest
+- rss.xml
+- feed.xml
+- sitemap.xml
+- sitemap-index.xml
+- service sitemap
+- blog sitemap
+- knowledge base sitemap
+- real interview questions sitemap
+- technology sitemap
+- location sitemap
+- conversion tracking data attributes
+- mobile sticky WhatsApp CTA
+- final build report

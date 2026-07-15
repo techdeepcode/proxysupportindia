@@ -1,0 +1,93 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import FAQ from '@components/FAQ.astro';
+import RelatedLinks from '@components/RelatedLinks.astro';
+import CTASection from '@components/CTASection.astro';
+import Schema from '@components/Schema.astro';
+import { fde } from '@data/fde';
+import { countries } from '@data/countries';
+import { cities } from '@data/cities';
+import { site } from '@data/site';
+
+const title = `Forward Deployed Engineer (FDE) Proxy Interview & Job Support | ${site.name}`;
+const description = `${fde.tagline} FDE proxy interview support to clear the loop and proxy job support to deliver at the customer — across USA and global markets. Typical USA base ${fde.salaryUSA}.`;
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Forward Deployed Engineer', href: '/forward-deployed-engineer' }];
+const topCountries = countries.slice(0, 9);
+const topCities = cities.filter((c) => ['new-york', 'san-francisco', 'san-jose', 'seattle', 'austin', 'toronto', 'london', 'singapore-city', 'bangalore', 'hyderabad'].includes(c.slug));
+
+const faqs = [
+  { q: 'What is a Forward Deployed Engineer (FDE)?', a: fde.whatIs },
+  { q: 'Why is FDE one of the highest-paying roles in 2026?', a: `${fde.whyHot} Typical USA base salary is around ${fde.salaryUSA}.` },
+  { q: 'Can you help me clear an FDE interview?', a: `Yes. FDE proxy interview support maps the exact loop — ${fde.interviewFocus} — and prepares you round by round with a stack-matched expert.` },
+  { q: 'Can you support me on the job as an FDE?', a: `Yes. FDE proxy job support helps you with ${fde.jobFocus}, in real time and aligned to your time zone.` },
+  { q: 'Which markets and cities do you cover for FDE?', a: 'USA (our center market), Canada, UK, Europe, Australia, Singapore, Japan, New Zealand, the Gulf and India — plus major cities like New York, San Francisco, Seattle, Austin, Toronto, London, Singapore, Bangalore and Hyderabad.' },
+];
+const related = [
+  { label: 'FDE Proxy Interview Support', href: '/forward-deployed-engineer-proxy-interview-support' },
+  { label: 'FDE Proxy Job Support', href: '/forward-deployed-engineer-proxy-job-support' },
+  { label: 'High-Paying IT Roles', href: '/high-paying-it-roles' },
+  { label: 'AI/ML Proxy Interview Support', href: '/ai-ml-proxy-interview-support' },
+  { label: 'Data Engineering Proxy Job Support', href: '/data-engineering-proxy-job-support' },
+  { label: 'Contact on WhatsApp', href: '/contact' },
+];
+---
+<BaseLayout title={title} description={description} path="/forward-deployed-engineer">
+  <Schema
+    name="Forward Deployed Engineer (FDE) Proxy Support"
+    description={description}
+    breadcrumb={crumbs}
+    service={{ name: 'Forward Deployed Engineer proxy support', description }}
+    faqs={faqs}
+  />
+  <PageHero
+    eyebrow="Aim higher · 2026’s hottest role"
+    h1="Forward Deployed Engineer (FDE) Proxy Interview & Job Support"
+    intro={`${fde.tagline} We help you clear the demanding FDE interview loop and then deliver at the customer — with real-time, stack-matched support across USA and global markets.`}
+    badge={`${fde.salaryUSA} USA base`}
+    breadcrumb={crumbs}
+  />
+  <article class="wrap section">
+    <div class="page-body">
+      <h2>What a Forward Deployed Engineer does</h2>
+      <p>{fde.whatIs}</p>
+      <p>{fde.whyHot}</p>
+
+      <h2>Skills we support you on</h2>
+      <ul class="bullets">{fde.skills.map((s) => <li>{s}</li>)}</ul>
+
+      <h2>Two ways we support FDEs</h2>
+      <div class="cards" style="margin-top:1rem;">
+        <a class="card" href="/forward-deployed-engineer-proxy-interview-support">
+          <span class="kicker">Clear the loop</span>
+          <h3>FDE Proxy Interview Support</h3>
+          <p>JD-based, round-wise help across coding, solution design, product scenarios, data/AI integration and stakeholder rounds.</p>
+          <span class="card-link">Explore FDE interview support</span>
+        </a>
+        <a class="card" href="/forward-deployed-engineer-proxy-job-support">
+          <span class="kicker">Deliver at the customer</span>
+          <h3>FDE Proxy Job Support</h3>
+          <p>Real-time help deploying and customizing the platform, building integrations and pipelines, and running client calls.</p>
+          <span class="card-link">Explore FDE job support</span>
+        </a>
+      </div>
+    </div>
+
+    <h2 style="margin-top:2rem; color:rgb(var(--primary));">FDE support by country</h2>
+    <div class="related" style="margin-top:1rem;">
+      {topCountries.map((c) => <a href={`/forward-deployed-engineer-proxy-interview-support-${c.slug}`}>FDE in {c.name}</a>)}
+      <a href="/countries">All markets →</a>
+    </div>
+
+    <h2 style="margin-top:2rem; color:rgb(var(--primary));">FDE support by city</h2>
+    <div class="related" style="margin-top:1rem;">
+      {topCities.map((c) => <a href={`/forward-deployed-engineer-proxy-interview-support-${c.slug}`}>FDE in {c.name}</a>)}
+      <a href="/locations">All cities →</a>
+    </div>
+  </article>
+  <CTASection heading="Aim for a Forward Deployed Engineer role" text="Share your FDE target or JD on WhatsApp. We’ll prepare you for the loop and back you on the job." />
+  <div class="wrap">
+    <FAQ faqs={faqs} />
+    <RelatedLinks links={related} />
+  </div>
+</BaseLayout>

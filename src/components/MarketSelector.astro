@@ -1,0 +1,62 @@
+---
+import { countries, flagUrl, demandTechs } from '@data/countries';
+import { techBySlug } from '@data/technologies';
+// USA first (center), then the rest in data order.
+const ordered = [...countries].sort((a, b) => (a.center ? -1 : 0) - (b.center ? -1 : 0));
+const data = ordered.map((c) => ({
+  slug: c.slug, name: c.name, flag: flagUrl(c.slug), angle: c.angle,
+  hiringStyle: c.hiringStyle, timezone: c.timezone,
+  techs: (demandTechs[c.slug] ?? []).map((s) => {
+    const t = techBySlug(s);
+    return { name: t?.name ?? s, interview: `/${s}-proxy-interview-support`, job: `/${s}-proxy-job-support` };
+  }),
+  interviewHref: `/proxy-interview-support-${c.slug}`, jobHref: `/proxy-job-support-${c.slug}`,
+}));
+---
+<section class="section tinted" id="markets">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">USA-first global market selector</p>
+      <h2>Pick your target market. We prepare you for how it actually hires.</h2>
+      <p>USA is our center market — but we cover Canada, UK, Europe, Australia, Singapore, Japan, New Zealand, the Gulf and India, each with its own interview style and recruiter channels.</p>
+    </div>
+    <div class="chips-row" data-chips role="group" aria-label="Choose a target market"></div>
+    <div class="market-panel" data-panel aria-live="polite"></div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ data }}>
+  const chips = document.querySelector('[data-chips]');
+  const panel = document.querySelector('[data-panel]');
+  if (chips && panel) {
+    const flag = (d) => `<img class="flag" src="${d.flag}" alt="" width="20" height="15" loading="lazy" />`;
+    chips.innerHTML = data.map((d, i) =>
+      `<button type="button" class="mchip" aria-pressed="${i === 0}" data-m="${d.slug}">${flag(d)} ${d.name}</button>`
+    ).join('');
+    const show = (slug) => {
+      const d = data.find((x) => x.slug === slug) || data[0];
+      const techChips = d.techs.map((t) =>
+        `<span class="mkt-tech">${t.name}<a href="${t.interview}" title="${t.name} proxy interview support">Interview</a><a href="${t.job}" title="${t.name} proxy job support">Job</a></span>`
+      ).join('');
+      panel.innerHTML =
+        `<h3>${flag(d)} ${d.name}</h3><p>${d.angle}</p>` +
+        `<dl class="market-grid">` +
+          `<div><dt>Interview style</dt><dd>${d.hiringStyle}</dd></div>` +
+          `<div><dt>Time zone</dt><dd>${d.timezone}</dd></div>` +
+        `</dl>` +
+        `<div class="mkt-tech-block"><dt class="mkt-tech-dt">In-demand tech — tap for interview or job support</dt>` +
+          `<div class="mkt-techs">${techChips}</div>` +
+        `</div>` +
+        `<div class="cta-row" style="margin-top:1.1rem">` +
+          `<a class="btn btn-violet btn-sm" href="${d.interviewHref}">${d.name} Interview Support</a>` +
+          `<a class="btn btn-line btn-sm" href="${d.jobHref}">${d.name} Job Support</a>` +
+        `</div>`;
+      chips.querySelectorAll('.mchip').forEach((b) => b.setAttribute('aria-pressed', b.dataset.m === slug ? 'true' : 'false'));
+    };
+    chips.addEventListener('click', (e) => {
+      const b = e.target.closest('.mchip');
+      if (b) show(b.dataset.m);
+    });
+    show(data[0].slug);
+  }
+</script>

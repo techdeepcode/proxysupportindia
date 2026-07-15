@@ -1,0 +1,28 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import CTASection from '@components/CTASection.astro';
+import Schema from '@components/Schema.astro';
+import { riqTopics } from '@data/realInterviewQuestions';
+
+const title = 'Real Interview Questions by Technology (2026) | Proxy Support India';
+const description = 'Real-style interview questions with strong answers, follow-ups and what the interviewer is checking — across AI/ML, GenAI, DevOps, Java, .NET, React, Workday, UiPath and more.';
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Real Interview Questions', href: '/real-interview-questions' }];
+const categories = [...new Set(riqTopics.map((t) => t.category))];
+---
+<BaseLayout title={title} description={description} path="/real-interview-questions">
+  <Schema pageType="CollectionPage" name="Real Interview Questions by Technology" description={description} breadcrumb={crumbs}
+    itemList={{ name: 'Interview Question Topics', items: riqTopics.map((t) => ({ name: t.title, url: `/real-interview-questions/${t.slug}` })) }} />
+  <PageHero eyebrow="Real interview questions · 2026" h1="Real Interview Questions by Technology" intro="Each set includes a short answer, a strong technical answer, a likely follow-up, what the interviewer is checking, and the common mistake to avoid. Facing one of these soon? Share your JD on WhatsApp for proxy interview support." breadcrumb={crumbs} />
+  <section class="wrap section">
+    {categories.map((cat) => (
+      <div style="margin-top:1.8rem;">
+        <h2 style="color:rgb(var(--primary)); font-size:1.25rem;">{cat}</h2>
+        <div class="related" style="margin-top:.7rem;">
+          {riqTopics.filter((t) => t.category === cat).map((t) => <a href={`/real-interview-questions/${t.slug}`}>{t.title}</a>)}
+        </div>
+      </div>
+    ))}
+  </section>
+  <CTASection primary="shareJD" heading="Need proxy interview support for one of these?" text="Share your JD on WhatsApp and we’ll match you with a stack expert for round-wise support." />
+</BaseLayout>

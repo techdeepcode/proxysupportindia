@@ -1,0 +1,65 @@
+---
+// Main technologies only (tier 1) — comprehensive but clean; supportive
+// sub-technologies live on the full /technologies hub.
+import { tier1Techs } from '@data/technologies';
+import Icon from './Icon.astro';
+// Distinct icon per technology (not shared across a whole category).
+const techIcon: Record<string, string> = {
+  // AI & Data
+  'ai-ml': 'cpu', genai: 'sparkles', llm: 'message-square', rag: 'search', 'agentic-ai': 'bot',
+  mlops: 'git-branch', 'data-science': 'bar-chart', 'data-engineering': 'database',
+  snowflake: 'snowflake', databricks: 'layers', 'power-bi': 'pie-chart',
+  'ai-platform-engineering': 'workflow',
+  // DevOps & Cloud
+  devops: 'workflow', 'cloud-engineering': 'cloud', aws: 'server', azure: 'box', 'google-cloud': 'globe',
+  kubernetes: 'grid', docker: 'package', terraform: 'layers', 'ci-cd': 'repeat', 'github-actions': 'git-branch',
+  jenkins: 'settings', sre: 'activity', observability: 'bar-chart', datadog: 'activity', 'prometheus-grafana': 'bar-chart',
+  // Security
+  cybersecurity: 'shield', devsecops: 'lock', 'cloud-security': 'shield-check', 'iam-zero-trust': 'key',
+  // Backend
+  java: 'coffee', 'spring-boot': 'leaf', microservices: 'share-2', python: 'terminal', nodejs: 'hexagon',
+  dotnet: 'hash', 'aspnet-core': 'hash', csharp: 'hash', 'rest-apis': 'share-2', graphql: 'share-2',
+  kafka: 'git-commit', 'event-driven-architecture': 'git-commit', 'system-design': 'layout', 'backend-engineering': 'server',
+  // Frontend
+  react: 'atom', angular: 'code', vue: 'leaf', nextjs: 'layers', typescript: 'code', javascript: 'code',
+  'full-stack': 'monitor', 'react-native': 'monitor',
+  // Enterprise
+  workday: 'briefcase', uipath: 'bot', rpa: 'repeat', salesforce: 'cloud', sap: 'box',
+  servicenow: 'settings', 'oracle-fusion': 'database',
+  // QA & Testing
+  'qa-automation': 'check-circle', selenium: 'target', playwright: 'monitor', cypress: 'check-circle',
+  'api-testing': 'share-2', 'performance-testing': 'activity',
+  // Data Platforms
+  sql: 'database', postgresql: 'database', 'sql-server': 'database', mongodb: 'layers', redis: 'zap',
+  etl: 'workflow', informatica: 'workflow', airflow: 'git-branch',
+  // Support
+  'production-support': 'headphones', 'application-support': 'headphones',
+};
+const iconFor = (slug: string) => techIcon[slug] ?? 'code';
+---
+<section class="section" id="tech">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Technology coverage · 2026 demand order</p>
+      <h2>Stack-matched experts across the technologies that hire in 2026</h2>
+      <p>From AI/ML and GenAI to DevOps, Java, .NET, Workday and UiPath — every track covers proxy interview support and proxy job support.</p>
+    </div>
+    <div class="matrix">
+      {tier1Techs.map((t) => (
+        <div class="cell">
+          <div class="t"><span class="tech-ic"><Icon name={iconFor(t.slug)} /></span> {t.name}</div>
+          <div class="f">{t.blurb}</div>
+          <div class="cell-links">
+            <a href={`/${t.slug}-proxy-interview-support`}>Interview</a>
+            <a href={`/${t.slug}-proxy-job-support`}>Job</a>
+          </div>
+        </div>
+      ))}
+    </div>
+    <p class="matrix-legend">All tracks include: proxy interview support · proxy job support · get interview scheduled · real interview questions</p>
+    <div class="cta-row" style="margin-top:1.4rem">
+      <a class="btn btn-line" href="/technologies">Browse all technologies →</a>
+      <a class="btn btn-line" href="/real-interview-questions">Real interview questions →</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,66 @@
+---
+import Breadcrumbs from './Breadcrumbs.astro';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import PhoneIcon from './PhoneIcon.astro';
+import { waTalk, telLink, stats, site } from '@data/site';
+import { countries } from '@data/countries';
+const years = 2026 - site.since;
+
+export interface Crumb { label: string; href: string; }
+export interface Metric { v: string; l: string; }
+export interface Props {
+  eyebrow: string;
+  h1: string;
+  intro: string;
+  breadcrumb?: Crumb[];
+  badge?: string;      // e.g. a salary band
+  metrics?: Metric[];
+  ctaLabel?: string;
+}
+const defaultMetrics: Metric[] = [
+  { v: stats.interviews, l: 'interviews supported' },
+  { v: stats.jobSupport, l: 'job-support projects' },
+  { v: stats.profiles, l: 'profiles marketed' },
+  { v: stats.higherRoles, l: 'landed higher-paying roles' },
+  { v: `${countries.length}`, l: 'global markets' },
+  { v: `${years}+ yrs`, l: 'proxy support since 2011' },
+];
+const { eyebrow, h1, intro, breadcrumb, badge, metrics = defaultMetrics, ctaLabel = 'Talk on WhatsApp' } = Astro.props;
+// Highlight the benefit clause after an em-dash in brass for instant scanning.
+const dash = h1.split(/\s+—\s+/);
+const h1lead = dash[0];
+const h1rest = dash.length > 1 ? dash.slice(1).join(' — ') : '';
+
+// Auto-highlight key phrases in the description so it scans in a glance.
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const escRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const phrases = [
+  'end-to-end it career proxy support', 'get more recruiter calls', 'forward deployed engineer',
+  'proxy interview support', 'proxy job support', 'profile engineering', 'profile marketing',
+  'profile managing', 'recruiter calls', 'higher-paying', 'higher paying', 'real-time', 'real time',
+  'stack-matched', 'no middlemen', 'in-house', 'since 2011', 'proxy support',
+].sort((a, b) => b.length - a.length);
+const hlRe = new RegExp(`\\b(${phrases.map(escRe).join('|')})\\b`, 'gi');
+const introHtml = esc(intro).replace(hlRe, '<b class="ph-mark">$1</b>');
+---
+<section class="page-hero">
+  <div class="wrap page-hero-inner">
+    <div class="ph-copy">
+      {breadcrumb && <div class="ph-crumbs"><Breadcrumbs items={breadcrumb} /></div>}
+      <p class="eyebrow">{eyebrow}</p>
+      <h1 class="ph-h1">{h1lead}{h1rest && <span class="ph-hl"> — {h1rest}</span>}</h1>
+      {badge && <span class="salary-band ph-badge">{badge}</span>}
+      <p class="ph-intro" set:html={introHtml}></p>
+      <div class="cta-row">
+        <a class="btn btn-wa" href={waTalk} target="_blank" rel="noopener" data-cta="whatsapp-click"><WhatsAppIcon /> {ctaLabel}</a>
+        <a class="btn btn-ghost" href={telLink} data-cta="phone-click"><PhoneIcon /> Call</a>
+      </div>
+    </div>
+    <aside class="ph-metrics-card" aria-label="Why Proxy Support India">
+      <div class="ph-metrics-top"><span class="ph-dot"></span> Since {site.since} · <b>{years}+ yrs</b> real-time proxy support</div>
+      <div class="ph-metrics">
+        {metrics.map((m) => <div><b>{m.v}</b><span>{m.l}</span></div>)}
+      </div>
+    </aside>
+  </div>
+</section>

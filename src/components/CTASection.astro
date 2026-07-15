@@ -1,0 +1,24 @@
+---
+import { waTalk, telLink, site, type CtaKey } from '@data/site';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import PhoneIcon from './PhoneIcon.astro';
+export interface Props {
+  primary?: CtaKey; // kept for compatibility; CTAs are now simple Talk/Call
+  heading?: string;
+  text?: string;
+}
+const {
+  heading = 'Talk to Proxy Support India',
+  text = 'Message us on WhatsApp or call — share your interview JD, project issue or target market and we’ll match you with a stack-matched expert fast.',
+} = Astro.props;
+---
+<section class="section">
+  <div class="final">
+    <h2>{heading}</h2>
+    <p>{text}</p>
+    <div class="cta-row">
+      <a class="btn btn-wa" href={waTalk} target="_blank" rel="noopener" data-cta="whatsapp-click"><WhatsAppIcon /> Talk on WhatsApp</a>
+      <a class="btn btn-ghost" href={telLink} data-cta="phone-click"><PhoneIcon /> Call {site.phone}</a>
+    </div>
+  </div>
+</section>

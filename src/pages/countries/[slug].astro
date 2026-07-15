@@ -1,0 +1,70 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import FAQ from '@components/FAQ.astro';
+import CTASection from '@components/CTASection.astro';
+import Schema from '@components/Schema.astro';
+import { countries, countryBySlug, flagUrl } from '@data/countries';
+import { cities } from '@data/cities';
+import { localMarketFor } from '@data/localMarkets';
+
+export function getStaticPaths() {
+  return countries.map((c) => ({ params: { slug: c.slug }, props: { slug: c.slug } }));
+}
+const { slug } = Astro.props as { slug: string };
+const c = countryBySlug(slug)!;
+const localCities = cities.filter((ct) => ct.countrySlug === slug);
+
+const services = [
+  { label: `Proxy Interview Support in ${c.name}`, href: `/proxy-interview-support-${c.slug}` },
+  { label: `Proxy Job Support in ${c.name}`, href: `/proxy-job-support-${c.slug}` },
+  { label: `Get Interview Scheduled — ${c.name}`, href: `/get-interview-scheduled-${c.slug}` },
+  { label: `Profile Engineering — ${c.name}`, href: `/profile-engineering-${c.slug}` },
+  { label: `Profile Marketing — ${c.name}`, href: `/profile-marketing-${c.slug}` },
+  { label: `Profile Managing — ${c.name}`, href: `/profile-managing-${c.slug}` },
+  { label: `Get More Recruiter Calls — ${c.name}`, href: `/get-more-recruiter-calls-${c.slug}` },
+  { label: `End-to-End Proxy Support — ${c.name}`, href: `/end-to-end-proxy-support-${c.slug}` },
+];
+const title = `${c.name} IT Proxy Support — Interview, Job, Profile & Recruiter Calls | Proxy Support India`;
+const description = `Proxy support for ${c.adjective} IT roles: ${c.angle} Interview support, job support, profile services and recruiter calls tuned to ${c.name}.`;
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Locations', href: '/countries' }, { label: c.name, href: `/countries/${c.slug}` }];
+const faqs = [
+  { q: `How does IT hiring work in ${c.name}?`, a: c.hiringStyle },
+  { q: `What is in demand in ${c.name}?`, a: c.demand },
+  { q: `Where do recruiters and vendors operate in ${c.name}?`, a: c.channels },
+  { q: `Can I get ${c.name} support from India?`, a: `Yes — aligned to ${c.timezone} hours, including night shifts where needed.` },
+];
+---
+<BaseLayout title={title} description={description} path={`/countries/${c.slug}`}>
+  <Schema name={`${c.name} IT Proxy Support`} description={description} breadcrumb={crumbs} service={{ name: `${c.name} IT Proxy Support`, description }} faqs={faqs} />
+  <PageHero eyebrow={`${c.name} · ${c.region}`} h1={`${c.name} IT Proxy Support`} intro={`${c.angle} ${c.visaNote}`} breadcrumb={crumbs} />
+  <section class="wrap section">
+    <div class="page-body">
+      <h2>How hiring works in {c.name}</h2>
+      <p>{c.hiringStyle}</p>
+      <h2>In demand right now</h2>
+      <p>{c.demand}</p>
+      <h2>Recruiter &amp; vendor channels</h2>
+      <p>{c.channels}</p>
+      {localMarketFor(c.slug) && (
+        <p><b>Popular job boards:</b> {localMarketFor(c.slug)!.jobBoards.join(', ')}. <b>Currency:</b> {localMarketFor(c.slug)!.currency}.</p>
+      )}
+    </div>
+
+    <h2 style="margin-top:2rem; color:rgb(var(--primary));">{c.name} services</h2>
+    <div class="related" style="margin-top:1rem;">
+      {services.map((s) => <a href={s.href}>{s.label}</a>)}
+    </div>
+
+    {localCities.length > 0 && (
+      <>
+        <h2 style="margin-top:2rem; color:rgb(var(--primary));">{c.name} cities</h2>
+        <div class="related" style="margin-top:1rem;">
+          {localCities.map((ct) => <a href={`/${ct.slug}-proxy-interview-support`}>{ct.name} Proxy Support</a>)}
+        </div>
+      </>
+    )}
+  </section>
+  <div class="wrap"><FAQ faqs={faqs} /></div>
+  <CTASection />
+</BaseLayout>

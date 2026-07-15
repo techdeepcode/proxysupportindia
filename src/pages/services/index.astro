@@ -1,0 +1,35 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import CTASection from '@components/CTASection.astro';
+import Schema from '@components/Schema.astro';
+import { services } from '@data/services';
+import { scenarios } from '@data/scenarios';
+
+const title = 'Our Services — Proxy Interview, Job Support, Profile & Recruiter Calls | Proxy Support India';
+const description = 'All Proxy Support India services: proxy interview support, proxy job support, profile engineering, marketing, managing, get more recruiter calls, and end-to-end IT career proxy support.';
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Services', href: '/services' }];
+---
+<BaseLayout title={title} description={description} path="/services">
+  <Schema pageType="CollectionPage" name="Our Services — Proxy Support India" description={description} breadcrumb={crumbs}
+    itemList={{ name: 'Services', items: [...services.map((s) => ({ name: s.name, url: `/${s.slug}` })), ...scenarios.map((s) => ({ name: s.name, url: `/${s.slug}` }))] }} />
+  <PageHero eyebrow="Core services · in priority order" h1="End-to-End IT Career Proxy Support Services" intro="From getting recruiter calls to clearing interviews and delivering the job — seven core services, plus urgent and scenario-specific support, across USA and global markets." breadcrumb={crumbs} />
+  <section class="wrap section">
+    <div class="cards cols-3" style="margin-top:1.6rem;">
+      {services.map((s) => (
+        <a class="card" href={`/${s.slug}`}>
+          <span class="kicker">{s.kicker}</span>
+          <h3>{s.name}</h3>
+          <p>{s.short}</p>
+          <span class="card-link">Explore</span>
+        </a>
+      ))}
+    </div>
+
+    <h2 style="margin-top:2.4rem; color:rgb(var(--primary));">Urgent &amp; scenario support</h2>
+    <div class="related" style="margin-top:1rem;">
+      {scenarios.map((s) => <a href={`/${s.slug}`}>{s.name}</a>)}
+    </div>
+  </section>
+  <CTASection />
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import CTASection from '@components/CTASection.astro';
+import Schema from '@components/Schema.astro';
+import { blogIndex } from '@data/blogs';
+
+const title = 'Blog — Proxy Support, India-to-Global & Tech Career Strategies | Proxy Support India';
+const description = 'Original, hook-based guides on proxy interview support, proxy job support, getting global IT interviews from India, profile marketing and more.';
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }];
+const categories = [...new Set(blogIndex.map((b) => b.category))];
+---
+<BaseLayout title={title} description={description} path="/blog">
+  <Schema pageType="CollectionPage" name="Proxy Support India Blog" description={description} breadcrumb={crumbs}
+    itemList={{ name: 'Blog posts', items: blogIndex.map((b) => ({ name: b.title, url: `/blog/${b.slug}` })) }} />
+  <PageHero eyebrow="Blog" h1="Strategies for Calls, Interviews & Jobs" intro="Practical, no-fluff guides written for candidates who need results — not academic theory." breadcrumb={crumbs} />
+  <section class="wrap section">
+    {categories.map((cat) => (
+      <div style="margin-top:1.8rem;">
+        <h2 style="color:rgb(var(--primary)); font-size:1.25rem;">{cat}</h2>
+        <div class="cards" style="margin-top:.8rem;">
+          {blogIndex.filter((b) => b.category === cat).map((b) => (
+            <a class="card" href={`/blog/${b.slug}`}>
+              <span class="kicker">{b.readMins} min · {b.updated}</span>
+              <h3>{b.title}</h3>
+              <p>{b.description}</p>
+              <span class="card-link">Read</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    ))}
+  </section>
+  <CTASection />
+</BaseLayout>

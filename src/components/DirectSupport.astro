@@ -1,0 +1,43 @@
+---
+import { site, waTalk } from '@data/site';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import Icon from './Icon.astro';
+const years = 2026 - site.since;
+const features = [
+  { i: 'users', t: 'In-house expert team', d: 'Salaried senior engineers on our own team — not a marketplace of strangers.' },
+  { i: 'shield-check', t: 'No middlemen or outsourcing', d: 'You work directly with the engineer doing the work. Nothing is passed on to third parties.' },
+  { i: 'send', t: 'Quick project handover', d: 'Share your JD or project and we take it on fast — no long onboarding.' },
+  { i: 'zap', t: 'Faster delivery', d: 'Direct ownership means fewer hops, quicker turnaround and cleaner results.' },
+  { i: 'message-square', t: 'Direct communication', d: 'One point of contact on WhatsApp, in your time zone — no account managers in between.' },
+  { i: 'clock', t: 'Immediate start available', d: 'Urgent interview or production issue? We can start within the hour.' },
+];
+---
+<section class="section" id="direct">
+  <div class="wrap">
+    <div class="direct-band">
+      <div class="direct-head">
+        <p class="eyebrow">Featured · Why Proxy Support India</p>
+        <h2>Direct IT Interview &amp; Job Support — No Middlemen</h2>
+        <p class="direct-lead">
+          We’re an <strong>IT company operating in the proxy support world since {site.since}</strong> —
+          {years}+ years, not freelancers or middlemen. You get an <strong>in-house team of expert
+          developers</strong> who take your interview or project directly and start immediately. No
+          outsourcing, no third parties, no delays — just direct work and fast, quality results.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-wa" href={waTalk} target="_blank" rel="noopener" data-cta="whatsapp-click"><WhatsAppIcon /> Talk on WhatsApp</a>
+          <a class="btn btn-line" href="/direct-it-support-no-middlemen">Why direct support wins →</a>
+        </div>
+      </div>
+      <ul class="direct-grid">
+        {features.map((f) => (
+          <li class="direct-card">
+            <span class="direct-ic" aria-hidden="true"><Icon name={f.i} /></span>
+            <b>{f.t}</b>
+            <span>{f.d}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

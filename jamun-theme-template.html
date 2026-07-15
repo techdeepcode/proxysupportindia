@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>India Proxy Support — Jamun theme · Readiness Console layout preview</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   INDIA PROXY SUPPORT — "Readiness Console" layout
+   Theme: Jamun (deep jamun violet · brass · WhatsApp green)
+   Plain CSS, mobile-first, light + dark via token overrides.
+   ============================================================ */
+
+:root{
+  --primary: 46 33 89;        /* deep jamun #2E2159 */
+  --secondary: 109 40 217;    /* action violet #6D28D9 */
+  --accent: 201 162 39;       /* brass #C9A227 */
+  --surface: 250 249 252;     /* page bg #FAF9FC */
+  --card: 255 255 255;        /* panel bg */
+  --ink: 34 26 62;            /* text #221A3E */
+  --muted: 107 101 132;       /* muted text #6B6584 */
+  --line: 230 226 240;        /* hairlines #E6E2F0 */
+  --cta: 109 40 217;
+  --cta-hover: 91 33 182;
+  --wa: 37 211 102;           /* WhatsApp #25D366 */
+  --wa-hover: 30 190 90;
+  --wa-ink: 6 48 26;          /* dark label on green */
+  --success: 22 163 74;
+  --warn: 245 158 11;
+  /* Console module is ALWAYS dark (cockpit), independent of mode */
+  --console-bg: 25 18 51;
+  --console-card: 36 27 70;
+  --console-line: 66 52 116;
+}
+.dark{
+  --surface: 19 15 38;        /* aubergine-black #130F26 */
+  --card: 29 24 54;
+  --ink: 236 233 246;
+  --muted: 164 157 192;
+  --line: 46 39 80;
+  --primary: 196 181 253;     /* headings brighten */
+  --secondary: 167 139 250;
+  --cta: 139 92 246;
+  --cta-hover: 167 139 250;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:rgb(var(--surface)); }
+img,svg{ display:block; }
+a{ color:inherit; text-decoration:none; }
+ul,ol{ margin:0; padding:0; list-style:none; }
+h1,h2,h3,h4,p,dl,dd,dt{ margin:0; }
+
+.page{
+  background:rgb(var(--surface));
+  color:rgb(var(--ink));
+  font-family:"IBM Plex Sans",system-ui,sans-serif;
+  font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{ font-family:"Sora","IBM Plex Sans",sans-serif; letter-spacing:-0.02em; line-height:1.2; }
+.mono{ font-family:"IBM Plex Mono",ui-monospace,monospace; }
+.wrap{ max-width:74rem; margin-inline:auto; padding-inline:1.1rem; }
+
+/* Eyebrow labels — the console's shared labelling system */
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:.72rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+  color:rgb(var(--accent));
+  display:flex; align-items:center; gap:.6rem;
+}
+.eyebrow::before{ content:""; width:1.6rem; height:2px; background:rgb(var(--accent)); }
+
+/* Buttons */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  border-radius:999px; font-weight:700; font-size:.95rem;
+  padding:.8rem 1.4rem; transition:background .15s ease, transform .15s ease;
+  border:0; cursor:pointer;
+}
+.btn:active{ transform:translateY(1px); }
+.btn-wa{ background:rgb(var(--wa)); color:rgb(var(--wa-ink)); }
+.btn-wa:hover{ background:rgb(var(--wa-hover)); }
+.btn-ghost{ background:transparent; color:#fff; box-shadow:inset 0 0 0 1.5px rgb(255 255 255/.35); }
+.btn-ghost:hover{ box-shadow:inset 0 0 0 1.5px rgb(255 255 255/.7); }
+.btn-violet{ background:rgb(var(--cta)); color:#fff; }
+.btn-violet:hover{ background:rgb(var(--cta-hover)); }
+.btn-sm{ padding:.55rem 1rem; font-size:.85rem; }
+.btn-line{ background:transparent; color:rgb(var(--ink)); box-shadow:inset 0 0 0 1.5px rgb(var(--line)); }
+.btn-line:hover{ box-shadow:inset 0 0 0 1.5px rgb(var(--secondary)); color:rgb(var(--secondary)); }
+.wa-glyph{ width:1.05em; height:1.05em; flex:none; }
+
+/* ---------- Compliance ribbon ---------- */
+.ribbon{
+  background:rgb(var(--accent)/.14);
+  border-bottom:1px solid rgb(var(--accent)/.35);
+  color:rgb(var(--ink));
+  font-size:.78rem; text-align:center; padding:.45rem 1rem;
+}
+.ribbon strong{ color:rgb(var(--ink)); }
+
+/* ---------- Header ---------- */
+.site-header{
+  position:sticky; top:0; z-index:30;
+  background:rgb(var(--surface)/.88); backdrop-filter:blur(10px);
+  border-bottom:1px solid rgb(var(--line));
+}
+.site-header .wrap{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-block:.7rem; }
+.brand{ display:flex; align-items:center; gap:.6rem; font-family:"Sora",sans-serif; font-weight:800; font-size:1.05rem; color:rgb(var(--primary)); }
+.brand-mark{
+  width:2.2rem; height:2.2rem; border-radius:.7rem; display:grid; place-items:center;
+  background:linear-gradient(135deg, rgb(46 33 89), rgb(109 40 217));
+  color:#fff; font-size:.8rem; font-weight:800;
+  box-shadow:0 0 0 1px rgb(var(--accent)/.5);
+}
+.main-nav{ display:none; gap:1.4rem; font-size:.9rem; font-weight:500; color:rgb(var(--muted)); }
+.main-nav a:hover{ color:rgb(var(--secondary)); }
+
+/* ---------- Hero ---------- */
+.hero{
+  color:#fff; position:relative; overflow:hidden;
+  background:
+    repeating-linear-gradient(0deg, rgb(255 255 255/.035) 0 1px, transparent 1px 44px),
+    repeating-linear-gradient(90deg, rgb(255 255 255/.035) 0 1px, transparent 1px 44px),
+    linear-gradient(135deg, rgb(30 21 61) 0%, rgb(46 33 89) 45%, rgb(76 47 168) 100%);
+}
+.hero::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(55% 55% at 72% 30%, rgb(167 139 250/.30) 0%, transparent 70%);
+}
+.hero-inner{ position:relative; z-index:1; display:grid; gap:2.4rem; padding-block:3rem 3.4rem; }
+.hero h1{ font-size:clamp(1.7rem, 5.4vw, 2.9rem); font-weight:800; max-width:15em; }
+.hero-copy > p.lead{ margin-top:1rem; color:rgb(255 255 255/.82); max-width:36em; font-size:1rem; }
+.cta-row{ margin-top:1.6rem; display:flex; flex-wrap:wrap; gap:.8rem; }
+.assure{ margin-top:1.5rem; display:flex; flex-wrap:wrap; gap:.5rem 1.4rem; font-size:.85rem; color:rgb(255 255 255/.75); }
+.assure li{ display:flex; align-items:center; gap:.45rem; }
+.assure li::before{ content:""; width:.5rem; height:.5rem; border-radius:50%; background:rgb(var(--success)); flex:none; }
+
+/* ---------- Readiness console (signature module) ---------- */
+.console{
+  background:rgb(var(--console-bg));
+  border:1px solid rgb(var(--console-line));
+  border-radius:1.1rem;
+  box-shadow:0 24px 60px rgb(10 5 30/.45), 0 0 0 1px rgb(201 162 39/.25);
+  padding:1.1rem; max-width:30rem;
+  font-size:.85rem; color:rgb(224 218 244);
+}
+.console-top{
+  display:flex; align-items:center; justify-content:space-between;
+  padding-bottom:.8rem; border-bottom:1px solid rgb(var(--console-line));
+  font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase;
+}
+.console-top .status{ display:flex; align-items:center; gap:.4rem; color:rgb(134 239 172); }
+.console-top .status::before{ content:""; width:.5rem; height:.5rem; border-radius:50%; background:rgb(var(--wa)); box-shadow:0 0 8px rgb(var(--wa)); }
+.console-profile{ padding:.85rem 0; display:flex; flex-wrap:wrap; gap:.4rem; }
+.chip{
+  font-family:"IBM Plex Mono",monospace; font-size:.68rem;
+  padding:.28rem .6rem; border-radius:999px;
+  background:rgb(var(--console-card)); border:1px solid rgb(var(--console-line));
+}
+.chip.brass{ color:rgb(232 200 96); border-color:rgb(201 162 39/.55); }
+.meter{ margin-top:.55rem; }
+.meter-label{ display:flex; justify-content:space-between; font-family:"IBM Plex Mono",monospace; font-size:.68rem; color:rgb(180 172 214); margin-bottom:.3rem; }
+.meter-bar{ height:.42rem; border-radius:999px; background:rgb(var(--console-card)); overflow:hidden; position:relative; }
+.meter-bar i{ position:absolute; inset:0; width:var(--v); background:linear-gradient(90deg, rgb(139 92 246), rgb(196 181 253)); border-radius:999px; }
+.console-plan{ margin-top:1rem; border-top:1px solid rgb(var(--console-line)); padding-top:.9rem; }
+.console-plan h4{ font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:rgb(232 200 96); font-weight:600; }
+.plan-row{ display:flex; gap:.7rem; padding:.45rem 0; align-items:baseline; }
+.plan-row .wk{ font-family:"IBM Plex Mono",monospace; font-size:.68rem; color:rgb(167 139 250); flex:none; width:3.2rem; }
+.console-foot{
+  margin-top:.9rem; padding-top:.9rem; border-top:1px solid rgb(var(--console-line));
+  display:flex; align-items:center; justify-content:space-between; gap:.8rem; flex-wrap:wrap;
+}
+.console-foot .next{ font-family:"IBM Plex Mono",monospace; font-size:.7rem; color:rgb(180 172 214); }
+.console-note{ margin-top:.7rem; font-size:.72rem; color:rgb(150 142 190); }
+
+/* ---------- Section scaffolding ---------- */
+.section{ padding-block:3.2rem; }
+.section-head{ max-width:44rem; }
+.section-head h2{ margin-top:.7rem; font-size:clamp(1.4rem,4vw,2rem); color:rgb(var(--primary)); }
+.section-head p{ margin-top:.7rem; color:rgb(var(--muted)); }
+.tinted{ background:rgb(var(--primary)/.05); border-block:1px solid rgb(var(--line)); }
+.dark .tinted{ background:rgb(var(--card)/.4); }
+
+/* ---------- Support journey rail ---------- */
+.rail{ margin-top:2.2rem; position:relative; display:grid; gap:1.6rem; }
+.rail::before{
+  content:""; position:absolute; left:1.05rem; top:.4rem; bottom:.4rem; width:2px;
+  background:linear-gradient(rgb(var(--secondary)/.5), rgb(var(--accent)/.6));
+}
+.stage{ position:relative; padding-left:3.1rem; }
+.stage-num{
+  position:absolute; left:0; top:0;
+  width:2.2rem; height:2.2rem; border-radius:.7rem;
+  display:grid; place-items:center;
+  font-family:"IBM Plex Mono",monospace; font-size:.72rem; font-weight:600;
+  background:rgb(var(--card)); color:rgb(var(--secondary));
+  border:1px solid rgb(var(--line)); box-shadow:0 4px 14px rgb(34 26 62/.08);
+}
+.stage h3{ font-size:1.05rem; }
+.stage p{ margin-top:.35rem; font-size:.92rem; color:rgb(var(--muted)); max-width:38em; }
+.tagline{ margin-top:.6rem; display:flex; flex-wrap:wrap; gap:.4rem; }
+.tag{
+  font-family:"IBM Plex Mono",monospace; font-size:.68rem;
+  padding:.26rem .55rem; border-radius:.45rem;
+  background:rgb(var(--secondary)/.08); color:rgb(var(--secondary));
+  border:1px solid rgb(var(--secondary)/.22);
+}
+
+/* ---------- Technology coverage matrix ---------- */
+.matrix{ margin-top:2rem; display:grid; grid-template-columns:repeat(2,1fr); border:1px solid rgb(var(--line)); border-radius:1rem; overflow:hidden; background:rgb(var(--card)); }
+.cell{ padding:.95rem 1rem; border:0 solid rgb(var(--line)); border-bottom-width:1px; }
+.cell:nth-child(odd){ border-right-width:1px; }
+.cell:nth-last-child(-n+1){ border-bottom-width:0; }
+.cell .t{ font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:.82rem; color:rgb(var(--ink)); }
+.cell .f{ margin-top:.2rem; font-size:.75rem; color:rgb(var(--muted)); }
+.matrix-legend{ margin-top:.8rem; font-family:"IBM Plex Mono",monospace; font-size:.7rem; color:rgb(var(--muted)); }
+
+/* ---------- Global market selector ---------- */
+.chips-row{ margin-top:1.8rem; display:flex; flex-wrap:wrap; gap:.45rem; }
+.mchip{
+  font-family:"IBM Plex Mono",monospace; font-size:.74rem; font-weight:500;
+  padding:.42rem .8rem; border-radius:999px; cursor:pointer;
+  background:rgb(var(--card)); color:rgb(var(--muted));
+  border:1px solid rgb(var(--line)); transition:all .15s ease;
+}
+.mchip:hover{ border-color:rgb(var(--secondary)/.5); color:rgb(var(--secondary)); }
+.mchip[aria-pressed="true"]{
+  background:rgb(var(--secondary)); color:#fff; border-color:rgb(var(--secondary));
+}
+.market-panel{
+  margin-top:1.2rem; border:1px solid rgb(var(--line)); border-left:4px solid rgb(var(--accent));
+  border-radius:.9rem; background:rgb(var(--card)); padding:1.3rem;
+  box-shadow:0 8px 24px rgb(34 26 62/.06);
+}
+.market-panel h3{ font-size:1.15rem; color:rgb(var(--primary)); }
+.market-panel > p{ margin-top:.4rem; font-size:.92rem; color:rgb(var(--muted)); }
+.market-grid{ margin-top:1rem; display:grid; gap:.9rem; }
+.market-grid dt{ font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:rgb(var(--accent)); }
+.market-grid dd{ margin-top:.2rem; font-size:.88rem; }
+
+/* ---------- Knowledge engine ---------- */
+.kb-split{ margin-top:2rem; display:grid; gap:2rem; }
+.index{ border-top:1px solid rgb(var(--line)); }
+.idx-row{
+  display:grid; grid-template-columns:auto 1fr; gap:.2rem 1rem;
+  padding:.95rem 0; border-bottom:1px solid rgb(var(--line));
+  align-items:baseline;
+}
+.idx-row .id{ font-family:"IBM Plex Mono",monospace; font-size:.7rem; color:rgb(var(--accent)); }
+.idx-row .cat{ grid-column:2; font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:rgb(var(--muted)); }
+.idx-row .title{ grid-column:2; font-weight:600; font-size:.95rem; }
+.idx-row .title a:hover{ color:rgb(var(--secondary)); }
+.idx-row .meta{ grid-column:2; font-size:.75rem; color:rgb(var(--muted)); }
+
+/* ---------- Compliance panel ---------- */
+.comp{
+  border:1px solid rgb(var(--accent)/.45); border-radius:1.1rem;
+  background:linear-gradient(180deg, rgb(var(--accent)/.10), rgb(var(--accent)/.03));
+  padding:1.6rem;
+}
+.comp .statement{ font-family:"Sora",sans-serif; font-weight:700; font-size:1.05rem; max-width:34em; color:rgb(var(--ink)); }
+.comp-cols{ margin-top:1.3rem; display:grid; gap:1.2rem; }
+.comp-cols h4{ font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; }
+.comp-cols .do h4{ color:rgb(var(--success)); }
+.comp-cols .dont h4{ color:rgb(var(--warn)); }
+.comp-cols li{ margin-top:.5rem; font-size:.9rem; display:flex; gap:.5rem; }
+.comp-cols .do li::before{ content:"✓"; color:rgb(var(--success)); font-weight:700; }
+.comp-cols .dont li::before{ content:"✕"; color:rgb(var(--warn)); font-weight:700; }
+
+/* ---------- Intent triage: "What do you need right now?" ---------- */
+.triage{
+  margin-top:2rem; display:grid;
+  border:1px solid rgb(var(--line)); border-radius:1rem; overflow:hidden;
+  background:rgb(var(--card));
+}
+.path{
+  padding:1.5rem 1.35rem; display:flex; flex-direction:column; gap:.6rem;
+  border-bottom:1px solid rgb(var(--line));
+}
+.path:last-child{ border-bottom:0; }
+.path-code{
+  font-family:"IBM Plex Mono",monospace; font-size:.66rem; font-weight:600;
+  letter-spacing:.14em; text-transform:uppercase; color:rgb(var(--accent));
+}
+.path h3{ font-size:1.08rem; }
+.path .prob{ font-size:.9rem; color:rgb(var(--muted)); }
+.path .helps{ font-size:.88rem; }
+.path .helps b{ color:rgb(var(--secondary)); }
+.path .btn{ align-self:flex-start; margin-top:.5rem; }
+@media (min-width:760px){
+  .triage{ grid-template-columns:repeat(3,1fr); }
+  .path{ border-bottom:0; border-right:1px solid rgb(var(--line)); }
+  .path:last-child{ border-right:0; }
+  .path .btn{ margin-top:auto; }
+}
+
+/* ---------- Knowledge hubs (layer above the index) ---------- */
+.hubs{ display:grid; gap:.7rem; margin-bottom:1.5rem; }
+.hub{
+  display:flex; align-items:center; gap:.9rem;
+  padding:.9rem 1rem; border:1px solid rgb(var(--line)); border-radius:.85rem;
+  background:rgb(var(--card)); transition:border-color .15s ease, box-shadow .15s ease;
+}
+.hub:hover{ border-color:rgb(var(--secondary)/.5); box-shadow:0 8px 22px rgb(34 26 62/.08); }
+.hub-code{
+  width:2.6rem; height:2.6rem; flex:none; border-radius:.65rem;
+  display:grid; place-items:center;
+  font-family:"IBM Plex Mono",monospace; font-size:.72rem; font-weight:600;
+  background:rgb(var(--secondary)/.10); color:rgb(var(--secondary));
+  border:1px solid rgb(var(--secondary)/.25);
+}
+.hub-body{ display:block; }
+.hub-body b{ display:block; font-family:"Sora",sans-serif; font-size:.92rem; color:rgb(var(--ink)); }
+.hub-body span{ display:block; margin-top:.1rem; font-size:.75rem; color:rgb(var(--muted)); }
+@media (min-width:760px){
+  .hubs{ grid-template-columns:repeat(3,1fr); }
+  .hub{ flex-direction:column; align-items:flex-start; gap:.6rem; }
+}
+
+/* ---------- Final CTA band ---------- */
+.final{
+  color:#fff; border-radius:1.2rem; padding:2.2rem 1.6rem; text-align:center;
+  background:linear-gradient(135deg, rgb(30 21 61), rgb(76 47 168));
+  box-shadow:0 0 0 1px rgb(201 162 39/.3);
+}
+.final h2{ font-size:clamp(1.3rem,4vw,1.9rem); }
+.final p{ margin:.7rem auto 0; max-width:32em; color:rgb(255 255 255/.8); font-size:.95rem; }
+.final .cta-row{ justify-content:center; }
+
+/* ---------- Sticky WhatsApp dock (mobile) ---------- */
+.dock{
+  position:sticky; bottom:0; z-index:40;
+  background:rgb(var(--surface)/.92); backdrop-filter:blur(10px);
+  border-top:1px solid rgb(var(--line));
+  padding:.6rem 1rem calc(.6rem + env(safe-area-inset-bottom));
+  display:flex; gap:.6rem;
+}
+.dock .btn{ flex:1; padding:.62rem .4rem; font-size:.78rem; gap:.35rem; white-space:nowrap; }
+
+/* ---------- Footer ---------- */
+.site-footer{ background:rgb(var(--primary)); color:rgb(255 255 255/.8); }
+.dark .site-footer{ background:rgb(var(--card)); }
+.site-footer .wrap{ padding-block:2.4rem; display:grid; gap:1.6rem; }
+.site-footer .fb{ font-family:"Sora",sans-serif; font-weight:800; color:#fff; }
+.dark .site-footer .fb{ color:rgb(var(--primary)); }
+.site-footer h5{ margin:0 0 .6rem; font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:rgb(var(--accent)); font-weight:600; }
+.site-footer li{ margin-top:.4rem; font-size:.88rem; }
+.site-footer a:hover{ color:#fff; }
+.dark .site-footer a:hover{ color:rgb(var(--primary)); }
+.site-footer .legal{ font-size:.75rem; color:rgb(255 255 255/.55); }
+.dark .site-footer .legal{ color:rgb(var(--muted)); }
+
+/* ---------- Mode banner (preview-only) ---------- */
+.mode-banner{
+  font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase;
+  text-align:center; padding:.55rem 1rem;
+  background:rgb(var(--accent)); color:rgb(34 26 62);
+}
+
+/* ---------- Focus & motion ---------- */
+:focus-visible{ outline:2px solid rgb(var(--secondary)); outline-offset:2px; }
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{ transition-duration:.01ms !important; }
+}
+
+/* ============================================================
+   DESKTOP ENHANCEMENTS — asymmetric cockpit composition
+   ============================================================ */
+@media (min-width:760px){
+  .main-nav{ display:flex; }
+  .hero-inner{ grid-template-columns:1.05fr .95fr; align-items:center; gap:3rem; padding-block:4.2rem 4.8rem; }
+  .console{ justify-self:end; transform:rotate(.6deg); }
+  .market-grid{ grid-template-columns:repeat(3,1fr); }
+  .comp-cols{ grid-template-columns:1fr 1fr; }
+  .kb-split{ grid-template-columns:.8fr 1.2fr; align-items:start; }
+  .matrix{ grid-template-columns:repeat(4,1fr); }
+  .cell{ border-right-width:1px; }
+  .cell:nth-child(4n){ border-right-width:0; }
+  .cell:nth-last-child(-n+4){ border-bottom-width:0; }
+  .rail{ grid-template-columns:repeat(5,1fr); gap:1.4rem; margin-top:2.6rem; }
+  .rail::before{ left:.4rem; right:.4rem; top:1.05rem; bottom:auto; width:auto; height:2px;
+    background:linear-gradient(90deg, rgb(var(--secondary)/.5), rgb(var(--accent)/.6)); }
+  .stage{ padding-left:0; padding-top:3.1rem; }
+  .stage-num{ top:0; }
+  .dock{ display:none; }
+  .site-footer .wrap{ grid-template-columns:2fr 1fr 1fr 1.4fr; }
+}
+@media (max-width:759px){
+  .cell:nth-last-child(2){ border-bottom-width:1px; } /* keep mobile grid borders clean */
+}
+</style>
+</head>
+<body>
+
+<!-- Page markup lives here once; JS clones it into light + dark roots. -->
+<template id="site">
+<div class="page">
+
+  <!-- Compliance ribbon: trust before anything else -->
+  <div class="ribbon">
+    <strong>IndiaProxySupport.com is an education and coaching service.</strong>
+    We prepare candidates; we never impersonate them.
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="#"><span class="brand-mark">IPS</span> India Proxy Support</a>
+      <nav class="main-nav">
+        <a href="#journey">Support journey</a>
+        <a href="#tech">Technologies</a>
+        <a href="#markets">Markets</a>
+        <a href="#knowledge">Knowledge</a>
+      </nav>
+      <a class="btn btn-wa btn-sm" href="#">
+        <svg class="wa-glyph" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.2 1.1-1.7 1.2-.4 0-.9.2-3.1-.7-2.6-1.1-4.3-3.7-4.4-3.9-.1-.2-1.1-1.4-1.1-2.7s.7-1.9 1-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.9 1.5 2 2.4 1.4 1.2 2.5 1.6 2.9 1.7.3.2.5.1.7-.1l1-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.3 1.4Z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </header>
+
+  <!-- ======== HERO: asymmetric cockpit composition ======== -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">India → Global · Career execution</p>
+        <h1 style="margin-top:.9rem">India Interview Preparation &amp; Technical Career Support for Global IT Jobs</h1>
+        <p class="lead">
+          India Proxy Support helps Indian IT professionals prepare for technical interviews,
+          mock interviews, project onboarding, debugging guidance, technical job support coaching,
+          and global job readiness across India, USA, Canada, UK, Europe, Australia, Singapore,
+          and Gulf markets.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-wa" href="#">
+            <svg class="wa-glyph" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.2 1.1-1.7 1.2-.4 0-.9.2-3.1-.7-2.6-1.1-4.3-3.7-4.4-3.9-.1-.2-1.1-1.4-1.1-2.7s.7-1.9 1-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.9 1.5 2 2.4 1.4 1.2 2.5 1.6 2.9 1.7.3.2.5.1.7-.1l1-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.3 1.4Z"/></svg>
+            Talk on WhatsApp
+          </a>
+          <a class="btn btn-ghost" href="#">Book a free career call</a>
+        </div>
+        <ul class="assure">
+          <li>Working-engineer mentors</li>
+          <li>One-to-one live sessions</li>
+          <li>Honest profile positioning</li>
+        </ul>
+      </div>
+
+      <!-- Signature module: the Readiness Console -->
+      <aside class="console" aria-label="Example candidate readiness plan">
+        <div class="console-top">
+          <span>Readiness console</span>
+          <span class="status">Mentor matched</span>
+        </div>
+        <div class="console-profile">
+          <span class="chip">Java Backend</span>
+          <span class="chip">6 yrs exp</span>
+          <span class="chip brass">Target: USA · Remote</span>
+        </div>
+        <div class="meter">
+          <div class="meter-label"><span>DSA &amp; coding rounds</span><span>72%</span></div>
+          <div class="meter-bar"><i style="--v:72%"></i></div>
+        </div>
+        <div class="meter">
+          <div class="meter-label"><span>System design</span><span>58%</span></div>
+          <div class="meter-bar"><i style="--v:58%"></i></div>
+        </div>
+        <div class="meter">
+          <div class="meter-label"><span>Interview communication</span><span>81%</span></div>
+          <div class="meter-bar"><i style="--v:81%"></i></div>
+        </div>
+        <div class="console-plan">
+          <h4>4-week preparation plan</h4>
+          <div class="plan-row"><span class="wk">WK 01</span><span>Core Java, Spring Boot &amp; SQL revision</span></div>
+          <div class="plan-row"><span class="wk">WK 02</span><span>System design drills with mentor feedback</span></div>
+          <div class="plan-row"><span class="wk">WK 03</span><span>3 full mock interviews + scorecards</span></div>
+          <div class="plan-row"><span class="wk">WK 04</span><span>Applications, offer strategy &amp; onboarding prep</span></div>
+        </div>
+        <div class="console-foot">
+          <span class="next">Next mock · Sat 7:00 PM IST</span>
+          <a class="btn btn-wa btn-sm" href="#">Get my readiness plan</a>
+        </div>
+        <p class="console-note">Example plan. Every candidate gets a plan built for their stack, level, and target market.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ======== SUPPORT JOURNEY RAIL ======== -->
+  <section class="section" id="journey">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Support journey</p>
+        <h2>One guided path — from skill gap to first 90 days on the job</h2>
+        <p>Every service we offer sits on a single execution path, so you always know what happens next.</p>
+      </div>
+      <ol class="rail">
+        <li class="stage">
+          <span class="stage-num">01</span>
+          <h3>Assess</h3>
+          <p>Skill-gap review of your stack and level, plus honest profile positioning — your real experience, presented clearly.</p>
+          <div class="tagline"><span class="tag">skill-gap planner</span><span class="tag">profile positioning</span></div>
+        </li>
+        <li class="stage">
+          <span class="stage-num">02</span>
+          <h3>Prepare</h3>
+          <p>Structured interview preparation: topic plans, curated interview questions, and live technical coaching sessions.</p>
+          <div class="tagline"><span class="tag">interview prep</span><span class="tag">question bank</span></div>
+        </li>
+        <li class="stage">
+          <span class="stage-num">03</span>
+          <h3>Rehearse</h3>
+          <p>Realistic mock interviews with working engineers, detailed scorecards, and communication coaching for global panels.</p>
+          <div class="tagline"><span class="tag">mock interviews</span><span class="tag">scorecards</span></div>
+        </li>
+        <li class="stage">
+          <span class="stage-num">04</span>
+          <h3>Land</h3>
+          <p>Job application guidance, market targeting, and offer negotiation — career execution support until you sign.</p>
+          <div class="tagline"><span class="tag">application guidance</span><span class="tag">career execution</span></div>
+        </li>
+        <li class="stage">
+          <span class="stage-num">05</span>
+          <h3>Onboard</h3>
+          <p>Project onboarding mentoring, debugging and production guidance, and technical job support coaching for your first 90 days.</p>
+          <div class="tagline"><span class="tag">onboarding mentoring</span><span class="tag">debugging guidance</span></div>
+        </li>
+      </ol>
+      <div class="cta-row" style="margin-top:2.2rem">
+        <a class="btn btn-wa" href="#">Book mock interview slot</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== INTENT TRIAGE: what do you need right now ======== -->
+  <section class="section" id="paths" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Choose your path</p>
+        <h2>What do you need right now?</h2>
+        <p>Three situations cover most candidates who message us. Start with yours — each path opens WhatsApp with the right first message.</p>
+      </div>
+      <div class="triage">
+        <div class="path">
+          <span class="path-code">Path 01 · Interview ahead</span>
+          <h3>I have an interview scheduled</h3>
+          <p class="prob">The date is fixed, the syllabus feels huge, and you don't know what this company will actually ask.</p>
+          <p class="helps"><b>What helps:</b> a JD-based preparation plan, curated interview questions, and mock interviews with scorecards before the real one.</p>
+          <div class="tagline"><span class="tag">interview prep</span><span class="tag">mock interviews</span><span class="tag">question bank</span></div>
+          <a class="btn btn-wa" href="#">Share JD on WhatsApp</a>
+        </div>
+        <div class="path">
+          <span class="path-code">Path 02 · New job, stuck</span>
+          <h3>I joined a new IT job and feel stuck</h3>
+          <p class="prob">New codebase, unfamiliar tools, production issues — and you're expected to deliver from week one.</p>
+          <p class="helps"><b>What helps:</b> project onboarding mentoring, debugging and production guidance, and job support coaching that teaches you the work.</p>
+          <div class="tagline"><span class="tag">onboarding mentoring</span><span class="tag">debugging guidance</span><span class="tag">job support coaching</span></div>
+          <a class="btn btn-wa" href="#">Send my project issue</a>
+        </div>
+        <div class="path">
+          <span class="path-code">Path 03 · Going global</span>
+          <h3>I want global jobs from India</h3>
+          <p class="prob">You're strong technically, but don't know which market fits you or how its hiring process really works.</p>
+          <p class="helps"><b>What helps:</b> a market-specific readiness plan, application guidance, and interview preparation tuned to that country's hiring style.</p>
+          <div class="tagline"><span class="tag">readiness plan</span><span class="tag">application guidance</span><span class="tag">market targeting</span></div>
+          <a class="btn btn-wa" href="#">Get my readiness plan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== TECHNOLOGY COVERAGE MATRIX ======== -->
+  <section class="section tinted" id="tech">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Coverage matrix</p>
+        <h2>16 technology tracks, one preparation system</h2>
+        <p>Mentors are matched to your exact stack. Every track covers interview prep, mock interviews, and job support coaching.</p>
+      </div>
+      <div class="matrix" data-matrix></div>
+      <p class="matrix-legend">All tracks include: interview prep · mock interviews · coaching · onboarding mentoring</p>
+    </div>
+  </section>
+
+  <!-- ======== GLOBAL MARKET SELECTOR ======== -->
+  <section class="section" id="markets">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Global market selector</p>
+        <h2>Pick your target market. We prepare you for how it actually hires.</h2>
+        <p>India-first, global-ready: the process, interview style, and readiness plan change with the market — so does your preparation.</p>
+      </div>
+      <div class="chips-row" data-chips role="group" aria-label="Choose a target market"></div>
+      <div class="market-panel" data-panel aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ======== KNOWLEDGE ENGINE ======== -->
+  <section class="section tinted" id="knowledge">
+    <div class="wrap kb-split">
+      <div class="section-head">
+        <p class="eyebrow">Knowledge engine</p>
+        <h2>Knowledge Base, Blog &amp; Interview Questions</h2>
+        <p>Free, continuously updated guidance written by the same mentors who run your sessions. Start reading before you ever message us.</p>
+        <div class="cta-row" style="margin-top:1.2rem">
+          <a class="btn btn-violet btn-sm" href="#">Browse all resources</a>
+        </div>
+      </div>
+      <div class="kb-main">
+        <div class="hubs">
+          <a class="hub" href="#">
+            <span class="hub-code">KB</span>
+            <span class="hub-body"><b>Knowledge Base</b><span>Practical guides: processes, notice periods, readiness</span></span>
+          </a>
+          <a class="hub" href="#">
+            <span class="hub-code">BL</span>
+            <span class="hub-body"><b>Blog</b><span>Preparation strategies and career moves, week by week</span></span>
+          </a>
+          <a class="hub" href="#">
+            <span class="hub-code">IQ</span>
+            <span class="hub-body"><b>Interview Questions</b><span>Curated question sets by technology and difficulty</span></span>
+          </a>
+        </div>
+      <div class="index">
+        <div class="idx-row">
+          <span class="id">IQ-125</span>
+          <span class="cat">Interview questions</span>
+          <span class="title"><a href="#">Top 25 system design questions asked in Indian product companies</a></span>
+          <span class="meta">12 min · Updated Jun 2026</span>
+        </div>
+        <div class="idx-row">
+          <span class="id">BL-032</span>
+          <span class="cat">Blog</span>
+          <span class="title"><a href="#">How to prepare for a Java backend interview in 4 weeks</a></span>
+          <span class="meta">8 min · Updated Jul 2026</span>
+        </div>
+        <div class="idx-row">
+          <span class="id">IQ-089</span>
+          <span class="cat">Interview questions</span>
+          <span class="title"><a href="#">GenAI interview questions: RAG, embeddings, and evaluation</a></span>
+          <span class="meta">10 min · Updated Jul 2026</span>
+        </div>
+        <div class="idx-row">
+          <span class="id">KB-014</span>
+          <span class="cat">Knowledge base</span>
+          <span class="title"><a href="#">Notice period strategy in Indian IT: a practical guide</a></span>
+          <span class="meta">6 min · Updated May 2026</span>
+        </div>
+        <div class="idx-row">
+          <span class="id">BL-027</span>
+          <span class="cat">Blog</span>
+          <span class="title"><a href="#">Service company to product company: a 90-day switch plan</a></span>
+          <span class="meta">9 min · Updated Jun 2026</span>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== COMPLIANCE PANEL ======== -->
+  <section class="section">
+    <div class="wrap">
+      <div class="comp">
+        <p class="eyebrow">How we work</p>
+        <p class="statement" style="margin-top:.8rem">
+          IndiaProxySupport.com is an education and coaching service.
+          We prepare candidates; we never impersonate them.
+        </p>
+        <div class="comp-cols">
+          <div class="do">
+            <h4>What we do</h4>
+            <ul>
+              <li>Interview preparation and curated question practice</li>
+              <li>Mock interviews with working engineers and scorecards</li>
+              <li>Project onboarding mentoring and debugging guidance</li>
+              <li>Honest profile positioning of your real experience</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h4>What we never do</h4>
+            <ul>
+              <li>Attend interviews on a candidate's behalf</li>
+              <li>Perform an employee's job for them</li>
+              <li>Fabricate experience, projects, or employers</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== FINAL CTA BAND ======== -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="final">
+        <h2>Send us your stack, level, and target market</h2>
+        <p>We reply on WhatsApp with a readiness plan like the one above — built for you, with available mentor slots.</p>
+        <div class="cta-row">
+          <a class="btn btn-wa" href="#">
+            <svg class="wa-glyph" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.2 1.1-1.7 1.2-.4 0-.9.2-3.1-.7-2.6-1.1-4.3-3.7-4.4-3.9-.1-.2-1.1-1.4-1.1-2.7s.7-1.9 1-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.9 1.5 2 2.4 1.4 1.2 2.5 1.6 2.9 1.7.3.2.5.1.7-.1l1-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.3 1.4Z"/></svg>
+            Share JD on WhatsApp
+          </a>
+          <a class="btn btn-ghost" href="#">Book a free career call</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== STICKY MOBILE CONVERSION DOCK ======== -->
+  <div class="dock">
+    <a class="btn btn-wa" href="#">
+      <svg class="wa-glyph" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.2 1.1-1.7 1.2-.4 0-.9.2-3.1-.7-2.6-1.1-4.3-3.7-4.4-3.9-.1-.2-1.1-1.4-1.1-2.7s.7-1.9 1-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.9 1.5 2 2.4 1.4 1.2 2.5 1.6 2.9 1.7.3.2.5.1.7-.1l1-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.3 1.4Z"/></svg>
+      WhatsApp
+    </a>
+    <a class="btn btn-violet" href="#">Free Call</a>
+    <a class="btn btn-line" href="#">Share JD</a>
+  </div>
+
+  <!-- ======== FOOTER ======== -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <p class="fb">India Proxy Support</p>
+        <p style="margin-top:.6rem; font-size:.88rem; max-width:30em">
+          Interview preparation, technical job support coaching, project mentoring, and global
+          job readiness for Indian IT candidates — from India to the world.
+        </p>
+      </div>
+      <div>
+        <h5>Support</h5>
+        <ul>
+          <li><a href="#">Interview preparation</a></li>
+          <li><a href="#">Mock interviews</a></li>
+          <li><a href="#">Job support coaching</a></li>
+          <li><a href="#">Onboarding mentoring</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Knowledge</h5>
+        <ul>
+          <li><a href="#">Knowledge Base</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Interview Questions</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <a class="btn btn-wa btn-sm" href="#" style="margin-top:.2rem">Talk on WhatsApp</a>
+        <p class="legal" style="margin-top:1rem">
+          © 2026 IndiaProxySupport.com — an education and coaching service.
+          We prepare candidates; we never impersonate them.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</template>
+
+<!-- Light mode -->
+<p class="mode-banner">Light mode preview — Jamun · Readiness Console</p>
+<div id="light-root"></div>
+
+<!-- Dark mode -->
+<p class="mode-banner">Dark mode preview — Jamun · Readiness Console</p>
+<div id="dark-root" class="dark"></div>
+
+<script>
+/* ---- Data ---- */
+const TECHS = [
+  ["Java","Spring Boot · microservices · DSA rounds"],
+  [".NET","C# · ASP.NET Core · Azure stacks"],
+  ["Python","Backend · scripting · data rounds"],
+  ["DevOps","CI/CD · IaC · SRE scenarios"],
+  ["AWS","Architecture · services deep-dives"],
+  ["Azure","Cloud engineering · AZ role prep"],
+  ["Kubernetes","Containers · orchestration · debugging"],
+  ["Data Engineering","Spark · SQL · pipeline design"],
+  ["AI/ML","Models · MLOps · case rounds"],
+  ["GenAI","LLM apps · RAG · prompt engineering"],
+  ["QA Automation","Selenium · Playwright · frameworks"],
+  ["Workday","HCM · integrations · consulting prep"],
+  ["UiPath / RPA","Automation design · bot delivery"],
+  ["Salesforce","Apex · LWC · admin-to-dev path"],
+  ["SAP","Modules · ABAP · functional prep"],
+  ["Power BI","DAX · modeling · analyst rounds"]
+];
+
+const MARKETS = {
+  "India":      ["Product, service, and GCC hiring is competitive and DSA-heavy.", "Interview style","Coding rounds + system design + managerial", "We prepare you for","Product-company loops, GCC panels, notice-period strategy", "Typical timeline","2–6 weeks per company"],
+  "USA":        ["Remote-first and onsite roles with structured, multi-round loops.", "Interview style","Behavioral (STAR) + system design + live coding", "We prepare you for","US-style communication, timezone-scheduled mocks", "Typical timeline","3–8 weeks per company"],
+  "Canada":     ["Growing tech hubs with immigration-linked career planning.", "Interview style","Communication-focused technical rounds", "We prepare you for","Express Entry-aligned career plans, Canadian panels", "Typical timeline","3–6 weeks per company"],
+  "UK":         ["Visa-sponsored roles with competency-based interviewing.", "Interview style","Competency questions + technical deep-dives", "We prepare you for","Sponsor-licence employers, structured answers", "Typical timeline","3–6 weeks per company"],
+  "Europe":     ["English-first tech hubs across the EU.", "Interview style","Portfolio and practical assessment emphasis", "We prepare you for","EU hub processes, relocation-ready positioning", "Typical timeline","4–8 weeks per company"],
+  "Australia":  ["Skills-shortage lists keep IT demand strong.", "Interview style","Practical assessments + culture-fit rounds", "We prepare you for","Skills-assessment alignment, local interview norms", "Typical timeline","4–8 weeks per company"],
+  "Germany":    ["Engineering-depth culture with structured processes.", "Interview style","Deep technical rounds, methodical evaluation", "We prepare you for","Engineering-first answers, EU Blue Card roles", "Typical timeline","4–10 weeks per company"],
+  "Ireland":    ["EU headquarters of major product companies.", "Interview style","Product-company interview loops", "We prepare you for","Big-tech style rounds from an EU base", "Typical timeline","3–8 weeks per company"],
+  "Singapore":  ["APAC hub with fast-paced hiring.", "Interview style","Compressed loops, strong fundamentals focus", "We prepare you for","Fast decision cycles, APAC panel expectations", "Typical timeline","2–5 weeks per company"],
+  "UAE":        ["Rapidly growing Gulf tech and digital sector.", "Interview style","Client-facing and delivery-readiness focus", "We prepare you for","Consulting-style rounds, Gulf work culture", "Typical timeline","2–5 weeks per company"],
+  "Saudi Arabia":["Vision 2030 is driving large enterprise tech programs.", "Interview style","Enterprise stack and delivery experience focus", "We prepare you for","Large-program roles, enterprise interviews", "Typical timeline","3–6 weeks per company"],
+  "New Zealand":["Work-visa pathways with quality-of-life appeal.", "Interview style","Culture-fit plus practical technical rounds", "We prepare you for","Accredited-employer roles, NZ interview norms", "Typical timeline","4–8 weeks per company"],
+  "Hong Kong":  ["Finance and fintech-led technology hiring.", "Interview style","Fintech domain + hybrid technical rounds", "We prepare you for","Finance-domain readiness, fast-paced panels", "Typical timeline","2–5 weeks per company"]
+};
+
+/* ---- Renderers (run per preview root) ---- */
+function buildMatrix(root){
+  root.querySelector("[data-matrix]").innerHTML = TECHS.map(([t,f]) =>
+    '<div class="cell"><div class="t">'+t+'</div><div class="f">'+f+'</div></div>'
+  ).join("");
+}
+
+function buildMarkets(root){
+  const chips = root.querySelector("[data-chips]");
+  const panel = root.querySelector("[data-panel]");
+  chips.innerHTML = Object.keys(MARKETS).map((m,i) =>
+    '<button type="button" class="mchip" aria-pressed="'+(i===0)+'" data-m="'+m+'">'+m+'</button>'
+  ).join("");
+  function show(name){
+    const d = MARKETS[name];
+    panel.innerHTML =
+      '<h3>'+name+'</h3><p>'+d[0]+'</p>'+
+      '<dl class="market-grid">'+
+        '<div><dt>'+d[1]+'</dt><dd>'+d[2]+'</dd></div>'+
+        '<div><dt>'+d[3]+'</dt><dd>'+d[4]+'</dd></div>'+
+        '<div><dt>'+d[5]+'</dt><dd>'+d[6]+'</dd></div>'+
+      '</dl>'+
+      '<a class="btn btn-wa btn-sm" style="margin-top:1.1rem" href="#">Get my '+name+' readiness plan</a>';
+    chips.querySelectorAll(".mchip").forEach(b =>
+      b.setAttribute("aria-pressed", b.dataset.m === name ? "true" : "false"));
+  }
+  chips.addEventListener("click", e => {
+    const b = e.target.closest(".mchip");
+    if (b) show(b.dataset.m);
+  });
+  show("India");
+}
+
+/* ---- Clone the page into light and dark roots ---- */
+const tpl = document.getElementById("site");
+for (const id of ["light-root","dark-root"]){
+  const root = document.getElementById(id);
+  root.appendChild(tpl.content.cloneNode(true));
+  buildMatrix(root);
+  buildMarkets(root);
+}
+</script>
+</body>
+</html>

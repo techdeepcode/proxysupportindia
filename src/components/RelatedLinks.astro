@@ -1,0 +1,13 @@
+---
+export interface Link { label: string; href: string; }
+export interface Props { links: Link[]; heading?: string; }
+const { links, heading = 'Related pages' } = Astro.props;
+---
+{links.length > 0 && (
+  <section class="section" style="padding-block:1.6rem;">
+    <h2 style="font-size:1.4rem; color:rgb(var(--primary));">{heading}</h2>
+    <div class="related">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </div>
+  </section>
+)}

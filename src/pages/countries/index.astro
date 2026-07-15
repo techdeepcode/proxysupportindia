@@ -1,0 +1,35 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import CTASection from '@components/CTASection.astro';
+import Schema from '@components/Schema.astro';
+import { countries, flagUrl } from '@data/countries';
+
+const title = 'Proxy Support by Country — USA, Canada, UK, Europe, Australia, APAC, Gulf, India | Proxy Support India';
+const description = 'Proxy interview support and proxy job support tuned to each market: USA, Canada, UK, Europe, Australia, Singapore, Japan, New Zealand, UAE, Saudi Arabia, India and more.';
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Locations', href: '/countries' }];
+const regions = [...new Set(countries.map((c) => c.region))];
+---
+<BaseLayout title={title} description={description} path="/countries">
+  <Schema pageType="CollectionPage" name="Proxy Support by Country" description={description} breadcrumb={crumbs}
+    itemList={{ name: 'Markets', items: countries.map((c) => ({ name: `${c.name} Proxy Support`, url: `/countries/${c.slug}` })) }} />
+  <PageHero eyebrow="USA-first · global markets" h1="Proxy Interview & Job Support by Market" intro="USA is our center market. Choose yours to see how we tune interview and job support to its hiring style, recruiter channels and time zone." breadcrumb={crumbs} />
+  <section class="wrap section">
+    {regions.map((r) => (
+      <div style="margin-top:2rem;">
+        <h2 style="color:rgb(var(--primary)); font-size:1.3rem;">{r}</h2>
+        <div class="cards cols-3" style="margin-top:.8rem;">
+          {countries.filter((c) => c.region === r).map((c) => (
+            <a class="card" href={`/countries/${c.slug}`}>
+              <span class="kicker"><img class="flag" src={flagUrl(c.slug)} alt="" width="20" height="15" loading="lazy" /> {c.name}</span>
+              <h3>{c.name} Proxy Support</h3>
+              <p>{c.angle}</p>
+              <span class="card-link">Open {c.name}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    ))}
+  </section>
+  <CTASection />
+</BaseLayout>
