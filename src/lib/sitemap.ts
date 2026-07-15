@@ -35,7 +35,8 @@ export function corePagesUrls(): Url[] {
     { loc: '/technologies', priority: 0.9, changefreq: 'weekly' },
     { loc: '/countries', priority: 0.9, changefreq: 'weekly' },
     { loc: '/locations', priority: 0.8, changefreq: 'weekly' },
-    { loc: '/india-to-global-proxy-support', priority: 0.8, changefreq: 'weekly' },
+    // NOTE: /india-to-global-proxy-support is emitted by the data-driven
+    // services sitemap — don't duplicate it here.
     { loc: '/direct-it-support-no-middlemen', priority: 0.8, changefreq: 'monthly' },
     { loc: '/high-paying-it-roles', priority: 0.8, changefreq: 'monthly' },
     { loc: '/forward-deployed-engineer', priority: 0.85, changefreq: 'weekly' },
