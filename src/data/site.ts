@@ -102,7 +102,10 @@ export const ogImages: Record<string, string> = {
   devops: '/og/devops-proxy-support-og.png',
   workday: '/og/workday-proxy-support-og.png',
 };
-export const ogImageFor = (key?: string) => (key && ogImages[key]) || ogImages.default;
+// Every page shares the homepage OG image for consistent link-share previews.
+// (Per-page OG art can be reintroduced later by returning ogImages[key] once
+// real branded PNGs exist — the current per-key entries are placeholder stubs.)
+export const ogImageFor = (_key?: string) => ogImages.default;
 
 // Impact metrics shown in hero metric panels.
 // Actual, verifiable figures backed by our internal records/database.
