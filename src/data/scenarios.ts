@@ -20,8 +20,8 @@ export const scenarios: Service[] = [
   {
     slug: 'india-to-global-proxy-support', order: 101, name: 'India-to-Global Proxy Support', kicker: 'India → World',
     short: 'From-India proxy support for global IT jobs: time-zone-aligned interview and job support for USA, Canada, UK, Europe, Australia, Singapore, Japan, New Zealand and Gulf roles.',
-    h1: 'India-to-Global Proxy Support — Win and Hold Global IT Roles from India',
-    intro: 'Sitting in India and targeting global roles? India-to-global proxy support handles the hard parts — time-zone-aligned interview support, remote job support and market-specific positioning — so distance never costs you the offer or the delivery.',
+    h1: 'India-to-Global Proxy Support — Compete for and Deliver Global IT Roles from India',
+    intro: 'Sitting in India and targeting global roles? India-to-global proxy support handles the hard parts — time-zone-aligned interview support, remote job support and market-specific positioning — so distance is never the reason your preparation or delivery falls short.',
     forWho: ['India-based engineers targeting overseas roles', 'Remote workers supporting USA/UK/AU time zones from India', 'Candidates on H1B/PR/work-visa pipelines', 'Consultants working global C2C from India'],
     includes: ['Time-zone-aligned proxy interview support (incl. night shift)', 'Remote proxy job support for global projects', 'India-to-global profile positioning', 'Market-specific recruiter targeting', 'Coverage for USA, Canada, UK, EU, APAC and Gulf', 'End-to-end support from India'],
     primaryCta: 'endToEndPlan', keywords: ['india to global proxy support', 'remote job support from india', 'global job support india'],

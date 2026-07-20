@@ -5,9 +5,17 @@
 ## What Proxy Support India is
 Proxy Support India is an end-to-end IT career support service for technology professionals
 targeting USA-first and global opportunities, including India-to-global career moves. It helps
-candidates get more recruiter calls, clear technical interviews, and deliver real project work
+candidates get more recruiter calls, prepare for technical interviews, and deliver real project work
 after they join. "Proxy" refers to hands-on, round-wise, real-time technical support — the service
 prepares and supports candidates and does not impersonate them or fabricate experience.
+
+## Important — what this service is (and is not)
+Proxy Support India is a paid IT career-support and technical-support service. It is not an employer,
+recruiter or job-placement agency, and it does not sell jobs or vacancies. Fees are for agreed support
+services only. Payment does not guarantee employment, interviews, recruiter calls, selection, job
+offers, promotions or salary outcomes — hiring decisions rest solely with employers. Any salary
+figures are informational market benchmarks, not promised compensation. Candidates contribute their
+own skills, experience, preparation and effort.
 
 ## Full service descriptions
 1. Proxy Interview Support — For candidates with scheduled interviews: JD-based interview mapping,

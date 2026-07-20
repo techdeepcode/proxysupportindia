@@ -18,6 +18,7 @@ const faqs = [
   { q: 'What drives interview support pricing?', a: 'Your stack, seniority, number of rounds, and how urgent it is (same-day costs more than planned).' },
   { q: 'What drives job support pricing?', a: 'Your technology, project complexity, how many hours you need, and your time zone (night-shift US coverage costs more).' },
   { q: 'How do I get a quote?', a: 'Tap any WhatsApp button and share your details. We reply fast with a clear, itemised quote.' },
+  { q: 'Does paying guarantee a job, interview or salary?', a: 'No. Our fees are for the agreed support services only — preparation, real-time technical support, profile and job-search help. We are not an employer, recruiter or job-placement agency, and we do not sell jobs or vacancies. Payment does not guarantee employment, interviews, recruiter calls, selection, job offers or any salary. Those outcomes depend on your own skills, preparation and effort, and hiring decisions rest solely with employers.' },
 ];
 ---
 <BaseLayout title={title} description={description} path="/pricing">
@@ -36,6 +37,7 @@ const faqs = [
         </div>
       ))}
     </div>
+    <p class="matrix-legend" style="margin-top:1.4rem;">Fees are for the agreed support services only. Proxy Support India is not an employer, recruiter or job-placement agency, and does not sell jobs or vacancies. Payment does not guarantee employment, interviews, recruiter calls, selection, job offers or salary — hiring decisions rest solely with employers.</p>
   </section>
   <div class="wrap"><FAQ faqs={faqs} /></div>
   <CTASection heading="Get your exact quote on WhatsApp" text="Share your JD, stack or project details and we’ll reply with a clear, itemised price." />

@@ -49,7 +49,7 @@ function whyUs(context: string): ContentSection {
       'Stack-matched experts, not generic coaches',
       'Fast WhatsApp response, time-zone aligned',
       'USA-first, global and India-to-global coverage',
-      'Support from profile to interview to a stable job',
+      'Support from profile to interview to on-the-job delivery',
     ],
   };
 }
@@ -61,7 +61,7 @@ function howItWorks(action: string): ContentSection {
       `Message us on WhatsApp with your ${action}.`,
       'We match you with a stack-matched expert within hours.',
       'You get a clear plan and real-time support through every step.',
-      'We stay with you until the outcome — offer, delivery or stability.',
+      'We stay with you through the process — interview rounds, delivery and beyond.',
     ],
   };
 }
@@ -124,7 +124,7 @@ function buildServiceCountry(entry: PageEntry): PageContent {
     },
     {
       h2: `How ${svc.name.toLowerCase()} maps to the ${c.name} market`,
-      paras: [`We tune ${svc.name.toLowerCase()} to how ${c.name} actually hires — its rounds, its recruiter and vendor channels (${c.channels}), and its ${c.timezone} working hours. For ${c.visaNote.toLowerCase()}, that market fit is what turns effort into offers.`],
+      paras: [`We tune ${svc.name.toLowerCase()} to how ${c.name} actually hires — its rounds, its recruiter and vendor channels (${c.channels}), and its ${c.timezone} working hours. For ${c.visaNote.toLowerCase()}, that market fit is what helps your preparation and effort count.`],
       bullets: svc.includes,
     },
     { h2: 'Who this is for', bullets: svc.forWho },
@@ -192,7 +192,7 @@ function buildTech(entry: PageEntry): PageContent {
   return {
     title: `${t.name} ${label} — USA & Global | ${BRAND}`,
     description: `${t.name} ${label.toLowerCase()} across USA and global markets. ${isInterview ? t.interviewFocus : t.jobFocus}`,
-    h1: `${t.name} ${label} — ${isInterview ? 'Clear Every Round' : 'Deliver Every Task'} With a ${t.name} Expert`,
+    h1: `${t.name} ${label} — ${isInterview ? 'Prepare for Every Round' : 'Deliver Every Task'} With a ${t.name} Expert`,
     kicker: `${t.category} · ${isInterview ? 'Interview' : 'Job'}`,
     intro: isInterview
       ? `Facing a ${t.name} interview? Our ${t.name} proxy interview support gives you JD-based, round-wise help — from the screen to the final round — with an engineer who lives in ${t.name} every day.`
@@ -333,7 +333,7 @@ function buildIndiaToGlobal(entry: PageEntry): PageContent {
     h1: `India to ${c.name} — ${label} for Your ${c.adjective} Career Move`,
     kicker: `India → ${c.name}`,
     intro: isInterview
-      ? `Targeting ${c.name} roles from India? India-to-${c.name} proxy interview support prepares you for ${c.hiringStyle.toLowerCase()} — aligned to ${c.timezone} so distance never costs you the offer.`
+      ? `Targeting ${c.name} roles from India? India-to-${c.name} proxy interview support prepares you for ${c.hiringStyle.toLowerCase()} — aligned to ${c.timezone} so distance is never the reason you walk in underprepared.`
       : `Delivering a ${c.name} project from India? India-to-${c.name} proxy job support gives you real-time backup aligned to ${c.timezone}, so you deliver on your team’s clock.`,
     sections: [
       { h2: `The India-to-${c.name} move`, paras: [`${c.angle} ${c.visaNote}`, `In demand: ${c.demand}`] },
@@ -436,7 +436,7 @@ function buildFde(entry: PageEntry): PageContent {
 
   return {
     title: `${fde.abbr} ${label}${place ? ` in ${place}` : ''} — Forward Deployed Engineer | ${BRAND}`,
-    description: `Forward Deployed Engineer (FDE) ${label.toLowerCase()}${place ? ` for ${place}` : ' across USA & global markets'}. ${isInterview ? 'Clear the FDE loop' : 'Deliver FDE work'} with a stack-matched expert. ${fde.tagline}`,
+    description: `Forward Deployed Engineer (FDE) ${label.toLowerCase()}${place ? ` for ${place}` : ' across USA & global markets'}. ${isInterview ? 'Prepare for the FDE loop' : 'Deliver FDE work'} with a stack-matched expert. ${fde.tagline}`,
     h1,
     kicker: `${fde.abbr} · ${isInterview ? 'Interview' : 'Job'}${place ? ' · ' + place : ''}`,
     intro: isInterview
@@ -471,13 +471,13 @@ function buildHowToGet(entry: PageEntry): PageContent {
       ],
     },
     {
-      h2: `Step 1 — Build a profile that gets you ${topic.jobs}`,
+      h2: `Step 1 — Build a profile that helps you compete for ${topic.jobs}`,
       paras: [`Most candidates are filtered out before a human reads the CV. Engineer an ATS-ready, JD-aligned profile that positions your real ${topic.label} experience for ${where}.`],
       bullets: ['ATS-ready CV with the right keywords', 'LinkedIn optimized for recruiter search', `${topic.label} project story and technology timeline`, 'Honest positioning of your real experience'],
     },
     {
-      h2: 'Step 2 — Get found and generate recruiter calls',
-      paras: [`A great profile no one sees stays silent. Consistent recruiter and vendor outreach plus job-board strategy${c ? ` (${c.channels})` : ''} turns visibility into interview calls.`],
+      h2: 'Step 2 — Get found and attract recruiter calls',
+      paras: [`A great profile no one sees stays silent. Consistent recruiter and vendor outreach plus job-board strategy${c ? ` (${c.channels})` : ''} works to turn visibility into interview calls.`],
       bullets: ['Recruiter and vendor outreach', 'Daily, targeted applications', 'JD-fit improvements to match more searches', 'Follow-ups that convert leads to interviews'],
     },
     {
@@ -486,8 +486,8 @@ function buildHowToGet(entry: PageEntry): PageContent {
       bullets: t ? [`What ${t.name} interviews test: ${t.interviewFocus}`, 'JD-based mapping and mock interviews', 'Coding, system design and client-round preparation'] : ['JD-based mapping and mock interviews', 'Coding, system design and behavioral prep', 'Round-wise, real-time support'],
     },
     {
-      h2: 'Step 4 — Land the offer and deliver on the job',
-      paras: [`Getting the offer is half the job — keeping it is the other half. After you join, real-time proxy job support helps you deliver ${topic.label} work from day one so the raise sticks.`],
+      h2: 'Step 4 — Prepare for the offer stage and deliver on the job',
+      paras: [`Winning an offer is only part of the journey — delivering once you join is the other part. After you start, real-time proxy job support helps you deliver ${topic.label} work from day one.`],
     },
     { h2: 'Who this is for', paras: ['Candidates targeting this field who want a faster, supported path:'], bullets: [`Engineers moving into ${topic.label}${c ? ` roles in ${c.name}` : ''}`, 'Professionals whose profile isn’t getting calls', 'Anyone who needs interview and on-the-job support', c ? `India-to-${c.name} candidates targeting this market from India` : 'India-to-global candidates targeting these roles from India'] },
     {
@@ -499,7 +499,7 @@ function buildHowToGet(entry: PageEntry): PageContent {
   ];
 
   const faqs: FAQ[] = [
-    { q: `How do I get ${topic.jobs}${c ? ` in ${c.name}` : ''} in 2026?`, a: `Build a ${topic.label}-aligned profile, market it to the right recruiters, clear the interviews with proxy interview support, and deliver with proxy job support. ${where} demand is strong — the bottleneck is usually profile visibility and interview readiness, both of which we fix.` },
+    { q: `How do I get ${topic.jobs}${c ? ` in ${c.name}` : ''} in 2026?`, a: `Build a ${topic.label}-aligned profile, market it to the right recruiters, prepare for the interviews with proxy interview support, and deliver with proxy job support. ${where} demand is strong — the bottleneck is usually profile visibility and interview readiness, both of which we help with.` },
     { q: `Is ${topic.label} in demand${c ? ` in ${c.name}` : ''}?`, a: `Yes. ${demand}.` },
     { q: 'Can you help me switch into this field?', a: `Yes — we position and strengthen your real experience for ${topic.label}, prepare you for its interviews, and support you on the job. We never fabricate experience.` },
     { q: c ? `Can I target ${c.name} roles from India?` : 'Do you cover markets outside India?', a: c ? `Yes — India-to-${c.name} support aligned to ${c.timezone}, including night shifts.` : 'Yes — USA (center market), Canada, UK, Europe, Australia, Singapore, Japan, New Zealand, the Gulf and India.' },
@@ -521,7 +521,7 @@ function buildHowToGet(entry: PageEntry): PageContent {
   const gLabel = c ? `${topic.label} Jobs in ${c.name}` : `${topic.label} Jobs`;
   return {
     title: `How to Get ${topic.label} Jobs${c ? ` in ${c.name}` : ''} in 2026 | ${BRAND}`,
-    description: `How to get ${topic.jobs}${c ? ` in ${c.name}` : ''} in 2026: build an ATS profile, get recruiter calls, clear interviews with proxy interview support, and deliver with proxy job support.`,
+    description: `How to get ${topic.jobs}${c ? ` in ${c.name}` : ''} in 2026: build an ATS profile, attract recruiter calls, prepare for interviews with proxy interview support, and deliver with proxy job support.`,
     h1: `How to Get ${topic.label} Jobs${c ? ` in ${c.name}` : ''} in 2026`,
     kicker: c ? `Career guide · ${c.name}` : 'Career guide · 2026',
     intro: `Want ${topic.jobs}${c ? ` in ${c.name}` : ''}? This 2026 guide walks the full path — profile, recruiter calls, interviews and on-the-job delivery — and how Proxy Support India supports each step. ${c ? c.angle : ''}`.trim(),

@@ -47,6 +47,9 @@ export function corePagesUrls(): Url[] {
     { loc: '/contact', priority: 0.7, changefreq: 'monthly' },
     { loc: '/pricing', priority: 0.7, changefreq: 'monthly' },
     { loc: '/about', priority: 0.6, changefreq: 'monthly' },
+    { loc: '/privacy-policy', priority: 0.3, changefreq: 'yearly' },
+    { loc: '/terms-of-service', priority: 0.3, changefreq: 'yearly' },
+    { loc: '/refund-cancellation-policy', priority: 0.3, changefreq: 'yearly' },
   ];
 }
 

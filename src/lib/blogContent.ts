@@ -40,7 +40,7 @@ const angles: Record<string, Cat> = {
     pain: 'You know you can do the work — but the interview, the unfamiliar codebase, or the silent phone keeps getting in the way.',
     urgency: 'Every week without a plan is a week of missed calls, missed rounds and lost momentum — while other candidates move ahead.',
     dream: 'Imagine clearing the round, delivering the sprint, and never feeling alone with a hard problem again.',
-    work: ['Match with a stack expert who has done exactly this', 'Get real-time, round-wise or ticket-by-ticket support', 'Keep full control while you learn as you deliver', 'Stay covered from the first call to job stability'],
+    work: ['Match with a stack expert who has done exactly this', 'Get real-time, round-wise or ticket-by-ticket support', 'Keep full control while you learn as you deliver', 'Stay covered from the first call through on-the-job delivery'],
     detail: [
       'Proxy support is not a shortcut around skill — it is a way to apply the right expertise at the exact moment it matters. In an interview, that means a stack-matched engineer helping you map the job description to likely rounds and rehearse them. On the job, it means someone who has shipped the same kind of work guiding you through your first tickets, a production incident, or a client call.',
       'The reason it works is focus. Instead of revising an entire stack in a panic, you concentrate on the specific rounds, tools and tasks in front of you, with a plan built for your level and your target market.',
@@ -111,8 +111,8 @@ function buildFaqs(topic: string, category: string): { q: string; a: string }[] 
       { q: `How quickly can I start ${t}?`, a: 'Often within the hour for urgent needs. We match you with an in-house stack expert fast — we have operated in the proxy support world since 2011.' },
     ],
     'India-to-Global': [
-      { q: `Can I really land a global role through ${t}?`, a: `Yes — many candidates target global markets from India. ${topic} tunes your profile and interview prep to that market and aligns job support to its time zone.` },
-      { q: 'How do you handle the time-zone gap?', a: 'We schedule around your target market’s hours — including early-morning, late-night and night-shift coverage from India — so distance never costs you the offer or the delivery.' },
+      { q: `Can I target global roles from India through ${t}?`, a: `Yes — many candidates target global markets from India. ${topic} tunes your profile and interview prep to that market and aligns job support to its time zone, so you compete on a level footing.` },
+      { q: 'How do you handle the time-zone gap?', a: 'We schedule around your target market’s hours — including early-morning, late-night and night-shift coverage from India — so distance is never the reason your preparation or delivery falls short.' },
     ],
     'Technology': [
       { q: `What do interviewers actually test for ${t}?`, a: `Beyond definitions, they test trade-offs, failure modes, design and how you apply the tech under real constraints. ${topic} preparation covers exactly that, with current best practices.` },
@@ -120,7 +120,7 @@ function buildFaqs(topic: string, category: string): { q: string; a: string }[] 
     ],
     'Profile & Recruiter': [
       { q: `Why is ${t} important for getting interviews?`, a: `Recruiter calls come from visibility plus fit. ${topic} fixes both — an engineered, keyword-aligned profile that gets found, and consistent marketing that converts to calls.` },
-      { q: 'How fast do recruiter calls start?', a: 'It varies by market and stack, but a properly engineered and marketed profile typically starts generating relevant calls within a few weeks — and we manage the pipeline so nothing goes cold.' },
+      { q: 'How fast do recruiter calls start?', a: 'There is no guaranteed timeline — it depends on your market, stack and demand. What we can do is improve how many relevant calls your profile attracts through consistent, well-targeted marketing, and manage the pipeline so nothing goes cold.' },
     ],
     'Career Scenarios': [
       { q: `What should I do first in this situation (${t})?`, a: `Do not panic — work a plan. ${topic} gives you an immediate, situation-specific playbook and a stack expert on call so you respond calmly and look dependable.` },

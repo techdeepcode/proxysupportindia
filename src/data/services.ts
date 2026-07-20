@@ -29,7 +29,7 @@ export const services: Service[] = [
     kicker: 'Interview ahead',
     short: 'JD-based, round-wise proxy interview support for scheduled technical interviews — coding, system design, client and final rounds across USA and global markets.',
     h1: 'Proxy Interview Support — JD-Based, Round-Wise Help to Clear Your Technical Interview',
-    intro: 'Interview scheduled and not fully confident? Proxy interview support gives you real-time, JD-based technical support before and through your rounds — from the recruiter screen to coding, system design, client and final rounds — so you walk in prepared and walk out with an offer.',
+    intro: 'Interview scheduled and not fully confident? Proxy interview support gives you real-time, JD-based technical support before and through your rounds — from the recruiter screen to coding, system design, client and final rounds — so you walk in fully prepared and can perform at your best.',
     forWho: [
       'Candidates with an interview already scheduled and a short runway to prepare',
       'Working professionals who cannot revise an entire stack alone in a few days',
@@ -108,7 +108,7 @@ export const services: Service[] = [
     order: 4,
     name: 'Profile Marketing',
     kicker: 'Reach recruiters',
-    short: 'Recruiter and vendor outreach, job-board strategy and daily application support across Dice, LinkedIn, Indeed, Naukri and more to generate real interest.',
+    short: 'Recruiter and vendor outreach, job-board strategy and daily application support across Dice, LinkedIn, Indeed, Naukri and more to put your profile in front of the right recruiters.',
     h1: 'Profile Marketing — Put Your Profile in Front of the Right Recruiters, Daily',
     intro: 'A great profile that nobody sees still gets zero calls. Profile marketing runs consistent recruiter and vendor outreach, job-board strategy and daily applications across Dice, LinkedIn, Indeed and Naukri — so your profile reaches the people who hire.',
     forWho: [
@@ -162,8 +162,8 @@ export const services: Service[] = [
     order: 6,
     name: 'Get More Recruiter Calls',
     kicker: 'More calls',
-    short: 'Turn your profile into a call magnet: profile-to-call conversion, vendor submissions, job-board ranking and JD-fit improvements that generate recruiter calls.',
-    h1: 'Get More Recruiter Calls — Turn a Quiet Profile into a Ringing Phone',
+    short: 'Strengthen your profile’s pull with recruiters: profile-to-call conversion, vendor submissions, job-board ranking and JD-fit improvements that help your profile attract more recruiter calls.',
+    h1: 'Get More Recruiter Calls — Help a Quiet Profile Attract More Recruiters',
     intro: 'If your phone is not ringing, the market is not seeing a match. Get More Recruiter Calls combines profile-to-call optimization, vendor submissions, job-board ranking and JD-fit improvements to fix the exact gaps stopping recruiters from reaching out.',
     forWho: [
       'Candidates whose profile is active but silent',
@@ -189,13 +189,13 @@ export const services: Service[] = [
     order: 7,
     name: 'End-to-End IT Career Proxy Support',
     kicker: 'Everything',
-    short: 'The complete journey: profile engineering, marketing and managing, recruiter calls, proxy interview support, offer support and proxy job support — one team, start to stable job.',
-    h1: 'End-to-End IT Career Proxy Support — From Profile to Interview to a Stable Job',
+    short: 'The complete journey: profile engineering, marketing and managing, recruiter calls, proxy interview support, offer support and proxy job support — one team, from profile to on-the-job delivery.',
+    h1: 'End-to-End IT Career Proxy Support — From Profile to Interview to On-the-Job Delivery',
     intro: 'Most candidates lose momentum in the gaps — a good profile with no outreach, calls with no interview prep, an offer with no delivery support. End-to-end IT career proxy support closes every gap with one team: profile, marketing, calls, interviews, offer and job support, managed as a single journey.',
     forWho: [
       'Candidates who want one team owning the whole journey',
       'Professionals restarting a stalled job search from scratch',
-      'Anyone who needs support from profile all the way to job stability',
+      'Anyone who needs support from profile all the way through on-the-job delivery',
       'Engineers making an India-to-global career move',
     ],
     includes: [

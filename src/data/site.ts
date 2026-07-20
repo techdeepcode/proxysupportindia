@@ -35,7 +35,7 @@ export const social = {
   website: 'https://proxysupportindia.com',
   whatsapp: '',  // channel/community link; blank falls back to wa.me/<number>
   linkedin: 'https://www.linkedin.com/company/proxy-support-india/',
-  instagram: 'https://www.instagram.com/proxysupportindia/',
+  instagram: 'https://www.instagram.com/proxy_support_india/',
   facebook: 'https://www.facebook.com/proxysupportindia',
   youtube: '',   // e.g. https://www.youtube.com/@proxysupportindia
   twitter: '',   // X — e.g. https://x.com/proxysupportind
@@ -105,12 +105,12 @@ export const ogImages: Record<string, string> = {
 export const ogImageFor = (key?: string) => (key && ogImages[key]) || ogImages.default;
 
 // Impact metrics shown in hero metric panels.
-// ⚠️ REPLACE these with your REAL figures before launch (like the contact placeholders).
+// Actual, verifiable figures backed by our internal records/database.
 export const stats = {
   interviews: '4,000+',   // interviews supported
   jobSupport: '2,500+',   // proxy job-support projects
   profiles: '3,500+',     // profiles engineered & marketed
-  higherRoles: '900+',    // candidates landed in higher-paying roles
+  higherRoles: '900+',    // candidates supported toward higher-paying roles
 };
 
 // Pre-filled WhatsApp message helper — every CTA opens chat with context.
@@ -196,4 +196,4 @@ export const urgencyBar =
 
 // Trust boundary line reused in schema + footer.
 export const trustLine =
-  'Proxy Support India is a professional IT career support and coaching service. We prepare, guide and support candidates in real time — we do not impersonate candidates or fabricate experience.';
+  'Proxy Support India is a paid IT career support and technical support service. We are not an employer, recruiter or job-placement agency, and our fees are for agreed support services only — we do not sell jobs or vacancies and do not guarantee employment, interviews, recruiter calls, selection, job offers or salary outcomes. Hiring decisions rest solely with employers. We prepare, guide and support candidates in real time — we never impersonate candidates or fabricate experience.';

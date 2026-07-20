@@ -13,7 +13,7 @@ export interface HighRole {
 // Typical USA-market BASE salary ranges (USD). Indicative only — actual pay
 // varies by experience, company, city and total-comp (bonus/equity).
 export const salaryNote =
-  'Typical USA base salary (USD). Actual pay varies by experience, company, city and total compensation.';
+  'Indicative USA base salary ranges (USD) based on published 2026 market benchmarks. Actual compensation depends on your experience, employer, city and total compensation (bonus/equity). These figures are informational market data only — they are not a promised or guaranteed outcome. Proxy Support India does not guarantee salary, employment or job offers.';
 
 export const highPayingRoles: HighRole[] = [
   { tech: 'forward-deployed-engineer', role: 'Forward Deployed Engineer (FDE)', blurb: '2026’s hottest role — customer-facing engineers who deploy AI/data platforms. Rare skills, top pay.', salaryUSA: '$150K–$260K' },

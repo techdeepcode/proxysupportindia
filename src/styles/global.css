@@ -613,6 +613,12 @@ h1,h2,h3,h4,h5{ font-family:"Sora","IBM Plex Sans",sans-serif; letter-spacing:-0
 .dark .site-footer a:hover{ color:rgb(var(--primary)); }
 .site-footer .legal{ font-size:.75rem; color:rgb(255 255 255/.55); }
 .dark .site-footer .legal{ color:rgb(var(--muted)); }
+.site-footer .legal-links{ margin:0 0 .5rem; font-size:.8rem; display:flex; gap:.4rem 1rem; flex-wrap:wrap; }
+.site-footer .legal-links a{ color:rgb(255 255 255/.8); text-decoration:none; }
+.site-footer .legal-links a:hover{ color:#fff; text-decoration:underline; }
+.dark .site-footer .legal-links a{ color:rgb(var(--primary)); }
+.legal-body .legal-updated{ color:rgb(var(--muted)); }
+.legal-body h3{ margin-top:1.2rem; }
 
 /* ---------- Always-visible floating CTA (WhatsApp + Call) ---------- */
 .floating-cta{ position:fixed; z-index:50; display:flex; }

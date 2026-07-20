@@ -36,12 +36,12 @@ const catDepth: Record<string, { h2: string; paras: string[] }[]> = {
       'Everything is honest — we position and strengthen what you have genuinely done; we never fabricate experience.',
     ] },
     { h2: 'The visibility-plus-fit principle', paras: [
-      'Recruiter calls come from two things working together: being found (search ranking, keywords, outreach) and matching what the role screens for (JD-fit). Break either link and the phone stays quiet; fix both and the calls come.',
+      'Recruiter calls come from two things working together: being found (search ranking, keywords, outreach) and matching what the role screens for (JD-fit). Break either link and the phone stays quiet; fix both and relevant calls become far more likely.',
     ] },
   ],
   'Process': [
     { h2: 'How the pieces connect', paras: [
-      'The IT career journey runs in stages: engineer the profile, market it for recruiter calls, manage the pipeline to schedule interviews, clear those interviews with proxy interview support, accept and prepare for the offer, then deliver with proxy job support. Momentum is usually lost in the gaps between these steps.',
+      'The IT career journey runs in stages: engineer the profile, market it for recruiter calls, manage the pipeline to schedule interviews, prepare for those interviews with proxy interview support, accept and prepare for the offer, then deliver with proxy job support. Momentum is usually lost in the gaps between these steps.',
       'Handled as one journey by a single team, nothing stalls — which is exactly what end-to-end support is designed to prevent.',
     ] },
   ],

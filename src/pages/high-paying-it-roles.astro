@@ -9,12 +9,13 @@ import { highPayingRoles, salaryNote } from '@data/highPayingRoles';
 import { techBySlug } from '@data/technologies';
 import { site } from '@data/site';
 
-const title = `Land Higher-Paying IT Roles in 2026’s Trending Tech | ${site.name}`;
-const description = 'Land higher-paying IT roles in AI/ML, GenAI, MLOps, DevOps, Cloud, SRE, Cloud Security, Data Engineering and QA Automation — with proxy interview support to clear the rounds and proxy job support to deliver.';
+const title = `Target Higher-Paying IT Roles in 2026’s Trending Tech | ${site.name}`;
+const description = 'Aim for higher-paying IT roles in AI/ML, GenAI, MLOps, DevOps, Cloud, SRE, Cloud Security, Data Engineering and QA Automation — with proxy interview support to prepare for the rounds and proxy job support to deliver. Salary figures are market benchmarks, not promised outcomes.';
 const crumbs = [{ label: 'Home', href: '/' }, { label: 'High-Paying IT Roles', href: '/high-paying-it-roles' }];
 
 const faqs = [
   { q: 'Which IT roles pay the most in 2026?', a: 'AI/ML, GenAI/LLM, MLOps, Data Engineering, Cloud, DevOps, SRE and Cloud Security consistently top the pay bands — driven by talent shortages and the AI build-out. QA Automation (SDET) and platform/Kubernetes roles also pay well above their traditional counterparts.' },
+  { q: 'Do the salary figures on this page mean I will earn that much?', a: 'No. The ranges shown are indicative USA base-salary benchmarks from published 2026 market data — general information to help you compare roles, not a promised or guaranteed outcome. Your actual pay depends on your experience, the employer, your location and total compensation. Proxy Support India is a paid support service and does not guarantee salary, employment or job offers.' },
   { q: 'Can you help me switch into a higher-paying role?', a: 'Yes. We engineer and market your profile toward the target role, prepare you with proxy interview support for its exact rounds, and back you with proxy job support once you join so you deliver from day one.' },
   { q: 'I don’t have deep experience in these stacks yet — can you still help?', a: 'We support you honestly on your real experience and help you present and strengthen it for the target role. During interviews and on the job, a stack-matched expert works with you in real time. We never fabricate experience.' },
   { q: 'Do these roles hire remotely and globally?', a: 'Yes — these are among the most remote-friendly, globally-hired roles. We cover USA, Canada, UK, Europe, Australia, Singapore, Japan, New Zealand, the Gulf and India, aligned to your time zone.' },
@@ -30,7 +31,7 @@ const related = [
 ---
 <BaseLayout title={title} description={description} path="/high-paying-it-roles">
   <Schema
-    name="Land Higher-Paying IT Roles in 2026's Trending Tech"
+    name="Target Higher-Paying IT Roles in 2026's Trending Tech"
     description={description}
     breadcrumb={crumbs}
     service={{ name: 'Support for high-paying IT roles', description }}
@@ -39,8 +40,8 @@ const related = [
   />
   <PageHero
     eyebrow="Aim higher · 2026’s highest-paying tech"
-    h1="Land Higher-Paying IT Roles in the Hottest Trending Tech"
-    intro="The best-paid IT roles in 2026 sit in AI/ML, GenAI, MLOps, DevOps, Cloud, SRE, Cloud Security, Data Engineering and QA Automation. They pay a premium because talent is scarce and the interviews are hard. We help you win them — and then deliver on the job so the raise sticks."
+    h1="Target Higher-Paying IT Roles in the Hottest Trending Tech"
+    intro="The best-paid IT roles in 2026 sit in AI/ML, GenAI, MLOps, DevOps, Cloud, SRE, Cloud Security, Data Engineering and QA Automation. They pay a premium because talent is scarce and the interviews are hard. We help you prepare to compete for them — and then deliver on the job once you join."
     breadcrumb={crumbs}
   />
   <article class="wrap section">
@@ -55,7 +56,7 @@ const related = [
 
       <h2>How we help you land — and keep — the role</h2>
       <ul class="bullets">
-        <li><b>Profile:</b> engineer and market your profile toward the higher-paying target role.</li>
+        <li><b>Profile:</b> engineer and market your profile toward the higher-paying target role you’re aiming for.</li>
         <li><b>Interview:</b> proxy interview support tuned to that role’s coding, system design and domain rounds.</li>
         <li><b>Deliver:</b> proxy job support so you handle the real work from day one and the offer sticks.</li>
       </ul>
@@ -81,7 +82,7 @@ const related = [
     </div>
     <p class="matrix-legend" style="margin-top:1rem;">{salaryNote}</p>
   </article>
-  <CTASection heading="Aim higher — land a better-paying IT role" text="Tell us your target role and current stack on WhatsApp. We’ll map the path: profile, interview support and job support to get you there." />
+  <CTASection heading="Aim higher — target a better-paying IT role" text="Tell us your target role and current stack on WhatsApp. We’ll map the path: profile, interview support and job support to help you get ready." />
   <div class="wrap">
     <FAQ faqs={faqs} />
     <RelatedLinks links={related} />
