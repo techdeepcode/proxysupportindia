@@ -14,4 +14,4 @@ Standards: HTML5, semantic markup, JSON-LD, Open Graph, Twitter Cards
 Components: Static-first, mobile-first, accessible
 Language: English
 Tech Stack: Astro 7, TypeScript, plain CSS (CSS variables), Cloudflare Pages ready
-Last updated: 2026-07-14
+Last updated: 2026-11-18

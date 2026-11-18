@@ -2,7 +2,7 @@
 // Blog cluster. `body` sections are added per post; the hub and
 // SEO read title/description/category. Hook-based, not academic.
 // ============================================================
-export interface BlogSection { h2: string; paras: string[]; bullets?: string[]; }
+export interface BlogSection { h2: string; paras: string[]; bullets?: string[]; html?: string; }
 export interface BlogPost {
   slug: string;
   title: string;        // SEO title
@@ -17,10 +17,18 @@ export interface BlogPost {
   body: BlogSection[];
   faqs: { q: string; a: string }[];
   relatedSlugs?: string[];
+  // Optional fields used by bespoke (fully-authored) posts. When present,
+  // blog/[slug].astro renders the rich body + per-post dates + links.
+  keywords?: string[];
+  related?: { label: string; href: string }[];
+  publishedTime?: string;   // ISO date, e.g. "2026-11-18"
+  modifiedTime?: string;    // ISO date
 }
 
-// Metadata for every planned post (bodies filled progressively).
-export const blogs: BlogPost[] = [];
+// Bespoke, fully-authored posts (rich HTML bodies). These override the
+// generic builder in blog/[slug].astro when a slug matches.
+import { blogPosts2026 } from './blogPosts';
+export const blogs: BlogPost[] = [...blogPosts2026];
 
 // Lightweight index used by the hub before bodies are attached.
 export interface BlogStub { slug: string; title: string; description: string; category: BlogPost['category']; readMins: number; updated: string; }
@@ -55,6 +63,11 @@ export const blogIndex: BlogStub[] = [
   { slug: 'production-issue-pressure-in-new-it-job', title: 'Production Issue Pressure in a New IT Job: Stay Calm, Fix It', description: 'How to handle a production incident early in a new role without panicking.', category: 'Career Scenarios', readMins: 7, updated: 'Jul 2026' },
   { slug: 'how-to-handle-client-calls-in-new-it-job', title: 'How to Handle Client Calls in a New IT Job', description: 'Framing status, answering tough questions, and sounding senior in client calls.', category: 'Career Scenarios', readMins: 7, updated: 'Jul 2026' },
   { slug: 'from-profile-to-interview-to-job-support', title: 'From Profile to Interview to Job: The Full Support Journey', description: 'How the pieces connect — profile, calls, interviews and job support — into one journey.', category: 'Career Scenarios', readMins: 9, updated: 'Jul 2026' },
+  // ---- November 2026 international SEO expansion (USA / UK / Canada / Ireland) ----
+  { slug: 'agentic-ai-interview-proxy-usa-2026', title: 'Agentic AI Interview Proxy Support USA 2026: Technical Rounds, System Design & Scheduled Interviews', description: 'AI, Agentic AI and GenAI interviews in the US test agent orchestration, RAG, LLM evals and AI system design. How proxy interview support helps you clear scheduled technical rounds.', category: 'Technology', readMins: 13, updated: 'Nov 2026' },
+  { slug: 'it-job-marketing-interview-calls-uk-2026', title: 'Not Getting IT Interview Calls in the UK? Job Marketing, Recruiter Outreach & Profile Visibility in 2026', description: 'Qualified but silent in the UK job market? Why the calls stop coming — and how IT job marketing, recruiter outreach and profile engineering fix visibility and fit in 2026.', category: 'Profile & Recruiter', readMins: 12, updated: 'Nov 2026' },
+  { slug: 'canada-it-job-marketing-linkedin-resume-2026', title: 'Canada IT Job Marketing 2026: Get More Recruiter Calls with LinkedIn, Resume & Profile Engineering', description: 'Applying to Canadian IT roles without enough recruiter responses? How profile engineering, ATS-ready resumes, LinkedIn visibility and profile marketing drive more recruiter calls in 2026.', category: 'Profile & Recruiter', readMins: 12, updated: 'Nov 2026' },
+  { slug: 'ai-cloud-interview-proxy-ireland-2026', title: 'AI & Cloud Interview Proxy Support Ireland 2026: Technical Interviews, LinkedIn Visibility & Recruiter Outreach', description: 'Dublin and Ireland tech interviews test AI, cloud, data and security depth. How interview proxy support, profile engineering and recruiter outreach fit together in 2026.', category: 'Proxy Support', readMins: 12, updated: 'Nov 2026' },
 ];
 
 export const blogBySlug = (slug: string) => blogs.find((b) => b.slug === slug);

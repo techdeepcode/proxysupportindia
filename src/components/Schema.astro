@@ -18,7 +18,7 @@ export interface Props {
   breadcrumb?: Crumb[];
   includeOrg?: boolean;                 // homepage/contact/about
   service?: { name: string; description: string };
-  article?: { headline: string; description: string; blog?: boolean; datePublished?: string; dateModified?: string };
+  article?: { headline: string; description: string; blog?: boolean; datePublished?: string; dateModified?: string; keywords?: string[]; section?: string };
   faqs?: QA[];
   itemList?: { name: string; items: ListEntry[] };
   offerCatalog?: { name: string; offers: Offer[] };
@@ -82,9 +82,13 @@ if (article) {
   const a: any = {
     '@type': article.blog ? ['Article', 'BlogPosting'] : 'Article',
     headline: article.headline, description: article.description,
+    url: canonical, image: new URL(site.defaultOgImage, site.url).href,
     datePublished: article.datePublished ?? DATE, dateModified: article.dateModified ?? DATE,
-    author: { '@id': orgId }, publisher: { '@id': orgId }, mainEntityOfPage: { '@id': pageId }, inLanguage: 'en',
+    author: { '@id': orgId }, publisher: { '@id': orgId }, mainEntityOfPage: { '@id': pageId },
+    inLanguage: 'en', isAccessibleForFree: true, isPartOf: { '@id': siteId },
   };
+  if (article.section) a.articleSection = article.section;
+  if (article.keywords && article.keywords.length) a.keywords = article.keywords.join(', ');
   graph.push(a);
 }
 

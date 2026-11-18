@@ -5,14 +5,17 @@ import FAQ from '@components/FAQ.astro';
 import RelatedLinks from '@components/RelatedLinks.astro';
 import CTASection from '@components/CTASection.astro';
 import Schema from '@components/Schema.astro';
-import { blogIndex } from '@data/blogs';
-import { buildBlogArticle } from '../../lib/blogContent';
+import { blogIndex, blogBySlug } from '@data/blogs';
+import { buildBlogArticle, buildBespokeArticle } from '../../lib/blogContent';
 
 export function getStaticPaths() {
   return blogIndex.map((stub) => ({ params: { slug: stub.slug }, props: { stub } }));
 }
 const { stub } = Astro.props as { stub: typeof blogIndex[number] };
-const a = buildBlogArticle(stub);
+const post = blogBySlug(stub.slug);
+const a = post ? buildBespokeArticle(post) : buildBlogArticle(stub);
+const published = post?.publishedTime ?? '2026-07-14';
+const modified = post?.modifiedTime ?? '2026-07-14';
 const crumbs = [{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }, { label: a.h1, href: `/blog/${a.slug}` }];
 ---
 <BaseLayout
@@ -22,18 +25,23 @@ const crumbs = [{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }, 
   keywords={a.keywords}
   ogType="article"
   ogImageKey="default"
-  modifiedTime="2026-07-14"
-  publishedTime="2026-07-14"
+  modifiedTime={modified}
+  publishedTime={published}
 >
-  <Schema name={a.h1} description={a.description} breadcrumb={crumbs} article={{ headline: a.h1, description: a.description, blog: true }} faqs={a.faqs} />
+  <Schema name={a.h1} description={a.description} breadcrumb={crumbs} article={{ headline: a.h1, description: a.description, blog: true, datePublished: published, dateModified: modified, keywords: a.keywords, section: a.category }} faqs={a.faqs} />
   <PageHero eyebrow={`${a.category} · ${a.readMins} min · Updated ${a.updated}`} h1={a.h1} intro={a.pain} breadcrumb={crumbs} />
   <article class="wrap section">
-    <div class="page-body">
+    <div class={a.rich ? 'page-body blog-rich' : 'page-body'}>
       {a.sections.map((s) => (
         <>
           <h2>{s.h2}</h2>
-          {s.paras.map((p) => <p>{p}</p>)}
-          {s.bullets && <ul class="bullets">{s.bullets.map((b) => <li>{b}</li>)}</ul>}
+          {a.rich
+            ? s.paras.map((p) => <p set:html={p} />)
+            : s.paras.map((p) => <p>{p}</p>)}
+          {s.bullets && (a.rich
+            ? <ul class="bullets">{s.bullets.map((b) => <li set:html={b} />)}</ul>
+            : <ul class="bullets">{s.bullets.map((b) => <li>{b}</li>)}</ul>)}
+          {s.html && <Fragment set:html={s.html} />}
         </>
       ))}
     </div>
@@ -44,3 +52,28 @@ const crumbs = [{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }, 
     <RelatedLinks links={a.related} />
   </div>
 </BaseLayout>
+
+{/* Styling for bespoke (rich HTML) blog bodies only — scoped to .blog-rich
+   so existing generic posts are untouched. Additive. */}
+<style is:global>
+  .blog-rich a{ color:rgb(var(--secondary)); text-decoration:underline; text-underline-offset:2px; font-weight:600; }
+  .blog-rich a:hover{ color:rgb(var(--primary)); }
+  .dark .blog-rich a{ color:rgb(var(--accent)); }
+  .blog-rich h3{ margin-top:1.8rem; font-size:1.18rem; color:rgb(var(--primary)); }
+  .blog-rich strong{ color:rgb(var(--ink)); }
+  .blog-rich .note{
+    margin-top:1.2rem; padding:1rem 1.1rem; border-left:3px solid rgb(var(--secondary));
+    background:rgb(var(--secondary)/.06); border-radius:.5rem; font-size:.95rem;
+  }
+  .blog-rich .cta-inline{
+    margin-top:1.3rem; padding:1.1rem 1.2rem; border:1px solid rgb(var(--line));
+    border-radius:.8rem; background:rgb(var(--card)); box-shadow:0 1px 0 rgb(var(--line));
+  }
+  .blog-rich .cta-inline strong{ color:rgb(var(--primary)); }
+  .blog-rich .table-wrap{ margin-top:1.3rem; overflow-x:auto; }
+  .blog-rich table{ width:100%; border-collapse:collapse; font-size:.92rem; min-width:34rem; }
+  .blog-rich th, .blog-rich td{ text-align:left; padding:.6rem .7rem; border-bottom:1px solid rgb(var(--line)); vertical-align:top; }
+  .blog-rich thead th{ color:rgb(var(--primary)); border-bottom:2px solid rgb(var(--secondary)/.4); }
+  .blog-rich ol{ margin-top:1rem; padding-left:1.2rem; display:grid; gap:.5rem; }
+  .blog-rich ol li{ font-size:.95rem; }
+</style>

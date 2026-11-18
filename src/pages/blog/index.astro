@@ -3,33 +3,50 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import PageHero from '@components/PageHero.astro';
 import CTASection from '@components/CTASection.astro';
 import Schema from '@components/Schema.astro';
-import { blogIndex } from '@data/blogs';
+import { blogIndex, blogBySlug } from '@data/blogs';
 
 const title = 'Blog — Proxy Support, India-to-Global & Tech Career Strategies | Proxy Support India';
 const description = 'Original, hook-based guides on proxy interview support, proxy job support, getting global IT interviews from India, profile marketing and more.';
 const crumbs = [{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }];
-const categories = [...new Set(blogIndex.map((b) => b.category))];
+
+// Sort all posts newest-first (no category grouping). Bespoke posts carry a
+// full publishedTime; others derive a date from their "Mon YYYY" updated label.
+const MONTHS: Record<string, number> = {
+  jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+  jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11,
+};
+const sortTime = (b: typeof blogIndex[number]): number => {
+  const iso = blogBySlug(b.slug)?.publishedTime;
+  if (iso) return new Date(iso).getTime();
+  const m = /^([A-Za-z]{3})\s+(\d{4})$/.exec(b.updated.trim());
+  if (m) return new Date(Number(m[2]), MONTHS[m[1].toLowerCase()] ?? 0, 1).getTime();
+  return 0;
+};
+const posts = blogIndex
+  .map((b, i) => ({ b, i, t: sortTime(b) }))
+  .sort((a, z) => z.t - a.t || a.i - z.i) // newest first; stable for ties
+  .map((x) => x.b);
 ---
 <BaseLayout title={title} description={description} path="/blog">
   <Schema pageType="CollectionPage" name="Proxy Support India Blog" description={description} breadcrumb={crumbs}
-    itemList={{ name: 'Blog posts', items: blogIndex.map((b) => ({ name: b.title, url: `/blog/${b.slug}` })) }} />
+    itemList={{ name: 'Blog posts', items: posts.map((b) => ({ name: b.title, url: `/blog/${b.slug}` })) }} />
   <PageHero eyebrow="Blog" h1="Strategies for Calls, Interviews & Jobs" intro="Practical, no-fluff guides written for candidates who need results — not academic theory." breadcrumb={crumbs} />
   <section class="wrap section">
-    {categories.map((cat) => (
-      <div style="margin-top:1.8rem;">
-        <h2 style="color:rgb(var(--primary)); font-size:1.25rem;">{cat}</h2>
-        <div class="cards" style="margin-top:.8rem;">
-          {blogIndex.filter((b) => b.category === cat).map((b) => (
-            <a class="card" href={`/blog/${b.slug}`}>
-              <span class="kicker">{b.readMins} min · {b.updated}</span>
-              <h3>{b.title}</h3>
-              <p>{b.description}</p>
-              <span class="card-link">Read</span>
-            </a>
-          ))}
-        </div>
-      </div>
-    ))}
+    <div class="cards">
+      {posts.map((b) => {
+        const p = blogBySlug(b.slug);
+        const mins = p?.readMins ?? b.readMins;
+        const upd = p?.updated ?? b.updated;
+        return (
+          <a class="card" href={`/blog/${b.slug}`}>
+            <span class="kicker">{b.category} · {mins} min · {upd}</span>
+            <h3>{b.title}</h3>
+            <p>{b.description}</p>
+            <span class="card-link">Read</span>
+          </a>
+        );
+      })}
+    </div>
   </section>
   <CTASection />
 </BaseLayout>

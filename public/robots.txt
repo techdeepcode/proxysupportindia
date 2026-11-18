@@ -1,7 +1,9 @@
 # ProxySupportIndia.com — robots policy
 # Posture: OPEN. We welcome all search engines, AI answer engines, and
 # agentic/user-triggered fetchers to crawl and cite the public site.
-# Bot list current as of July 2026. To opt a bot OUT later, change its
+# Bot list current as of November 2026. The wildcard above already allows
+# EVERY crawler (incl. any newer AI/agentic bot not named here); the explicit
+# entries below are for clarity. To opt a bot OUT later, change its
 # "Allow: /" to "Disallow: /".
 
 User-agent: *
@@ -121,6 +123,18 @@ User-agent: CCBot
 Allow: /
 
 User-agent: Bytespider
+Allow: /
+
+User-agent: DeepSeekBot
+Allow: /
+
+User-agent: iaskspider/2.0
+Allow: /
+
+User-agent: PanguBot
+Allow: /
+
+User-agent: Ai2Bot-Dolma
 Allow: /
 
 # ============================================================

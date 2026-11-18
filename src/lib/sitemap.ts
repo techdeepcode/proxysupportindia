@@ -3,7 +3,7 @@
 import { getAllPages } from '@data/pageRegistry';
 import { countries } from '@data/countries';
 import { cities } from '@data/cities';
-import { blogIndex } from '@data/blogs';
+import { blogIndex, blogBySlug } from '@data/blogs';
 import { knowledgeBase } from '@data/knowledgeBase';
 import { riqTopics } from '@data/realInterviewQuestions';
 
@@ -71,7 +71,17 @@ export function locationsUrls(): Url[] {
 }
 
 export function blogUrls(): Url[] {
-  return blogIndex.map((b) => ({ loc: `/blog/${b.slug}`, priority: 0.6, changefreq: 'monthly' }));
+  // Bespoke posts carry their own modified date (fresher lastmod + slightly
+  // higher priority). Generic posts fall back to the global LASTMOD / 0.6.
+  return blogIndex.map((b) => {
+    const post = blogBySlug(b.slug);
+    return {
+      loc: `/blog/${b.slug}`,
+      priority: post ? 0.7 : 0.6,
+      changefreq: 'monthly',
+      lastmod: post?.modifiedTime,
+    };
+  });
 }
 export function kbUrls(): Url[] {
   return knowledgeBase.map((k) => ({ loc: `/knowledge-base/${k.slug}`, priority: 0.6, changefreq: 'monthly' }));

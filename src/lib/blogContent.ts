@@ -5,7 +5,7 @@
 // Bespoke posts in blogs.ts (`blogs` array) override this.
 // Structured for SEO, social and agentic/AI answer-engine indexing.
 // ============================================================
-import type { BlogStub } from '@data/blogs';
+import type { BlogStub, BlogPost } from '@data/blogs';
 
 export interface BlogArticle {
   slug: string;
@@ -19,9 +19,10 @@ export interface BlogArticle {
   pain: string;
   urgency: string;
   dream: string;
-  sections: { h2: string; paras: string[]; bullets?: string[] }[];
+  sections: { h2: string; paras: string[]; bullets?: string[]; html?: string }[];
   faqs: { q: string; a: string }[];
   related: { label: string; href: string }[];
+  rich?: boolean;   // true for bespoke, fully-authored posts (HTML body)
 }
 
 const base = () => [
@@ -128,6 +129,28 @@ function buildFaqs(topic: string, category: string): { q: string; a: string }[] 
     ],
   };
   return [...(byCat[category] ?? []), ...common];
+}
+
+// Bespoke, fully-authored post -> BlogArticle. Rich HTML body, per-post
+// keywords and related links. Used when a slug has a matching entry in `blogs`.
+export function buildBespokeArticle(post: BlogPost): BlogArticle {
+  return {
+    slug: post.slug,
+    title: `${post.title} | Proxy Support India`,
+    h1: post.h1,
+    description: post.description,
+    category: post.category,
+    keywords: post.keywords ?? [post.h1.toLowerCase(), 'proxy interview support', 'proxy support india'],
+    readMins: post.readMins,
+    updated: post.updated,
+    pain: post.pain,
+    urgency: post.urgency,
+    dream: post.dream,
+    sections: post.body,
+    faqs: post.faqs,
+    related: post.related ?? base(),
+    rich: true,
+  };
 }
 
 export function buildBlogArticle(stub: BlogStub): BlogArticle {

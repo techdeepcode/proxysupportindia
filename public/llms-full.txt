@@ -81,6 +81,42 @@ base, and the WhatsApp contact CTA. Technology pages cross-link interview and jo
 matching interview-questions topic. Country pages link to their service variants and city pages.
 India-to-global pages link to the matching country service and time-zone job-support pages.
 
+## Featured international guides (November 2026)
+Country-specific, high-intent blog guides published November 18, 2026. Each is original, hook-based
+and commercially focused, with realistic technical examples, FAQs and clear calls to action.
+
+1. Agentic AI Interview Proxy Support USA 2026
+   URL: https://proxysupportindia.com/blog/agentic-ai-interview-proxy-usa-2026
+   Market: USA. Primary service: Proxy Interview Support.
+   Topic: what US AI, Agentic AI, GenAI and ML interviews test in 2026 — agent orchestration and
+   planning, tool calling, RAG pipelines and retrieval quality, LLM evaluation, agent memory,
+   prompt-injection defense, production monitoring and AI system design — with realistic questions,
+   a short prep plan, and how proxy interview support maps to scheduled technical rounds.
+
+2. Not Getting IT Interview Calls in the UK? Job Marketing, Recruiter Outreach & Profile Visibility
+   URL: https://proxysupportindia.com/blog/it-job-marketing-interview-calls-uk-2026
+   Market: United Kingdom. Primary service: IT Job Marketing / Profile Marketing (secondary: Profile Engineering).
+   Topic: why qualified UK engineers get few interview calls (visibility vs fit), the difference
+   between profile engineering and job marketing, what IT job marketing includes, UK specifics
+   (CV, recruitment agencies, contract vs permanent, IR35, shortlisting) and 2026 UK tech demand
+   (cyber security, agentic AI, GenAI, cloud).
+
+3. Canada IT Job Marketing 2026: Get More Recruiter Calls with LinkedIn, Resume & Profile Engineering
+   URL: https://proxysupportindia.com/blog/canada-it-job-marketing-linkedin-resume-2026
+   Market: Canada. Primary services: Profile Marketing + Profile Engineering.
+   Topic: getting more recruiter calls in Canada via ATS-readable resumes, role-specific keywords,
+   LinkedIn positioning for Canadian recruiters, the profile-to-interview chain, where roles are
+   (Toronto, Vancouver, Montreal, Calgary, Ottawa) and 2026 demand (AI Architect, AI/ML Engineer,
+   Cloud Engineer, Data roles).
+
+4. AI & Cloud Interview Proxy Support Ireland 2026
+   URL: https://proxysupportindia.com/blog/ai-cloud-interview-proxy-ireland-2026
+   Market: Ireland. Primary service: Proxy Interview Support (secondary: Profile Engineering, Job Marketing).
+   Topic: what Irish AI and cloud interviews test (cloud architecture, AI/GenAI design, data
+   engineering, cybersecurity/cloud security, DevOps, AI governance), realistic questions, Dublin/Cork/
+   Galway/Limerick hubs, and how interview proxy support, profile engineering and recruiter outreach fit
+   together.
+
 ## Content usage
 All content is original to Proxy Support India. There is no duplicated text from ProxyTechSupport.com
 or any other site. Titles, H1s, meta descriptions, intros, FAQs and examples are freshly written from a
